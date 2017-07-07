@@ -1,5 +1,6 @@
 ﻿using L.EntityFramework.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace L.EntityFramework.Extension
                     x.GetInterfaces().Any(y => y.GetTypeInfo().IsGenericType && y.GetGenericTypeDefinition() == mappingInterface));
         }
         /// <summary>
-        /// 从程序
+        /// 从程序集动态加载实体配置文件
         /// </summary>
         /// <param name="modelBuilder"></param>
         /// <param name="assembly"></param>
@@ -28,7 +29,9 @@ namespace L.EntityFramework.Extension
             var mappingTypes = assembly.GetMappingTypes(typeof(IEntityMappingConfiguration<>));
 
             foreach (var config in mappingTypes.Select(Activator.CreateInstance).Cast<IEntityMappingConfiguration>())
-                config.Map(modelBuilder);
+                config.Configuration(modelBuilder);
         }
+
+        
     }
 }

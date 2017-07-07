@@ -7,14 +7,14 @@ namespace L.EntityFramework.Configuration
     {
         public abstract void Map(EntityTypeBuilder<T> b);
 
-        public void Map(ModelBuilder b)
+        public void Configuration(ModelBuilder b)
         {
             Map(b.Entity<T>());
         }
     }
     public interface IEntityMappingConfiguration
     {
-        void Map(ModelBuilder b);
+        void Configuration(ModelBuilder b);
     }
 
     public interface IEntityMappingConfiguration<T> : IEntityMappingConfiguration where T : class
