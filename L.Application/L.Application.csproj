@@ -8,4 +8,8 @@
     <Folder Include="Services\Notice\Dto\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\L.LCore\L.LCore.csproj" />
+  </ItemGroup>
+
 </Project>

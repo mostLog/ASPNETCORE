@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -13,7 +14,18 @@ namespace L.LCore.Infrastructure.Reflection
         /// <returns></returns>
         public IList<Type> FindTypeList<T>()
         {
-            
+            List<Type> typeList = new List<Type>();
+            Type type = typeof(T);
+            var assemblys=GetAssemblys();
+            foreach (var assembly in assemblys)
+            {
+                typeList.AddRange(assembly
+                    .GetTypes()
+                    .Where(c => c.GetTypeInfo().GetInterfaces().Any(p => p.GetType() == typeof(T)))
+                    .ToList());
+            }
+
+            return typeList;
         }
 
         /// <summary>
@@ -22,7 +34,10 @@ namespace L.LCore.Infrastructure.Reflection
         /// <returns></returns>
         private IList<Assembly> GetAssemblys()
         {
-            
+            return new List<Assembly>() {
+
+
+            };
         }
     }
 }
