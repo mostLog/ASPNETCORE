@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using L.LCore.Infrastructure.Configuration;
 using L.LCore.Infrastructure.Reflection;
 
 namespace L.LCore.Infrastructure.Dependeny
@@ -12,7 +13,7 @@ namespace L.LCore.Infrastructure.Dependeny
         /// 类型注册
         /// </summary>
         /// <param name="builder"></param>
-        void Register(ContainerBuilder builder, ITypeFinder typeFinder);
+        void Register(ContainerBuilder builder, ILConfig config);
         /// <summary>
         /// 序号
         /// </summary>

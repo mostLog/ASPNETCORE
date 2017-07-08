@@ -22,6 +22,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\L.Application\L.Application.csproj" />
+    <ProjectReference Include="..\L.EntityFramework\L.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>

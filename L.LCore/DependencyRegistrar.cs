@@ -1,7 +1,6 @@
 ﻿using Autofac;
+using L.LCore.Infrastructure.Configuration;
 using L.LCore.Infrastructure.Dependeny;
-using L.LCore.Infrastructure.Reflection;
-using System.Reflection;
 
 namespace L.LCore
 {
@@ -10,7 +9,7 @@ namespace L.LCore
     /// </summary>
     public class DependencyRegistrar : IDependencyRegistrar
     {
-        public void Register(ContainerBuilder builder, ITypeFinder typeFinder)
+        public void Register(ContainerBuilder builder, ILConfig config)
         {
             
            

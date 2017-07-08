@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 
-namespace MI.Data
+namespace L.EntityFramework
 {
-    public class BaseRepository<T>:IBaseRepository<T> where T: class
+    /// <summary>
+    /// EF仓储实现类
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class EFBaseRepository<T>:IBaseRepository<T> where T: class
     {
         private readonly IDbContext _context;
 
-        private IQueryable<T> _entities;
+        private DbSet<T> _entities;
         
-        public BaseRepository(IDbContext context)
+        public EFBaseRepository(IDbContext context)
         {
             _context = context;
         }
@@ -25,10 +29,10 @@ namespace MI.Data
             return Entities.Find(id);
         }
         /// <summary>
-        /// 获取所有数据
+        /// 整表数据
         /// </summary>
         /// <returns></returns>
-        public IQueryable<T> GetAll()
+        public IQueryable<T> Table()
         {
 
             return Entities;
@@ -46,7 +50,6 @@ namespace MI.Data
                     throw new ArgumentNullException(nameof(t));
                 }
                 this.Entities.Add(t);
-                //return _context.SaveChanges();
             }
             catch (Exception)
             {
@@ -68,7 +71,6 @@ namespace MI.Data
                 }
                 AttachIfNot(t);
                 _context.GetEntry(t).State = EntityState.Modified;
-                //return _context.SaveChanges();
             }
             catch (Exception)
             {
@@ -89,7 +91,6 @@ namespace MI.Data
                     throw new ArgumentNullException(nameof(t));
                 }
                 this.Entities.Remove(t);
-                //return _context.SaveChanges();
             }
             catch (Exception)
             {
@@ -98,22 +99,9 @@ namespace MI.Data
             }
         }
         /// <summary>
-        /// 批量删除
-        /// </summary>
-        /// <param name="query"></param>s
-        /// <returns></returns>
-        public void Delete(IEnumerable<T> query)
-        {
-            foreach (var item in query)
-            {
-               this.Entities.Remove(item);
-            }
-            //return _context.SaveChanges();
-        }
-        /// <summary>
         /// 获取上下文实体对象
         /// </summary>
-        public IDbSet<T> Entities
+        public DbSet<T> Entities
         {
             get
             {
@@ -121,7 +109,7 @@ namespace MI.Data
             }
         }
         /// <summary>
-        /// 
+        /// 如果上下文对象不纯在当前实体则附加上
         /// </summary>
         /// <param name="entity"></param>
         public virtual void AttachIfNot(T entity)

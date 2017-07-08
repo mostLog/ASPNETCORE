@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace L.LCore
@@ -10,6 +11,11 @@ namespace L.LCore
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        IServiceProvider ConfigureServices(IServiceCollection services);
+        IServiceProvider ConfigureServices(IServiceCollection services, IConfigurationRoot configuration);
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="services"></param>
+        void Initial(IServiceCollection services);
     }
 }

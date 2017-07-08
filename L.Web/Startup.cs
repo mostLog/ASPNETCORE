@@ -1,4 +1,6 @@
-﻿using L.LCore.Infrastructure.Extension;
+﻿using L.EntityFramework;
+using L.LCore.Infrastructure.Configuration;
+using L.LCore.Infrastructure.Extension;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,10 +26,11 @@ namespace L.Web
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
+            var config = new LConfig();
+            Configuration.GetSection("L").Bind(config);
+            //
+            services.AddSingleton(typeof(ILConfig), config);
             return services.ConfigureApplicationServices(Configuration);
-            //添加数据库上下文对象
-            //services.AddDbContext<LDbContext>(options =>options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

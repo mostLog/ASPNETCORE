@@ -1,15 +1,10 @@
-﻿using MI.Core;
-using MI.Core.Domain;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MI.Data
+namespace L.EntityFramework
 {
     /// <summary>
-    /// 
+    /// 基类仓储接口
     /// </summary>
     public interface IBaseRepository<T> where T : class
     {
@@ -17,7 +12,7 @@ namespace MI.Data
         /// 获取所有数据
         /// </summary>
         /// <returns></returns>
-        IQueryable<T> GetAll();
+        IQueryable<T> Table();
         /// <summary>
         /// 根据id获取实体
         /// </summary>
@@ -30,11 +25,6 @@ namespace MI.Data
         /// <param name="t"></param>
         void Insert(T t);
         /// <summary>
-        /// 添加数据并返回id
-        /// </summary>
-        /// <returns></returns>
-        //int InsertAndGetId(T t);
-        /// <summary>
         /// 更新
         /// </summary>
         /// <param name="t"></param>
@@ -44,9 +34,5 @@ namespace MI.Data
         /// </summary>
         /// <param name="t"></param>
         void Delete(T t);
-
-
-        void Delete(IEnumerable<T> query);
-
     }
 }
