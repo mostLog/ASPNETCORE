@@ -29,15 +29,6 @@ namespace L.EntityFramework
             return Entities.Find(id);
         }
         /// <summary>
-        /// 整表数据
-        /// </summary>
-        /// <returns></returns>
-        public IQueryable<T> Table()
-        {
-
-            return Entities;
-        }
-        /// <summary>
         /// 添加实体
         /// </summary>
         /// <param name="t"></param>
@@ -96,6 +87,17 @@ namespace L.EntityFramework
             {
 
                 throw;
+            }
+        }
+        /// <summary>
+        /// 整表数据
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<T> Table
+        {
+            get
+            {
+                return Entities;
             }
         }
         /// <summary>

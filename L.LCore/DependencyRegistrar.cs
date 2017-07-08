@@ -9,7 +9,7 @@ namespace L.LCore
     /// </summary>
     public class DependencyRegistrar : IDependencyRegistrar
     {
-        public void Register(ContainerBuilder builder, ILConfig config)
+        public void Register(ContainerBuilder builder)
         {
             
            

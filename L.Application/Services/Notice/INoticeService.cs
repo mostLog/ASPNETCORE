@@ -1,7 +1,10 @@
-﻿namespace L.Application
+﻿using L.LCore.Domain.Entities;
+using System.Collections.Generic;
+
+namespace L.Application
 {
     public interface INoticeService
     {
-        int GetNoticeById();
+        IList<Notice> GetNotices();
     }
 }

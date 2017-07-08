@@ -12,7 +12,7 @@ namespace L.EntityFramework
         /// 获取所有数据
         /// </summary>
         /// <returns></returns>
-        IQueryable<T> Table();
+        IQueryable<T> Table { get; }
         /// <summary>
         /// 根据id获取实体
         /// </summary>

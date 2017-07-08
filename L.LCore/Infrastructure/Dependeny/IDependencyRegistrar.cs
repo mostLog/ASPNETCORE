@@ -13,7 +13,7 @@ namespace L.LCore.Infrastructure.Dependeny
         /// 类型注册
         /// </summary>
         /// <param name="builder"></param>
-        void Register(ContainerBuilder builder, ILConfig config);
+        void Register(ContainerBuilder builder);
         /// <summary>
         /// 序号
         /// </summary>

@@ -15,4 +15,8 @@
     <ProjectReference Include="..\L.LCore\L.LCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Uow\" />
+  </ItemGroup>
+
 </Project>

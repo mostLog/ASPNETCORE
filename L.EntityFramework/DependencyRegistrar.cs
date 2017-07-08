@@ -1,10 +1,6 @@
 ﻿using Autofac;
-using L.LCore.Infrastructure.Configuration;
 using L.LCore.Infrastructure.Dependeny;
-using L.LCore.Infrastructure.Reflection;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
 
 namespace L.EntityFramework
 {
@@ -13,12 +9,18 @@ namespace L.EntityFramework
     /// </summary>
     public class DependencyRegistrar : IDependencyRegistrar
     {
-        public void Register(ContainerBuilder builder, ILConfig config)
+        public void Register(ContainerBuilder builder)
         {
             //注册仓储
             builder.RegisterGeneric(typeof(EFBaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerLifetimeScope();
             //注册数据库上下文对象
-            builder.Register(c => (IDbContext)Activator.CreateInstance(typeof(LDbContext),new object[] {new DbContextOptionsBuilder().UseSqlServer(config.SqlServerConnection)})).InstancePerLifetimeScope();
+            //builder.RegisterType<LDbContext>().As<IDbContext>().InstancePerLifetimeScope();
+            builder.Register<IDbContext>(c => new LDbContext(
+                    new DbContextOptionsBuilder()
+                    .UseSqlServer("data source=.;initial catalog=CoreTest;Integrated Security=true")
+                    .Options
+                ))
+                .InstancePerLifetimeScope();
         }
         public int Order { get; set; } = 1;
     }

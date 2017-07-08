@@ -25,12 +25,15 @@ namespace L.Web
         public IConfigurationRoot Configuration { get; }
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            //services.AddDbContext<LDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
             services.AddMvc();
             var config = new LConfig();
             Configuration.GetSection("L").Bind(config);
             //
             services.AddSingleton(typeof(ILConfig), config);
             return services.ConfigureApplicationServices(Configuration);
+
+            
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

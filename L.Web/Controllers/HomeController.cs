@@ -15,13 +15,11 @@ namespace L.Web.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return View(_noticeService.GetNotices());
         }
 
         public IActionResult About()
         {
-            ViewData["Message"] = _noticeService.GetNoticeById();
-
             return View();
         }
 

@@ -1,6 +1,6 @@
-﻿using L.LCore.Domain.Entities;
+﻿using L.EntityFramework.Extension;
 using Microsoft.EntityFrameworkCore;
-using L.EntityFramework.Extension;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Reflection;
 
 namespace L.EntityFramework
@@ -8,7 +8,7 @@ namespace L.EntityFramework
     /// <summary>
     /// 上下文对象
     /// </summary>
-    public class LDbContext : DbContext
+    public class LDbContext : DbContext, IDbContext
     {
         /// <summary>
         /// 构造函数
@@ -16,8 +16,19 @@ namespace L.EntityFramework
         /// <param name="options"></param>
         public LDbContext(DbContextOptions options) : base(options)
         {
-
+            
         }
+
+        public EntityEntry<T> GetEntry<T>(T t) where T : class
+        {
+            return base.Entry<T>(t);
+        }
+
+        public DbSet<T> SetEntity<T>() where T : class
+        {
+            return base.Set<T>();
+        }
+
         /// <summary>
         /// 执行sql查询语句
         /// </summary>
@@ -29,12 +40,15 @@ namespace L.EntityFramework
         {
             return Database.ExecuteSqlCommand(sql, parameters);
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            
             modelBuilder.AddEntityConfigurationsFromAssembly(GetType().GetTypeInfo().Assembly);
         }
+
+       
     }
     
 

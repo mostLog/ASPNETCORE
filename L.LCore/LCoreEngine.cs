@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace L.LCore
 {
@@ -21,6 +22,13 @@ namespace L.LCore
         {
             
         }
+
+        protected IServiceProvider GetServiceProvider()
+        {
+            var accessor = ServiceProvider.GetService<IHttpContextAccessor>();
+            var context = accessor.HttpContext;
+            return context != null ? context.RequestServices : ServiceProvider;
+        }
         /// <summary>
         /// 配置服务
         /// </summary>
@@ -31,9 +39,9 @@ namespace L.LCore
             var typeFinder = new AssemblyTypeFinder();
 
             //
-            var config = ServiceProvider.GetRequiredService<ILConfig>();
+            //var config = GetServiceProvider().GetRequiredService<ILConfig>();
 
-            RegisterDependencies(services, typeFinder,config);
+            RegisterDependencies(services, typeFinder);
 
             return ServiceProvider;
         }
@@ -44,7 +52,7 @@ namespace L.LCore
         /// <param name="services"></param>
         /// <returns></returns>
 
-        protected virtual IServiceProvider RegisterDependencies(IServiceCollection services,ITypeFinder typeFinder, ILConfig config)
+        protected virtual IServiceProvider RegisterDependencies(IServiceCollection services,ITypeFinder typeFinder)
         {
 
             var containerBuilder = new ContainerBuilder();
@@ -61,7 +69,7 @@ namespace L.LCore
 
             foreach (var register in instances)
             {
-                register.Register(containerBuilder,config);
+                register.Register(containerBuilder);
             }
 
             containerBuilder.Populate(services);
