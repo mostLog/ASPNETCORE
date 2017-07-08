@@ -3,20 +3,18 @@ using L.LCore.Infrastructure.Dependeny;
 using L.LCore.Infrastructure.Reflection;
 using System.Reflection;
 
-namespace L.Application
+namespace L.LCore
 {
     /// <summary>
-    /// Application层依赖注入配置
+    /// Core层依赖注入配置
     /// </summary>
     public class DependencyRegistrar : IDependencyRegistrar
     {
         public void Register(ContainerBuilder builder, ITypeFinder typeFinder)
         {
-            //注册服务层
-            builder.RegisterAssemblyTypes(GetType().GetTypeInfo().Assembly)
-             .Where(t => t.Name.EndsWith("Service"))
-             .AsImplementedInterfaces();
+            
+           
         }
-        public int Order { get; set; } =3;
+        public int Order { get; set; } = 1;
     }
 }

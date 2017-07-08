@@ -1,7 +1,10 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using L.LCore.Infrastructure.Dependeny;
+using L.LCore.Infrastructure.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 
 namespace L.LCore
 {
@@ -19,42 +22,42 @@ namespace L.LCore
         /// <returns></returns>
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            var typeFinder = new AssemblyTypeFinder();
+
+            RegisterDependencies(services, typeFinder);
 
             return ServiceProvider;
         }
         /// <summary>
-        /// 注册依赖
+        /// 通过Autofac注册依赖
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
 
-        protected virtual IServiceProvider RegisterDependencies(IServiceCollection services)
+        protected virtual IServiceProvider RegisterDependencies(IServiceCollection services,ITypeFinder typeFinder)
         {
 
             var containerBuilder = new ContainerBuilder();
             
             containerBuilder.RegisterInstance(this).As<ILCoreEngine>().SingleInstance();
 
-            //register type finder
-            //containerBuilder.RegisterInstance(typeFinder).As<ITypeFinder>().SingleInstance();
+            containerBuilder.RegisterInstance(typeFinder).As<ITypeFinder>().SingleInstance();
 
-            //find dependency registrars provided by other assemblies
-            //var dependencyRegistrars = typeFinder.FindClassesOfType<IDependencyRegistrar>();
+            var registrars = typeFinder.FindTypesByInterface<IDependencyRegistrar>();
 
-            //create and sort instances of dependency registrars
-            //var instances = dependencyRegistrars
-            //    //.Where(dependencyRegistrar => PluginManager.FindPlugin(dependencyRegistrar).Return(plugin => plugin.Installed, true)) //ignore not installed plugins
-            //    .Select(dependencyRegistrar => (IDependencyRegistrar)Activator.CreateInstance(dependencyRegistrar))
-            //    .OrderBy(dependencyRegistrar => dependencyRegistrar.Order);
+            var instances = registrars
+                .Select(r => (IDependencyRegistrar)Activator.CreateInstance(r))
+                .OrderBy(r => r.Order);
 
-            //register all provided dependencies
-            //foreach (var dependencyRegistrar in instances)
-            //    dependencyRegistrar.Register(containerBuilder, typeFinder, nopConfiguration);
+            foreach (var register in instances)
+            {
+                register.Register(containerBuilder, typeFinder);
+            }
 
             containerBuilder.Populate(services);
 
-            //create service provider
             ServiceProvider = new AutofacServiceProvider(containerBuilder.Build());
+
             return ServiceProvider;
         }
     }

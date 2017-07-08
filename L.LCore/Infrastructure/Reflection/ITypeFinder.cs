@@ -14,6 +14,6 @@ namespace L.LCore.Infrastructure.Reflection
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        IList<Type> FindTypeList<T>();
+        IList<Type> FindTypesByInterface<T>();
     }
 }

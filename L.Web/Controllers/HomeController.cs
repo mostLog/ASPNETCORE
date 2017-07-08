@@ -1,7 +1,5 @@
 ﻿using L.Application;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace L.Web.Controllers
 {

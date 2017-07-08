@@ -10,7 +10,7 @@ namespace L.LCore.Infrastructure.Extension
         {
             var engine = LCoreEngineManager.CreateEngine();
 
-            //var serviceProvider = engine.ConfigureServices(services, configuration);
+            var serviceProvider = engine.ConfigureServices(services);
 
             return serviceProvider;
         }

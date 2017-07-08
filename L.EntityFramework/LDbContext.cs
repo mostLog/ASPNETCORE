@@ -18,8 +18,6 @@ namespace L.EntityFramework
         {
 
         }
-
-        public DbSet<Notice> Notices { get; set; }
         /// <summary>
         /// 执行sql查询语句
         /// </summary>

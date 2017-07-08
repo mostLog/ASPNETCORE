@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using L.LCore.Infrastructure.Extension;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace L.Web
 {
@@ -19,9 +21,11 @@ namespace L.Web
         }
 
         public IConfigurationRoot Configuration { get; }
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            return services.ConfigureApplicationServices(Configuration);
             //添加数据库上下文对象
             //services.AddDbContext<LDbContext>(options =>options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
         }

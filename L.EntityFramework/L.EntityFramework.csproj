@@ -7,7 +7,6 @@
   <ItemGroup>
     <Compile Remove="BaseRepository.cs" />
     <Compile Remove="IBaseRepository.cs" />
-    <Compile Remove="IDbContext.cs" />
   </ItemGroup>
 
   <ItemGroup>
