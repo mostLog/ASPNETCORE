@@ -15,6 +15,8 @@ namespace L.Web.Controllers
         }
         public IActionResult Index()
         {
+            _noticeService.AddNotice();
+
             return View(_noticeService.GetNotices());
         }
 

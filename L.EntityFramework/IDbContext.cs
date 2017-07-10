@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections.Generic;
 
 namespace L.EntityFramework
@@ -19,6 +20,8 @@ namespace L.EntityFramework
         /// <param name="t"></param>
         /// <returns></returns>
         int SqlQuery<T>(string sql,params object[] parameters);
-        
+
+        IDbContextTransaction CreateTransaction();
+
     }
 }

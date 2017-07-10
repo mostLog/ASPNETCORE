@@ -2,6 +2,7 @@
 using L.LCore.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace L.Application
 {
@@ -14,13 +15,18 @@ namespace L.Application
         {
             _noticeRepository = noticeRepository;
         }
+
+        public int AddNotice()
+        {
+            return 1;
+        }
+
         /// <summary>
         /// 返回所有公共信息
         /// </summary>
         /// <returns></returns>
         public IList<Notice> GetNotices()
         {
-            
             return _noticeRepository.Table.ToList();
         }
     }

@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Reflection;
+using Microsoft.EntityFrameworkCore.Storage;
+using System;
 
 namespace L.EntityFramework
 {
@@ -26,6 +28,7 @@ namespace L.EntityFramework
 
         public DbSet<T> SetEntity<T>() where T : class
         {
+
             return base.Set<T>();
         }
 
@@ -39,6 +42,14 @@ namespace L.EntityFramework
         public int SqlQuery<T>(string sql, params object[] parameters)
         {
             return Database.ExecuteSqlCommand(sql, parameters);
+        }
+        /// <summary>
+        /// 创建事务
+        /// </summary>
+        /// <returns></returns>
+        public IDbContextTransaction CreateTransaction()
+        {
+            return this.Database.BeginTransaction();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
