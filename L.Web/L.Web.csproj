@@ -30,7 +30,6 @@
     <Content Include="wwwroot\js\layuilib\elements.js" />
     <Content Include="wwwroot\js\layuilib\larry.js" />
     <Content Include="wwwroot\js\layuilib\navtab.js" />
-    <Content Include="wwwroot\js\lyx.js" />
     <Content Include="wwwroot\js\navtab.js" />
     <Content Include="wwwroot\lib\layui\css\layui.css" />
     <Content Include="wwwroot\lib\layui\css\layui.mobile.css" />
