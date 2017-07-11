@@ -228,7 +228,7 @@ layui.define(['jquery', 'layer', 'element', 'common'], function (exports) {
                     if (data[i].icon.indexOf('fa-') !== -1) {
                         ulHtml += '<i class="fa ' + data[i].icon + '" data-icon="' + data[i].icon + '" aria-hidden="true" ></i>';
                     } else if (data[i].icon.indexOf('icon-') !== -1) {
-                        ulHtml += '<i class="iconfont' + data[i].icon + '" data-icon="' + data[i].icon + '" aria-hidden="true"></i>';
+                        ulHtml += '<i class="iconfont ' + data[i].icon + '" data-icon="' + data[i].icon + '" aria-hidden="true"></i>';
                     }
                     else {
                         ulHtml += '<i class="fa" data-icon="' + data[i].icon + '">' + data[i].icon + '</i>';
@@ -244,7 +244,7 @@ layui.define(['jquery', 'layer', 'element', 'common'], function (exports) {
                         if (data[i].children[j].icon.indexOf('fa-') !== -1) {
                             ulHtml += '<i class="fa ' + data[i].children[j].icon + '" data-icon="' + data[i].children[j].icon + '" aria-hidden="true" ></i>';
                         } else if (data[i].icon.indexOf('icon-') !== -1) {
-                            ulHtml += '<i class="iconfont' + data[i].children[j].icon + '" data-icon="' + data[i].children[j].icon + '" aria-hidden="true"></i>';
+                            ulHtml += '<i class="iconfont ' + data[i].children[j].icon + '" data-icon="' + data[i].children[j].icon + '" aria-hidden="true"></i>';
                         } else {
                             ulHtml += '<i class="fa" data-icon="' + data[i].children[j].icon + '">' + data[i].children[j].icon + '</i>';
                         }

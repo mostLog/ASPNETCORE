@@ -101,13 +101,13 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
                     {
                         "pid": "100",
                         "title": "后台首页",
-                        "icon": "fa-list",
+                        "icon": "icon-home",
                         "href": "html/main.php"
                     },
                     {
                         "pid": "101",
-                        "title": "我的面板",
-                        "icon": "fa-list",
+                        "title": "数据采集",
+                        "icon": "icon-spider",
                         "spread": "true",
                         "children": [
                             {
@@ -119,59 +119,6 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
                             {
                                 "title": "日志信息", "icon": "fa-list", "href": "html/myloginfo.html"
                             }]
-                    }, {
-                        "pid": "102",
-                        "title": "用户管理",
-                        "icon": "fa-list",
-                        "spread": "true",
-                        "children": [{
-                            "title": "用户列表", "icon": "fa-list", "href": "html/main.html"
-                        }, {
-                                "title": "角色列表", "icon": "fa-list", "href": "html/temp.html"
-                            }, {
-                                "title": "菜单管理", "icon": "fa-list", "href": "html/temp.html"
-                            }]
-                    }, {
-                        "pid": "103",
-                        "title": "会员管理",
-                        "icon": "fa-list",
-                        "spread": "true",
-                        "children": [{
-                            "title": "会员注册列表", "icon": "fa-list", "href": "html/temp.html"
-                        }, {
-                                "title": "会员留言管理", "icon": "fa-list", "href": "html/temp.html"
-                            }, {
-                                "title": "会员等级管理", "icon": "fa-list", "href": "html/temp.html"
-                            }]
-                    }, {
-                        "pid": "104",
-                        "title": "系统设置",
-                        "icon": "fa-list",
-                        "spread": "true",
-                        "children": [{
-                            "title": "系统基本参数", "icon": "fa-list", "href": "html/temp.html"
-                        }, {
-                                "title": "SQL命令行工具", "icon": "fa-list", "href": "html/temp.html"
-                            }, {
-                                "title": "系统日志管理", "icon": "fa-list", "href": "html/temp.html"
-                        }, {
-                                "title": "验证安全管理", "icon": "fa-list", "href": "html/temp.html"
-                            }, {
-                                "title": "图片水印设置", "icon": "fa-list", "href": "html/temp.html"
-                        }, {
-                                "title": "安全字典设置", "icon": "fa-list", "href": "html/temp.html"
-                            }, {
-                                "title": "短信接口配置", "icon": "fa-list", "href": "html/temp.html"
-                        }, {
-                                "title": "系统错误修复", "icon": "fa-list", "href": "html/temp.html"
-                            }, {
-                                "title": "数据库管理", "icon": "fa-list", "href": "html/temp.html"
-                            }]
-                    }, {
-                        "pid": "105",
-                        "title": "友链管理",
-                        "icon": "fa-list",
-                        "href": "html/temp.html"
                     }];
                
 				var result;

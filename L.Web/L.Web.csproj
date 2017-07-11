@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot/lib\layui\layui.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\css\common\backstage.css" />
     <Content Include="wwwroot\css\common\fontstyle.css" />
     <Content Include="wwwroot\css\common\font\iconfont.css" />
