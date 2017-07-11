@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace L.EntityFramework
 {
@@ -20,6 +21,7 @@ namespace L.EntityFramework
         {
             
         }
+
 
         public EntityEntry<T> GetEntry<T>(T t) where T : class
         {
@@ -58,13 +60,23 @@ namespace L.EntityFramework
             
             modelBuilder.AddEntityConfigurationsFromAssembly(GetType().GetTypeInfo().Assembly);
         }
-
-       
     }
-    
+    /// <summary>
+    /// 用于数据迁移
+    /// </summary>
+    public class ApplicationDbContextFactory : IDbContextFactory<LDbContext>
+    {
+       
+        public LDbContext Create(DbContextFactoryOptions options)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<LDbContext>();
 
-    
+            optionsBuilder.UseSqlServer("data source=.;initial catalog=CoreTest;Integrated Security=true");
+            return new LDbContext(optionsBuilder.Options);
+        }
+    }
 
-    
+
+
 }
 
