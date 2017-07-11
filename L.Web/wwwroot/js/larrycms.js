@@ -362,29 +362,29 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
 
     // 顶部左侧导航控制开关
     $('#toggle').click(function () {
-        var sideWidth = $('#larry-side').width();
+        var sideWidth = $(this).width();
         var bodyW = $('#larry-body').width();
         if (sideWidth === 200) {
-            bodyW += 203;
+            bodyW += 130;
             $('#larry-body').animate({
-                left: '0',
+                left: '70',
                 width: bodyW
             });
             $('#larry-footer').animate({
-                left: '0',
+                left: '70',
                 width: bodyW
             });
             $('#larry-side').animate({
-                width: '0'
+                width: '70'
             });
         } else {
-            bodyW -= 203;
+            bodyW -= 130;
             $('#larry-body').animate({
-                left: '203px',
+                left: '200px',
                 width: bodyW
             });
             $('#larry-footer').animate({
-                left: '203px',
+                left: '200px',
                 width: bodyW
             });
             $('#larry-side').animate({

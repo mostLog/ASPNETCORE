@@ -19,7 +19,6 @@
   <ItemGroup>
     <Content Include="wwwroot\css\common\backstage.css" />
     <Content Include="wwwroot\css\common\global.css" />
-    <Content Include="wwwroot\css\global.css" />
     <Content Include="wwwroot\css\index.css" />
     <Content Include="wwwroot\images\lockscreenbg.jpg" />
     <Content Include="wwwroot\images\logo.png" />
