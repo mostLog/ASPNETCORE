@@ -138,7 +138,7 @@ layui.define(['jquery','elements','layer','common'],function(exports){
 			}
 			title += '<em>' + data.title + '</em>';
 			if (_config.closed) {
-				title += '<i class="fa fa-close layui-unselect layui-tab-close" data-id="' + globalTabIdIndex + '"></i>';
+				title += '<i class="iconfont icon-close layui-unselect layui-tab-close" data-id="' + globalTabIdIndex + '"></i>';
 			}
 
 			// 添加tab

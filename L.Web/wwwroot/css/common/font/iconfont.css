@@ -7,8 +7,8 @@
 }*/
 @font-face {
     font-family: 'iconfont'; /* project id 350379 */
-    src: url('//at.alicdn.com/t/font_sm2hgalkjr3pu8fr.eot');
-    src: url('//at.alicdn.com/t/font_sm2hgalkjr3pu8fr.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_sm2hgalkjr3pu8fr.woff') format('woff'), url('//at.alicdn.com/t/font_sm2hgalkjr3pu8fr.ttf') format('truetype'), url('//at.alicdn.com/t/font_sm2hgalkjr3pu8fr.svg#iconfont') format('svg');
+    src: url('//at.alicdn.com/t/font_6jz7axuisqy0t3xr.eot');
+    src: url('//at.alicdn.com/t/font_6jz7axuisqy0t3xr.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_6jz7axuisqy0t3xr.woff') format('woff'), url('//at.alicdn.com/t/font_6jz7axuisqy0t3xr.ttf') format('truetype'), url('//at.alicdn.com/t/font_6jz7axuisqy0t3xr.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -52,4 +52,31 @@
 .icon-menu:before {
     content: "\e61e";
 }
+/*类别*/
+.icon-category:before {
+    content: "\e647";
+}
+/*任务*/
+.icon-task:before{
+    content: "\e630";
+}
+/*规则*/
+.icon-rule:before {
+    content: "\e602";
+}
+/*左*/
+.icon-left:before {
+    content: "\e720";
+}
+/*右*/
+.icon-right:before {
+    content: "\e6f8";
+}
+/*关闭*/
+.icon-close:before {
+    content: "\e6b1";
 
+}
+.icon-close{
+    font-size:12px;
+}

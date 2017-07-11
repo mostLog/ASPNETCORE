@@ -49,21 +49,6 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
 			"title": "系统管理",
             "icon": "fa-list",
 			"pid": "0"
-		  },
-		  {
-			"title": "内容管理",
-            "icon": "fa-list",
-			"pid": "35"
-		  },
-		  {
-			"title": "微信公众",
-            "icon": "fa-list",
-			"pid": "40"
-		  },
-		  {
-			"title": "扩展模块",
-            "icon": "fa-list",
-			"pid": "46"
 		  }
 		]
 		larry.set({
@@ -111,13 +96,13 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
                         "spread": "true",
                         "children": [
                             {
-                                "title": "个人信息", "icon": "fa-list", "href": "html/personInfo.html"
+                                "title": "采集规则定义", "icon": "icon-rule", "href": "html/personInfo.html"
                             },
                             {
-                                "title": "修改密码", "icon": "fa-list", "href": "html/changepwd.html"
+                                "title": "采集任务", "icon": "icon-task", "href": "html/changepwd.html"
                             },
                             {
-                                "title": "日志信息", "icon": "fa-list", "href": "html/myloginfo.html"
+                                "title": "数据类型维护", "icon": "icon-category", "href": "html/myloginfo.html"
                             }]
                     }];
                

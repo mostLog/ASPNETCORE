@@ -369,6 +369,7 @@ ul.layui-tab-title li i{
 	vertical-align: top;
 	padding-right: 3px;
 	line-height: 40px;
+    /*font-size:12px;*/
 }
 ul.layui-tab-title li em{
 	display: inline-block;
