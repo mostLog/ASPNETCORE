@@ -366,6 +366,8 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
         var bodyW = $('#larry-body').width();
         if (sideWidth === 200) {
             bodyW += 130;
+            $(this).addClass('sidebar-mix')
+            $('#larry-side').addClass('sidebar-mix');
             $('#larry-body').animate({
                 left: '70',
                 width: bodyW
@@ -379,6 +381,8 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
             });
         } else {
             bodyW -= 130;
+            $(this).removeClass('sidebar-mix');
+            $("#larry-side").removeClass('sidebar-mix');
             $('#larry-body').animate({
                 left: '200px',
                 width: bodyW
