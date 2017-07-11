@@ -1,10 +1,12 @@
-﻿using System;
+﻿using L.LCore.Domain.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace L.LCore.Domain.Spider
+namespace L.LCore.Domain.Entities
 {
-    class SpiderTask
+    public class SpiderTask: PKOfIntEntity
     {
+         
     }
 }

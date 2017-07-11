@@ -1,0 +1,5 @@
+﻿Add-Migration init  第一个命令(用于初始化Migrations目录)
+
+Update-Database init 第一次更新数据库
+
+

@@ -1,13 +1,10 @@
-﻿using System;
+﻿using L.LCore.Domain.Base;
+using System;
 
 namespace L.LCore.Domain.Entities
 {
-    public class Notice
+    public class Notice: PKOfIntEntity
     {
-        /// <summary>
-        /// 自增id
-        /// </summary>
-        public int Id { get; set; }
         /// <summary>
         /// 公告类型,0=一般公告、1=紧急通知
         /// </summary>
