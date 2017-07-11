@@ -8,9 +8,10 @@ using L.EntityFramework;
 namespace L.EntityFramework.Migrations
 {
     [DbContext(typeof(LDbContext))]
-    partial class LDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170711091926_SpiderTask")]
+    partial class SpiderTask
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

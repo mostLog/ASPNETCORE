@@ -3,7 +3,7 @@ using System;
 
 namespace L.LCore.Domain.Entities
 {
-    public class Notice: PKOfIntEntity
+    public class Notice: AuditEntity
     {
         /// <summary>
         /// 公告类型,0=一般公告、1=紧急通知
@@ -13,14 +13,6 @@ namespace L.LCore.Domain.Entities
         /// 公告内容
         /// </summary>
         public string Content { get; set; }
-        /// <summary>
-        /// 添加时间
-        /// </summary>
-        public DateTime? AddDate { get; set; }
-        /// <summary>
-        /// 添加人
-        /// </summary>
-        public string Registrant { get; set; }
         /// <summary>
         /// 有效开始时间
         /// </summary>
