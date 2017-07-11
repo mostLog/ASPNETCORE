@@ -28,6 +28,12 @@
     width: 70px;
 }
 
-.sidebar-mix .layui-side-scroll .layui-nav-tree .layui-nav-item a > span {
+
+.sidebar-mix .layui-side-scroll ul.layui-nav li.layui-nav-item dl.layui-nav-child dd a
+{
+    padding-left:24px;
+    padding-right:0px;
+}
+.sidebar-mix .layui-side-scroll .layui-nav-tree .layui-nav-item a > em {
     display: none;
 }
