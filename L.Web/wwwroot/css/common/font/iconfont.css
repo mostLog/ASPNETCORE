@@ -1,3 +1,10 @@
+/*.icon {
+    font-size: 42px;
+    margin: 10px 0;
+    -webkit-transition: font-size 0.25s ease-out 0s;
+    -moz-transition: font-size 0.25s ease-out 0s;
+    transition: font-size 0.25s ease-out 0s;
+}*/
 @font-face {font-family: "iconfont";
   src: url('iconfont.eot?t=1499744053846'); /* IE9*/
   src: url('iconfont.eot?t=1499744053846#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -7,11 +14,11 @@
 }
 
 .iconfont {
-  font-family:"iconfont" !important;
-  font-size:16px;
-  font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: "iconfont" !important;
+    font-size: 26px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .icon-themesetting:before { content: "\e637"; }
@@ -24,3 +31,6 @@
 
 .icon-signout:before { content: "\e60f"; }
 
+.icon-hand:before {
+    content: "\e83e"
+}
