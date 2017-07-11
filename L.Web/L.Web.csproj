@@ -22,10 +22,8 @@
 
   <ItemGroup>
     <Content Include="wwwroot\css\common\backstage.css" />
-    <Content Include="wwwroot\css\common\fontstyle.css" />
     <Content Include="wwwroot\css\common\font\iconfont.css" />
     <Content Include="wwwroot\css\common\font\iconfont.eot" />
-    <Content Include="wwwroot\css\common\font\iconfont.js" />
     <Content Include="wwwroot\css\common\font\iconfont.svg" />
     <Content Include="wwwroot\css\common\font\iconfont.ttf" />
     <Content Include="wwwroot\css\common\font\iconfont.woff" />

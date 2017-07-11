@@ -7,8 +7,8 @@
 }*/
 @font-face {
     font-family: 'iconfont'; /* project id 350379 */
-    src: url('//at.alicdn.com/t/font_eod7a2ncsl0g4x6r.eot');
-    src: url('//at.alicdn.com/t/font_eod7a2ncsl0g4x6r.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_eod7a2ncsl0g4x6r.woff') format('woff'), url('//at.alicdn.com/t/font_eod7a2ncsl0g4x6r.ttf') format('truetype'), url('//at.alicdn.com/t/font_eod7a2ncsl0g4x6r.svg#iconfont') format('svg');
+    src: url('//at.alicdn.com/t/font_sm2hgalkjr3pu8fr.eot');
+    src: url('//at.alicdn.com/t/font_sm2hgalkjr3pu8fr.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_sm2hgalkjr3pu8fr.woff') format('woff'), url('//at.alicdn.com/t/font_sm2hgalkjr3pu8fr.ttf') format('truetype'), url('//at.alicdn.com/t/font_sm2hgalkjr3pu8fr.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -47,5 +47,9 @@
 /*≈¿≥Ê*/
 .icon-spider:before {
     content: "\e601";
+}
+/*≤Àµ•*/
+.icon-menu:before {
+    content: "\e61e";
 }
 
