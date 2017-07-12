@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace L.EntityFramework
 {
@@ -32,7 +33,7 @@ namespace L.EntityFramework
         /// 添加实体
         /// </summary>
         /// <param name="t"></param>
-        public void Insert(T t)
+        public T Insert(T t)
         {
             try
             {
@@ -40,7 +41,7 @@ namespace L.EntityFramework
                 {
                     throw new ArgumentNullException(nameof(t));
                 }
-                this.Entities.Add(t);
+                return Entities.Add(t).Entity;
             }
             catch (Exception)
             {
@@ -52,7 +53,7 @@ namespace L.EntityFramework
         /// 更新数据
         /// </summary>
         /// <param name="t"></param>
-        public void Update(T t)
+        public T Update(T t)
         {
             try
             {
@@ -62,6 +63,7 @@ namespace L.EntityFramework
                 }
                 AttachIfNot(t);
                 _context.GetEntry(t).State = EntityState.Modified;
+                return t;
             }
             catch (Exception)
             {
@@ -73,7 +75,7 @@ namespace L.EntityFramework
         /// 删除数据
         /// </summary>
         /// <param name="t"></param>
-        public void Delete(T t)
+        public T Delete(T t)
         {
             try
             {
@@ -81,7 +83,7 @@ namespace L.EntityFramework
                 {
                     throw new ArgumentNullException(nameof(t));
                 }
-                this.Entities.Remove(t);
+                return this.Entities.Remove(t).Entity;
             }
             catch (Exception)
             {
@@ -99,7 +101,7 @@ namespace L.EntityFramework
             {
                 return Entities;
             }
-        }
+        } 
         /// <summary>
         /// 获取上下文实体对象
         /// </summary>
@@ -120,6 +122,45 @@ namespace L.EntityFramework
             {
                 Entities.Attach(entity);
             }
+        }
+        /// <summary>
+        /// 异步获取
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<T> GetEntityByIdAsync(int id)
+        {
+            return await Entities.FindAsync(id);
+        }
+        /// <summary>
+        /// 异步插入
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public Task<T> InsertAsync(T t)
+        {
+            return Task.FromResult(Insert(t)) ;
+        }
+        /// <summary>
+        /// 异步更新
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public Task<T> UpdateAsync(T t)
+        {
+            AttachIfNot(t);
+            _context.GetEntry(t).State = EntityState.Modified;
+            return Task.FromResult(t);
+        }
+        /// <summary>
+        /// 异步删除
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public Task<T> DeleteAsync(T t)
+        {
+            Entities.Remove(t);
+            return Task.FromResult(t);
         }
     }
 }
