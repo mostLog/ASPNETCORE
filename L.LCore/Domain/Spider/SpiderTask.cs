@@ -16,8 +16,25 @@ namespace L.LCore.Domain.Entities
         /// </summary>
         public string Description { get; set; }
         /// <summary>
+        /// 爬取模式
+        /// </summary>
+        public int CrawlerType { get; set; }
+        /// <summary>
+        /// 是否开启定时执行
+        /// </summary>
+        public bool? IsOpenTime { get; set; }
+        /// <summary>
+        /// 定时开始时间
+        /// </summary>
+        public DateTime? OpenTime { get; set; }
+        /// <summary>
         /// 状态
         /// </summary>
          public int Status { get; set; }
+        /// <summary>
+        /// 爬取规则
+        /// </summary>
+        public virtual ICollection<CrawlerRule> Rules { get; set; }
+
     }
 }

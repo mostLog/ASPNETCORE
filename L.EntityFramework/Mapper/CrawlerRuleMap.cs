@@ -5,13 +5,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace L.EntityFramework.Mapper
 {
-    public class SpiderTaskMap : EntityMappingConfiguration<SpiderTask>
+    public class CrawlerRuleMap : EntityMappingConfiguration<CrawlerRule>
     {
-        public override void Map(EntityTypeBuilder<SpiderTask> b)
+        public override void Map(EntityTypeBuilder<CrawlerRule> b)
         {
-            b.ToTable("T_SpiderTask");
+            b.ToTable("T_CrawlerRule");
             b.HasKey(c=>c.Id);
-            b.HasMany(c=>c.Rules);
+            b.HasMany(c => c.Tasks);
+
         }
     }
 }
