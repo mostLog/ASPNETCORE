@@ -12,6 +12,7 @@ namespace L.EntityFramework.Mapper
             b.ToTable("T_SpiderTask");
             b.HasKey(c=>c.Id);
             b.HasMany(c=>c.Rules);
+            
         }
     }
 }
