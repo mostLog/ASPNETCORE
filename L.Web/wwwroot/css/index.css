@@ -37,3 +37,66 @@
 .sidebar-mix .layui-side-scroll .layui-nav-tree .layui-nav-item a > em {
     display: none;
 }
+
+.gray-bg {
+    background-color: rgb(243, 243, 244);
+}
+.wrapper-content {
+    padding: 20px;
+}
+
+.wrapper {
+    padding: 0px 20px;
+}
+
+.box {
+    clear: both;
+    margin-bottom: 25px;
+    margin-top: 0px;
+    padding: 0px;
+}
+.box-title {
+    background-color: rgb(255, 255, 255);
+    -webkit-border-image: none;
+    color: inherit;
+    margin-bottom: 0px;
+    min-height: 48px;
+    border-color: rgb(231, 234, 236);
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 4px 0px 0px;
+    padding: 14px 15px 7px;
+}
+.box-title h5 {
+    display: inline-block;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    /*float: left;
+    margin: 0px 0px 7px;*/
+    padding: 0px;
+}
+.box-tools {
+    display: inline-block;
+    float: right;
+    margin-top: 0px;
+    position: relative;
+    padding: 0px;
+}
+.box-content {
+    clear: both;
+}
+
+.box-content {
+    background-color: rgb(255, 255, 255);
+    color: inherit;
+    -webkit-border-image: none;
+    padding: 15px 20px 20px;
+    border-color: rgb(231, 234, 236);
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0px;
+}
+
+.form-control {
+    border-radius:1px;
+}

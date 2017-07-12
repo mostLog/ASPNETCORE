@@ -10,9 +10,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\lib\bootstrap\fonts\**" />
+    <Compile Remove="wwwroot\lib\bootstrap\grunt\**" />
+    <Compile Remove="wwwroot\lib\bootstrap\js\**" />
+    <Compile Remove="wwwroot\lib\bootstrap\less\**" />
+    <Compile Remove="wwwroot\lib\bootstrap\nuget\**" />
     <Compile Remove="wwwroot\lib\layer\**" />
+    <Content Remove="wwwroot\lib\bootstrap\fonts\**" />
+    <Content Remove="wwwroot\lib\bootstrap\grunt\**" />
+    <Content Remove="wwwroot\lib\bootstrap\js\**" />
+    <Content Remove="wwwroot\lib\bootstrap\less\**" />
+    <Content Remove="wwwroot\lib\bootstrap\nuget\**" />
     <Content Remove="wwwroot\lib\layer\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\fonts\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\grunt\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\js\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\less\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\nuget\**" />
     <EmbeddedResource Remove="wwwroot\lib\layer\**" />
+    <None Remove="wwwroot\lib\bootstrap\fonts\**" />
+    <None Remove="wwwroot\lib\bootstrap\grunt\**" />
+    <None Remove="wwwroot\lib\bootstrap\js\**" />
+    <None Remove="wwwroot\lib\bootstrap\less\**" />
+    <None Remove="wwwroot\lib\bootstrap\nuget\**" />
     <None Remove="wwwroot\lib\layer\**" />
   </ItemGroup>
 
@@ -39,6 +59,7 @@
     <Content Include="wwwroot\js\layuilib\elements.js" />
     <Content Include="wwwroot\js\layuilib\larry.js" />
     <Content Include="wwwroot\js\layuilib\navtab.js" />
+    <Content Include="wwwroot\js\layuilib\paged.js" />
     <Content Include="wwwroot\js\navtab.js" />
     <Content Include="wwwroot\lib\layui\css\layui.css" />
     <Content Include="wwwroot\lib\layui\css\layui.mobile.css" />
@@ -164,9 +185,6 @@
     <ProjectReference Include="..\L.Application\L.Application.csproj" />
     <ProjectReference Include="..\L.EntityFramework\L.EntityFramework.csproj" />
     <ProjectReference Include="..\L.LCore\L.LCore.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\SpiderTask\" />
   </ItemGroup>
 
 </Project>

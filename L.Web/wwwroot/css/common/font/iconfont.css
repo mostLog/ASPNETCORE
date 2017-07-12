@@ -7,8 +7,8 @@
 }*/
 @font-face {
     font-family: 'iconfont'; /* project id 350379 */
-    src: url('//at.alicdn.com/t/font_6jz7axuisqy0t3xr.eot');
-    src: url('//at.alicdn.com/t/font_6jz7axuisqy0t3xr.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_6jz7axuisqy0t3xr.woff') format('woff'), url('//at.alicdn.com/t/font_6jz7axuisqy0t3xr.ttf') format('truetype'), url('//at.alicdn.com/t/font_6jz7axuisqy0t3xr.svg#iconfont') format('svg');
+    src: url('//at.alicdn.com/t/font_xq5dpggbpf2edn29.eot');
+    src: url('//at.alicdn.com/t/font_xq5dpggbpf2edn29.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_xq5dpggbpf2edn29.woff') format('woff'), url('//at.alicdn.com/t/font_xq5dpggbpf2edn29.ttf') format('truetype'), url('//at.alicdn.com/t/font_xq5dpggbpf2edn29.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -76,6 +76,14 @@
 .icon-close:before {
     content: "\e6b1";
 
+}
+/*±à¼­*/
+.icon-edit:before {
+    content: "\e649";
+}
+/*É¾³ý*/
+.icon-delete:before {
+    content: "\e6b4";
 }
 .icon-close{
     font-size:12px;

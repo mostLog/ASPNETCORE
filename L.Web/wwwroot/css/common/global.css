@@ -1,13 +1,4 @@
-@charset "utf-8";
-/**
- * @Author: Larry  2017-04-16 17:20:56
- *+----------------------------------------------------------------------
- *| LarryBlogCMS [ LarryCMS网站内容管理系统 ]
- *| Copyright (c) 2016-2017 http://www.larrycms.com All rights reserved.
- *| Version 1.09
- *| <313492783@qq.com>
- *+----------------------------------------------------------------------
- */
+﻿@charset "utf-8";
 /* initialize css */
 *html{padding:0px}
 html{background-color: #ffffff; }
