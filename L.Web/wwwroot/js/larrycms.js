@@ -5,7 +5,8 @@ layui.config({
     larry: 'larry',
     navtab: 'navtab',
     elemnts: 'elements',
-    common: 'common'
+    common: 'common',
+    services:'services'
 });
 layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], function () {
     var $ = layui.jquery,

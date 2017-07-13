@@ -3,6 +3,7 @@
         , layer = layui.layer
         ,services=layer.services;
 
+    
     $("#btn-add").click(function () {
         services.addOrUpdateTask({
             SpiderTask: {

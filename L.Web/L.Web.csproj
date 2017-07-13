@@ -188,5 +188,8 @@
     <ProjectReference Include="..\L.EntityFramework\L.EntityFramework.csproj" />
     <ProjectReference Include="..\L.LCore\L.LCore.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\js\business\spidertask\Index.js" />
+  </ItemGroup>
 
 </Project>
