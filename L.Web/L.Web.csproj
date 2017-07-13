@@ -187,5 +187,9 @@
   <ItemGroup>
     <None Include="wwwroot\js\business\spidertask\Index.js" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Type\" />
+    <Folder Include="Views\Type\" />
+  </ItemGroup>
 
 </Project>

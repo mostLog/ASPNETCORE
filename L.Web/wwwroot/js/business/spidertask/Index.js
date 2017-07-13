@@ -3,20 +3,26 @@
 }).extend({
     services: 'services'
 });
-layui.use(['laypage', 'layer', 'services'], function () {
+layui.use(['jquery','laypage', 'layer', 'services'], function () {
     var laypage = layui.laypage
+        , $ = layui.jquery
         , layer = layui.layer
         , services = layui.services;
 
     
     $("#btn-add").click(function () {
-        services.addOrUpdateTask({
-            SpiderTask: {
-                Name:"小白"
-            }
-        }).done(function (data) {
-
+        layer.open({
+            type: 2,
+            content: 'SpiderTask/AddOrUpdateTask',
+            area: ['100%','100%']
         });
+        //services.addOrUpdateTask({
+        //    SpiderTask: {
+        //        Name:"小白"
+        //    }
+        //}).done(function (data) {
+
+        //});
     });
     //laypage({
     //    cont: 'tb'  //元素id

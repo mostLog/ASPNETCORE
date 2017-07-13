@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using L.Application.Dto;
 using L.Application.Services;
 using L.Application.Services.Dto;
-using L.Application.Dto;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace L.Web.Controllers
 {
@@ -48,6 +46,14 @@ namespace L.Web.Controllers
                 result = -1;
             }
             return Json(result);
+        }
+        /// <summary>
+        /// 添加或者修改对话框页面
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult A()
+        {
+            return View();
         }
     }
 }
