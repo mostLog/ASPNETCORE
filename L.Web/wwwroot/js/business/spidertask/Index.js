@@ -1,7 +1,12 @@
-﻿layui.use(['laypage', 'layer','services'], function () {
+﻿layui.config({
+    base: '../js/layuilib/' //layui自定义layui组件目录
+}).extend({
+    services: 'services'
+});
+layui.use(['laypage', 'layer', 'services'], function () {
     var laypage = layui.laypage
         , layer = layui.layer
-        ,services=layer.services;
+        , services = layui.services;
 
     
     $("#btn-add").click(function () {

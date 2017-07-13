@@ -1,5 +1,6 @@
 ﻿using L.Application.Dto;
 using L.Application.Services.Dto;
+using L.EntityFramework.Uow;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace L.Application.Services
 {
+    [UnitOfWork]
     public interface ISpiderService
     {
         /// <summary>
@@ -19,6 +21,7 @@ namespace L.Application.Services
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [NoUnitOfWork]
         Task<SpiderTaskEditDto> GetTaskById(BaseDto input);
 
     }

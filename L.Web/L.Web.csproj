@@ -53,16 +53,12 @@
     <Content Include="wwwroot\images\logo.png" />
     <Content Include="wwwroot\images\menu.png" />
     <Content Include="wwwroot\images\menu_o.png" />
-    <Content Include="wwwroot\js\index.js" />
     <Content Include="wwwroot\js\larrycms.js" />
-    <Content Include="wwwroot\js\layuiconfig.js" />
     <Content Include="wwwroot\js\layuilib\common.js" />
     <Content Include="wwwroot\js\layuilib\elements.js" />
     <Content Include="wwwroot\js\layuilib\larry.js" />
     <Content Include="wwwroot\js\layuilib\navtab.js" />
-    <Content Include="wwwroot\js\layuilib\paged.js" />
     <Content Include="wwwroot\js\layuilib\services.js" />
-    <Content Include="wwwroot\js\navtab.js" />
     <Content Include="wwwroot\lib\layui\css\layui.css" />
     <Content Include="wwwroot\lib\layui\css\layui.mobile.css" />
     <Content Include="wwwroot\lib\layui\css\modules\code.css" />
