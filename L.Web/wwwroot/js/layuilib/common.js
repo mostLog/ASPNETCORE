@@ -1,8 +1,3 @@
-/**
- * larryCMS 自定义公共基础信息提示模块
- * Autor: Larry
- * Date: 17-04-25
- */
 layui.define(['layer'],function(exports){
     "use strict";
 	var $ = layui.jquery,

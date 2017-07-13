@@ -3,6 +3,8 @@ using L.EntityFramework;
 using L.LCore.Domain.Entities;
 using L.LCore.Infrastructure.Extension;
 using System.Threading.Tasks;
+using L.Application.Dto;
+using System;
 
 namespace L.Application.Services
 {
@@ -56,6 +58,15 @@ namespace L.Application.Services
         {
 
         }
-
+        /// <summary>
+        /// 更具id获取实体
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<SpiderTaskEditDto> GetTaskById(BaseDto input)
+        {
+            var task=await _spiderRepository.GetEntityByIdAsync(input.Id.Value);
+            return task.MapTo<SpiderTaskEditDto>();
+        }
     }
 }

@@ -1,11 +1,3 @@
-/**
- * @author Larry_qin 2017-05-20 /参考Beginner navbar.js并进行改进
- * @link      http://www.larrycms.com/
- * @version   [0.01]
- * @license   [license]
- * @param     {[type]}     [description]
- * @return    {[type]}     [description]
- */
 layui.define(['jquery', 'layer', 'element', 'common'], function (exports) {
     var $ = layui.jquery,
         layer = layui.layer,

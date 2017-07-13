@@ -1,12 +1,3 @@
-/**
- * @author Larry_qin 2017-05-22 / navtab.js
- * @copyright [copyright]
- * @link      http://www.larrycms.com/
- * @version   [version]
- * @license   [license]
- * @param     {[type]}                 exports){} [description]
- * @return    {[type]}                              [description]
- */
 layui.define(['jquery','elements','layer','common'],function(exports){
    "use strict";
    var $ = layui.jquery,

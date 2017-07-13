@@ -1,4 +1,5 @@
-﻿using L.Application.Services.Dto;
+﻿using L.Application.Dto;
+using L.Application.Services.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,12 @@ namespace L.Application.Services
         /// </summary>
         /// <returns></returns>
         Task AddOrUpdateSpiderTask(AddOrEditTaskInputDto input);
+        /// <summary>
+        /// 更具id获取实体
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<SpiderTaskEditDto> GetTaskById(BaseDto input);
 
     }
 }
