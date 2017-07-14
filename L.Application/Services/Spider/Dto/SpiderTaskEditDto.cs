@@ -20,6 +20,10 @@ namespace L.Application.Services.Dto
         /// </summary>
         public int CrawlerType { get; set; }
         /// <summary>
+        /// 网址集合
+        /// </summary>
+        public string Urls { get; set; }
+        /// <summary>
         /// 是否开启定时执行
         /// </summary>
         public bool? IsOpenTime { get; set; }

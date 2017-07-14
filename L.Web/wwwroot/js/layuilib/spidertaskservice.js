@@ -1,7 +1,7 @@
 ﻿layui.define(['jquery'], function (exports) {
     "use strict";
     var $ = layui.jquery,
-        module_name = 'services';
+        module_name = 'spidertaskservice';
     var Service = {
         addOrUpdateTask: function (model) {
             return $.ajax({
@@ -11,5 +11,5 @@
             });
         }
     };
-    exports(module_name, Service );
-})
+    exports(module_name, Service);
+});

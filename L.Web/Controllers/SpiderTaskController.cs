@@ -1,4 +1,4 @@
-using L.Application.Dto;
+ï»¿using L.Application.Dto;
 using L.Application.Services;
 using L.Application.Services.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +9,7 @@ namespace L.Web.Controllers
 {
     public class SpiderTaskController : Controller
     {
-        //ÅÀ³æ·şÎñ
+        //çˆ¬è™«æœåŠ¡
         private readonly ISpiderService _spiderService;
         public SpiderTaskController(ISpiderService spiderService)
         {
@@ -20,7 +20,7 @@ namespace L.Web.Controllers
             return View();
         }
         /// <summary>
-        /// ¸ù¾İid»ñÈ¡ÊµÌå
+        /// æ ¹æ®idè·å–å®ä½“
         /// </summary>
         /// <returns></returns>
         [NonAction]
@@ -29,12 +29,12 @@ namespace L.Web.Controllers
             return Json(await _spiderService.GetTaskById(input));
         }
         /// <summary>
-        /// Ìí¼Ó»òÕß¸üĞÂÈÎÎñ 
+        /// æ·»åŠ æˆ–è€…æ›´æ–°ä»»åŠ¡ 
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> AddOrUpdateTask(AddOrEditTaskInputDto input)
+        public async Task<IActionResult> AddOrUpdateTask(AddOrEditTaskInput input)
         {
             int result = 0;
             try
@@ -48,10 +48,10 @@ namespace L.Web.Controllers
             return Json(result);
         }
         /// <summary>
-        /// Ìí¼Ó»òÕßĞŞ¸Ä¶Ô»°¿òÒ³Ãæ
+        /// æ·»åŠ æˆ–è€…ä¿®æ”¹å¯¹è¯æ¡†é¡µé¢
         /// </summary>
         /// <returns></returns>
-        public IActionResult A()
+        public IActionResult AddOrEditSpiderTask()
         {
             return View();
         }

@@ -1,9 +1,6 @@
 ﻿using L.Application.Dto;
 using L.Application.Services.Dto;
 using L.EntityFramework.Uow;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace L.Application.Services
@@ -12,10 +9,17 @@ namespace L.Application.Services
     public interface ISpiderService
     {
         /// <summary>
+        /// 分页获取数据
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [NoUnitOfWork]
+        Task<PageListDto<SpiderTaskListOutput>> GetSpiderTaskPagedList(SearchInput input);
+        /// <summary>
         /// 创建或者更新爬虫
         /// </summary>
         /// <returns></returns>
-        Task AddOrUpdateSpiderTask(AddOrEditTaskInputDto input);
+        Task AddOrUpdateSpiderTask(AddOrEditTaskInput input);
         /// <summary>
         /// 更具id获取实体
         /// </summary>

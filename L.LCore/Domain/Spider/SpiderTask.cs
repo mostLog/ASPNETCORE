@@ -20,6 +20,10 @@ namespace L.LCore.Domain.Entities
         /// </summary>
         public int CrawlerType { get; set; }
         /// <summary>
+        /// 爬取网址
+        /// </summary>
+        public string Urls { get; set; }
+        /// <summary>
         /// 是否开启定时执行
         /// </summary>
         public bool? IsOpenTime { get; set; }
