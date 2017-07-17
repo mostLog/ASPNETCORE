@@ -4,7 +4,7 @@ using System.Text;
 
 namespace L.Application.Services.Dto
 {
-    public class SpiderTaskEditDto
+    public class TaskEditDto
     {
         public int? Id { get; set; }
         /// <summary>

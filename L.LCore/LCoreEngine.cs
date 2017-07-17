@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Builder;
 
 namespace L.LCore
 {
@@ -22,7 +23,10 @@ namespace L.LCore
         {
             
         }
-
+        /// <summary>
+        /// 通过IHttpContextAccessor 提供服务
+        /// </summary>
+        /// <returns></returns>
         protected IServiceProvider GetServiceProvider()
         {
             var accessor = ServiceProvider.GetService<IHttpContextAccessor>();
@@ -38,12 +42,45 @@ namespace L.LCore
         {
             var typeFinder = new AssemblyTypeFinder();
 
-            //
+            services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+
+
             //var config = GetServiceProvider().GetRequiredService<ILConfig>();
+
+
+            //配置服务
+            var startUps = typeFinder.FindTypesByInterface<IStartUp>();
+
+            var instances = startUps.Select(r => (IStartUp)Activator.CreateInstance(r))
+                .OrderBy(r => r.Order);
+
+            foreach (var register in instances)
+            {
+                register.ConfigureServices(services);
+            }
 
             RegisterDependencies(services, typeFinder);
 
             return ServiceProvider;
+        }
+        /// <summary>
+        /// 配置请求中间件
+        /// </summary>
+        /// <param name="app"></param>
+        public void ConfigureRequestMiddleware(IApplicationBuilder app)
+        {
+            var typeFinder= (ITypeFinder)GetServiceProvider().GetRequiredService(typeof(ITypeFinder));
+
+            var startUps=typeFinder.FindTypesByInterface<IStartUp>();
+
+            var instances=startUps
+                .Select(r => (IStartUp)Activator.CreateInstance(r))
+                .OrderBy(r => r.Order);
+
+            foreach (var register in instances)
+            {
+                register.Configure(app);
+            }
         }
 
         /// <summary>

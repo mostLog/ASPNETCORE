@@ -25,26 +25,33 @@ namespace L.Application.Services
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<PageListDto<SpiderTaskListOutput>> GetSpiderTaskPagedList(SearchInput input)
+        public async Task<PagedListResult<TaskListOutput>> GetSpiderTaskPagedList(TaskSearchInput input)
         {
             var tmplist= _spiderRepository.Table
                 .AsNoTracking()
                 .WhereIf(!input.Name.IsNullOrEmpty(), p => p.Name.Contains(input.Name))
                 .OrderByDescending(p => p.CreateDateTime);
 
-            var list = (await tmplist
+            var list = await tmplist
                 .PageBy(input.PageIndex, input.PageSize)
-                .ToListAsync()).MapTo<IList<SpiderTaskListOutput>>();
+                .ToListAsync();
+
+            AutoMapper.Mapper.Initialize(cfg=>cfg.CreateMap<SpiderTask, TaskListOutput>());
+            
             //总数
             int count = list.Count();
 
-            return new PageListDto<SpiderTaskListOutput>(list, count);
+            return new PagedListResult<TaskListOutput>() {
+                Rows= AutoMapper.Mapper.Map<IList<TaskListOutput>>(list),
+                Total=count,
+                Flag=true
+            };
         }
         /// <summary>
         /// 添加或者更新
         /// </summary>
         /// <returns></returns>
-        public async Task AddOrUpdateSpiderTask(AddOrEditTaskInput input)
+        public async Task AddOrUpdateSpiderTask(TaskAddOrEditInput input)
         {
             //是否存在有效值
             if (input.SpiderTask.Id.HasValue)
@@ -59,7 +66,7 @@ namespace L.Application.Services
         /// 创建爬虫任务
         /// </summary>
         /// <returns></returns>
-        private async Task CreateSpiderTask(AddOrEditTaskInput input)
+        private async Task CreateSpiderTask(TaskAddOrEditInput input)
         {
             SpiderTask task=input.SpiderTask.MapTo<SpiderTask>();
             await _spiderRepository.InsertAsync(task);
@@ -68,7 +75,7 @@ namespace L.Application.Services
         /// 更新爬虫任务
         /// </summary>
         /// <returns></returns>
-        private async Task UpdateSpiderTask(AddOrEditTaskInput input)
+        private async Task UpdateSpiderTask(TaskAddOrEditInput input)
         {
             SpiderTask task = input.SpiderTask.MapTo<SpiderTask>();
             await _spiderRepository.UpdateAsync(task);
@@ -86,10 +93,10 @@ namespace L.Application.Services
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<SpiderTaskEditDto> GetTaskById(BaseDto input)
+        public async Task<TaskEditDto> GetTaskById(BaseDto input)
         {
             var task=await _spiderRepository.GetEntityByIdAsync(input.Id.Value);
-            return task.MapTo<SpiderTaskEditDto>();
+            return task.MapTo<TaskEditDto>();
         }
     }
 }

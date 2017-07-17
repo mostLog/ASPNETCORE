@@ -14,19 +14,19 @@ namespace L.Application.Services
         /// <param name="input"></param>
         /// <returns></returns>
         [NoUnitOfWork]
-        Task<PageListDto<SpiderTaskListOutput>> GetSpiderTaskPagedList(SearchInput input);
+        Task<PagedListResult<TaskListOutput>> GetSpiderTaskPagedList(TaskSearchInput input);
         /// <summary>
         /// 创建或者更新爬虫
         /// </summary>
         /// <returns></returns>
-        Task AddOrUpdateSpiderTask(AddOrEditTaskInput input);
+        Task AddOrUpdateSpiderTask(TaskAddOrEditInput input);
         /// <summary>
         /// 更具id获取实体
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         [NoUnitOfWork]
-        Task<SpiderTaskEditDto> GetTaskById(BaseDto input);
+        Task<TaskEditDto> GetTaskById(BaseDto input);
 
     }
 }

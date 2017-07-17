@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
+
 namespace L.Web.Controllers
 {
     public class SpiderTaskController : Controller
@@ -18,6 +19,11 @@ namespace L.Web.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        //[HttpPost]
+        public async Task<IActionResult> GetPagedList(TaskSearchInput input)
+        {
+            return Json(await _spiderService.GetSpiderTaskPagedList(input));
         }
         /// <summary>
         /// 根据id获取实体
@@ -34,7 +40,7 @@ namespace L.Web.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> AddOrUpdateTask(AddOrEditTaskInput input)
+        public async Task<IActionResult> AddOrUpdateTask(TaskAddOrEditInput input)
         {
             int result = 0;
             try

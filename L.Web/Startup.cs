@@ -1,5 +1,4 @@
-﻿using L.EntityFramework;
-using L.LCore.Infrastructure.Configuration;
+﻿using L.LCore.Infrastructure.Configuration;
 using L.LCore.Infrastructure.Extension;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using Hangfire;
 
 namespace L.Web
 {
@@ -25,8 +25,8 @@ namespace L.Web
         public IConfigurationRoot Configuration { get; }
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<LDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
             services.AddMvc();
+           
             var config = new LConfig();
             Configuration.GetSection("L").Bind(config);
             //
@@ -56,6 +56,8 @@ namespace L.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.ConfigureRequestMiddleware();
         }
     }
 }

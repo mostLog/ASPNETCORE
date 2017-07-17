@@ -4,8 +4,8 @@ using System.Text;
 
 namespace L.Application.Services.Dto
 {
-    public class SpiderTaskListOutput
+    public class TaskAddOrEditInput
     {
-
+        public TaskEditDto SpiderTask { get; set; }
     }
 }

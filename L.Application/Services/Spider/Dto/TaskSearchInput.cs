@@ -5,7 +5,7 @@ using System.Text;
 
 namespace L.Application.Services.Dto
 {
-    public class SearchInput: PagedInputDto
+    public class TaskSearchInput: PagedInputDto
     {
         /// <summary>
         /// 任务名称

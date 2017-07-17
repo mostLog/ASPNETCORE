@@ -46,21 +46,7 @@
                             </div>
                         </div>
                         <div class="list">
-                            <table class="layui-table">
-                                <thead>
-                                    <tr>
-                                        <th>状态</th>
-                                        <th><i class="iconfont icon-spider"></i> 爬虫</th>
-                                        <th>创建时间</th>
-                                        <th>当前进度</th>
-                                        <th style="width:12%;">操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                </tbody>
-                            </table>
-                            <div id="paged">
+                            <div id="tb">
 
                             </div>
                         </div>
@@ -69,6 +55,37 @@
             </div>
         </div>
     </div>
+    <script id="view" type="text/html">
+        <table class="layui-table text-center" lay-even>
+            <thead>
+                <tr>
+                    <th>状态</th>
+                    <th><i class="iconfont icon-spider"></i> 爬虫</th>
+                    <th>创建时间</th>
+                    <th>当前进度</th>
+                    <th style="width:12%;">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{# layui.each(d.rows,function(index,item){ }}
+                <tr>
+                    <td>{{item.status==0?"进行中":"结束"}}</td>
+                    <td>
+                        标题：{{item.name}}
+                        <br />
+                        描述：{{item.description}}
+                    </td>
+                    <td>{{item.createDateTime}}</td>
+                    <td></td>
+                    <td>
+                        <a class="layui-btn layui-btn-small layui-btn-normal" href="javascript:fn.update()"><i class="iconfont icon-edit"></i>修改</a>
+                        <a class="layui-btn layui-btn-small layui-btn-danger" href="javascript:fn.delete()"><i class="iconfont icon-delete"></i>删除</a>
+                    </td>
+                </tr>
+                {{# }); }}
+            </tbody>
+        </table>
+    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/lib/layui/layui.js"></script>
