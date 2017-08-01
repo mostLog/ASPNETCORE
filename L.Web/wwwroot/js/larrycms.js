@@ -97,7 +97,7 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
                         "spread": "true",
                         "children": [
                             {
-                                "title": "采集规则定义", "icon": "icon-rule", "href": "html/personInfo.html"
+                                "title": "采集规则定义", "icon": "icon-rule", "href": "/CrawlerRule/"
                             },
                             {
                                 "title": "采集任务", "icon": "icon-task", "href": "html/changepwd.html"
@@ -297,7 +297,7 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
     $('#toggle').click(function () {
         var sideWidth = $(this).width();
         var bodyW = $('#larry-body').width();
-        if (sideWidth === 200) {
+    if (sideWidth === 200) {
             bodyW += 130;
             $(this).addClass('sidebar-mix')
             $('#larry-side').addClass('sidebar-mix');

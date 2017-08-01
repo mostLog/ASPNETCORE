@@ -1,8 +1,0 @@
-version: '2'
-
-services:
-  l.web:
-    image: l.web
-    build:
-      context: ./L.Web
-      dockerfile: Dockerfile

@@ -1,9 +1,8 @@
 ﻿using Autofac;
-using L.LCore.Infrastructure.Configuration;
-using L.LCore.Infrastructure.Dependeny;
-using L.LCore.Infrastructure.Reflection;
-using System.Reflection;
 using Autofac.Extras.DynamicProxy;
+using L.LCore.Infrastructure.Dependeny;
+using System.Reflection;
+using System.Xml;
 
 namespace L.Application
 {
@@ -19,6 +18,7 @@ namespace L.Application
              .Where(t => t.Name.EndsWith("Service"))
              .EnableInterfaceInterceptors()
              .AsImplementedInterfaces();
+           
         }
         public int Order { get; set; } =2;
     }

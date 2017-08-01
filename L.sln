@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.Dapper", "L.Dapper\L.Dapp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.HangFire", "L.HangFire\L.HangFire.csproj", "{7AF39997-2BB3-4E7F-8B8F-F3CD5618CCB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.SpiderCore", "L.SpiderCore\L.SpiderCore.csproj", "{EB6E8B4B-77E5-4928-9637-AECFD6FF3FF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{7AF39997-2BB3-4E7F-8B8F-F3CD5618CCB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AF39997-2BB3-4E7F-8B8F-F3CD5618CCB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AF39997-2BB3-4E7F-8B8F-F3CD5618CCB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB6E8B4B-77E5-4928-9637-AECFD6FF3FF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB6E8B4B-77E5-4928-9637-AECFD6FF3FF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB6E8B4B-77E5-4928-9637-AECFD6FF3FF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB6E8B4B-77E5-4928-9637-AECFD6FF3FF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

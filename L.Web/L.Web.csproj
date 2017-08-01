@@ -16,24 +16,28 @@
     <Compile Remove="wwwroot\lib\bootstrap\less\**" />
     <Compile Remove="wwwroot\lib\bootstrap\nuget\**" />
     <Compile Remove="wwwroot\lib\layer\**" />
+    <Compile Remove="wwwroot\lib\layui-extend\**" />
     <Content Remove="wwwroot\lib\bootstrap\fonts\**" />
     <Content Remove="wwwroot\lib\bootstrap\grunt\**" />
     <Content Remove="wwwroot\lib\bootstrap\js\**" />
     <Content Remove="wwwroot\lib\bootstrap\less\**" />
     <Content Remove="wwwroot\lib\bootstrap\nuget\**" />
     <Content Remove="wwwroot\lib\layer\**" />
+    <Content Remove="wwwroot\lib\layui-extend\**" />
     <EmbeddedResource Remove="wwwroot\lib\bootstrap\fonts\**" />
     <EmbeddedResource Remove="wwwroot\lib\bootstrap\grunt\**" />
     <EmbeddedResource Remove="wwwroot\lib\bootstrap\js\**" />
     <EmbeddedResource Remove="wwwroot\lib\bootstrap\less\**" />
     <EmbeddedResource Remove="wwwroot\lib\bootstrap\nuget\**" />
     <EmbeddedResource Remove="wwwroot\lib\layer\**" />
+    <EmbeddedResource Remove="wwwroot\lib\layui-extend\**" />
     <None Remove="wwwroot\lib\bootstrap\fonts\**" />
     <None Remove="wwwroot\lib\bootstrap\grunt\**" />
     <None Remove="wwwroot\lib\bootstrap\js\**" />
     <None Remove="wwwroot\lib\bootstrap\less\**" />
     <None Remove="wwwroot\lib\bootstrap\nuget\**" />
     <None Remove="wwwroot\lib\layer\**" />
+    <None Remove="wwwroot\lib\layui-extend\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,22 +57,17 @@
     <Content Include="wwwroot\images\logo.png" />
     <Content Include="wwwroot\images\menu.png" />
     <Content Include="wwwroot\images\menu_o.png" />
+    <Content Include="wwwroot\js\business\crawlerrule\Form.js" />
+    <Content Include="wwwroot\js\business\crawlerrule\Index.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="wwwroot\js\business\spidertask\Form.js" />
     <Content Include="wwwroot\js\larrycms.js" />
     <Content Include="wwwroot\js\layuilib\common.js" />
     <Content Include="wwwroot\js\layuilib\elements.js" />
-    <Content Include="wwwroot\js\layuilib\grid.js" />
     <Content Include="wwwroot\js\layuilib\larry.js" />
     <Content Include="wwwroot\js\layuilib\navtab.js" />
     <Content Include="wwwroot\js\layuilib\spidertaskservice.js" />
-    <Content Include="wwwroot\js\layuilib\treeGrid.js" />
-    <Content Include="wwwroot\lib\layui-extend\css\grid.css" />
-    <Content Include="wwwroot\lib\layui-extend\grid.js" />
-    <Content Include="wwwroot\lib\layui-extend\img\collapse.png" />
-    <Content Include="wwwroot\lib\layui-extend\img\expand.png" />
-    <Content Include="wwwroot\lib\layui-extend\img\loading.gif" />
-    <Content Include="wwwroot\lib\layui-extend\img\wrong.png" />
-    <Content Include="wwwroot\lib\layui-extend\treeGrid.js" />
     <Content Include="wwwroot\lib\layui\css\layui.css" />
     <Content Include="wwwroot\lib\layui\css\layui.mobile.css" />
     <Content Include="wwwroot\lib\layui\css\modules\code.css" />
@@ -203,6 +202,7 @@
   <ItemGroup>
     <Folder Include="Views\Type\" />
     <Folder Include="Views\Type\" />
+    <Folder Include="Views\CrawlerRule\" />
   </ItemGroup>
 
 </Project>
