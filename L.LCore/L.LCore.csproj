@@ -18,4 +18,8 @@
     <Folder Include="Domain\Notice\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\L.SpiderCore\L.SpiderCore.csproj" />
+  </ItemGroup>
+
 </Project>
