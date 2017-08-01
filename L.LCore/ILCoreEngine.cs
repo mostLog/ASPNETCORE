@@ -12,7 +12,7 @@ namespace L.LCore
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        IServiceProvider ConfigureServices(IServiceCollection services, IConfigurationRoot configuration);
+        IServiceProvider ConfigureServices(IServiceCollection services, IConfiguration configuration);
         /// <summary>
         /// 配置请求组件
         /// </summary>

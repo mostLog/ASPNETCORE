@@ -5,6 +5,7 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace L.EntityFramework
 {
@@ -64,10 +65,9 @@ namespace L.EntityFramework
     /// <summary>
     /// 用于数据迁移
     /// </summary>
-    public class ApplicationDbContextFactory : IDbContextFactory<LDbContext>
+    public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<LDbContext>
     {
-       
-        public LDbContext Create(DbContextFactoryOptions options)
+        public LDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<LDbContext>();
 

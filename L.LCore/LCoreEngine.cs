@@ -38,7 +38,7 @@ namespace L.LCore
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        public IServiceProvider ConfigureServices(IServiceCollection services, IConfigurationRoot configuration)
+        public IServiceProvider ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
             var typeFinder = new AssemblyTypeFinder();
 

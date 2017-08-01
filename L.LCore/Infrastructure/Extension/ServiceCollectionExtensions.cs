@@ -7,7 +7,7 @@ namespace L.LCore.Infrastructure.Extension
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceProvider ConfigureApplicationServices(this IServiceCollection services, IConfigurationRoot configuration)
+        public static IServiceProvider ConfigureApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
             var engine = LCoreEngineManager.CreateEngine();
 
