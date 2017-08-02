@@ -1,9 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.0" />
     <PackageReference Include="AutoMapper" Version="6.1.1" />
@@ -13,13 +12,4 @@
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.0.0-preview2-25407-01" />
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Domain\Notice\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\L.SpiderCore\L.SpiderCore.csproj" />
-  </ItemGroup>
-
 </Project>

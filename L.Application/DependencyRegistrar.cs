@@ -2,7 +2,6 @@
 using Autofac.Extras.DynamicProxy;
 using L.LCore.Infrastructure.Dependeny;
 using System.Reflection;
-using System.Xml;
 
 namespace L.Application
 {

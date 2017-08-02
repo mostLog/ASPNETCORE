@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Xml;
+using HtmlAgilityPack;
 
 namespace L.SpiderCore.Tools
 {
@@ -10,6 +10,12 @@ namespace L.SpiderCore.Tools
     /// </summary>
     public class XPathSelector
     {
+        private HtmlDocument HtmlDoc { get; set; }
+
+        public XPathSelector()
+        {
+            HtmlDoc.DocumentNode.SelectNodes("");
+        }
 
     }
 }
