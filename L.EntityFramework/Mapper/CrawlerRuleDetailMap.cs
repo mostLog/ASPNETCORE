@@ -1,10 +1,7 @@
-﻿using L.EntityFramework.Configuration;
-using L.LCore.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using L.Domain.Entities;
+using L.EntityFramework.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace L.EntityFramework.Mapper
 {

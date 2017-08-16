@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using L.LCore.Infrastructure.Configuration;
 using L.LCore.Infrastructure.Extension;
 
 namespace L.Web
@@ -24,13 +23,8 @@ namespace L.Web
         {
 
             services.AddMvc();
-            var config = new LConfig();
-            Configuration.GetSection("L").Bind(config);
-            //
-            services.AddSingleton(typeof(ILConfig), config);
             return services.ConfigureApplicationServices(Configuration);
         }
-
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())

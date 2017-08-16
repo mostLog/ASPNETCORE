@@ -1,5 +1,5 @@
 ﻿using L.EntityFramework.Uow;
-using L.LCore.Domain.Entities;
+using L.Domain.Entities;
 using System.Collections.Generic;
 
 namespace L.Application

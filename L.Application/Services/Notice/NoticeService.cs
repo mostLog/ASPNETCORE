@@ -1,8 +1,7 @@
-﻿using L.EntityFramework;
-using L.LCore.Domain.Entities;
+﻿using L.Domain.Entities;
+using L.EntityFramework;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace L.Application
 {

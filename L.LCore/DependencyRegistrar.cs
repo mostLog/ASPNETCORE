@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using L.LCore.Infrastructure.Configuration;
 using L.LCore.Infrastructure.Dependeny;
 
 namespace L.LCore

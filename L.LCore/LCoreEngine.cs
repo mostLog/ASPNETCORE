@@ -1,14 +1,13 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using L.LCore.Infrastructure.Configuration;
 using L.LCore.Infrastructure.Dependeny;
 using L.LCore.Infrastructure.Reflection;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Builder;
 
 namespace L.LCore
 {

@@ -1,7 +1,7 @@
 ﻿using L.Application.Dto;
 using L.Application.Services.Dto;
 using L.EntityFramework;
-using L.LCore.Domain.Entities;
+using L.Domain.Entities;
 using L.LCore.Infrastructure.Extension;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

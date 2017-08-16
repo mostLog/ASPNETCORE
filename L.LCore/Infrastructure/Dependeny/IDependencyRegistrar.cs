@@ -1,6 +1,4 @@
 ﻿using Autofac;
-using L.LCore.Infrastructure.Configuration;
-using L.LCore.Infrastructure.Reflection;
 
 namespace L.LCore.Infrastructure.Dependeny
 {

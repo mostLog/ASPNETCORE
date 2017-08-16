@@ -23,10 +23,9 @@ namespace L.LCore.Infrastructure.Reflection
             {
                 typeList.AddRange(assembly
                     .GetTypes()
-                    .Where(c => c.GetTypeInfo().GetInterfaces().Contains(typeof(T))||(c.GetTypeInfo().BaseType!=null&&c.GetTypeInfo().BaseType==typeof(T)))
+                    .Where(c =>c.GetTypeInfo().GetInterfaces().Contains(typeof(T))||(c.GetTypeInfo().BaseType!=null&&c.GetTypeInfo().BaseType==typeof(T)))
                     .ToList());
             }
-
             return typeList;
         }
         /// <summary>

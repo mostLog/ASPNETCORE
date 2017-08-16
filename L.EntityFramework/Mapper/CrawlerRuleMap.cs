@@ -1,5 +1,5 @@
 ﻿using L.EntityFramework.Configuration;
-using L.LCore.Domain.Entities;
+using L.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
