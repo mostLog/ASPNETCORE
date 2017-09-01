@@ -109,9 +109,10 @@ namespace L.LCore
             }
 
             containerBuilder.Populate(services);
-
-            ServiceProvider = new AutofacServiceProvider(containerBuilder.Build());
-
+            var container=containerBuilder.Build();
+            ServiceProvider = new AutofacServiceProvider(container);
+            //
+            ContainerManager.SetContainer(container);
             return ServiceProvider;
         }
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using L.LCore.Infrastructure.Extension;
+using L.Web.Hubs;
 
 namespace L.Web
 {
@@ -23,6 +24,7 @@ namespace L.Web
         {
 
             services.AddMvc();
+            //services.AddSignalR();
             return services.ConfigureApplicationServices(Configuration);
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -36,15 +38,14 @@ namespace L.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
             app.UseStaticFiles();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            app.Map("/notice", NotcieSocketHandler.Map);
             app.ConfigureRequestMiddleware();
         }
     }

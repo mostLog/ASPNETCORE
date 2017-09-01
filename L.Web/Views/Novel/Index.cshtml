@@ -1,0 +1,60 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="~/lib/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/css/common/layuie.css" rel="stylesheet" />
+    <link href="~/lib/animate.css/animate.min.css" rel="stylesheet" />
+    <link href="~/css/common/font/iconfont.css" rel="stylesheet" />
+
+    <link href="~/css/index.css" rel="stylesheet" />
+    <base target="_blank">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-title">
+                        <h5>小说列表</h5>
+                    </div>
+                    <div class="box-content">
+                        <div class="row">
+                            <div class="col-md-11">
+                                小说名称：
+                                <div class="layui-inline">
+                                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入小说名称" class="layui-input">
+                                </div>
+                                <button type="submit" class="layui-btn layui-btn-small">搜索</button>
+                            </div>
+                        </div>
+                        <div class="data-list">
+                            <table id="novel-table" lay-filter="novel-table"></table>
+                            <table id="article-table" lay-filter="article-table"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="novel-bar">
+        <a class="layui-btn layui-btn-small" lay-event="viewChapters">获取小说章节列表</a>
+    </script>
+    <script type="text/html" id="article-bar">
+        <a class="layui-btn layui-btn-small" lay-event="view">查看</a>
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/layui/layui.js"></script>
+    <script src="~/js/business/novel/Index.js"></script>
+</body>
+</html>
+

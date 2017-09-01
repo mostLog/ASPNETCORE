@@ -1,6 +1,6 @@
 ﻿using L.Application.Dto;
 using L.Application.Services;
-using L.Application.Services.Dto;
+using L.SpiderCore;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -20,7 +20,20 @@ namespace L.Web.Controllers
         {
             return View();
         }
-        //[HttpPost]
+        /// <summary>
+        /// 添加或者修改对话框页面
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult AddOrEditSpiderTask()
+        {
+            
+            return View();
+        }
+        /// <summary>
+        /// 获取爬虫列表
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<IActionResult> GetPagedList(TaskSearchInput input)
         {
             return Json(await _spiderService.GetSpiderTaskPagedList(input));
@@ -54,12 +67,22 @@ namespace L.Web.Controllers
             return Json(result);
         }
         /// <summary>
-        /// 添加或者修改对话框页面
+        /// 删除任务
         /// </summary>
         /// <returns></returns>
-        public IActionResult AddOrEditSpiderTask()
+        public async Task<IActionResult> DeleteTask(BaseDto input)
         {
-            return View();
+            int result = 0;
+            try
+            {
+                await _spiderService.DeleteSpiderTask(input);
+            }
+            catch (Exception)
+            {
+                result = -1;
+            }
+            return Json(result);
         }
+        
     }
 }

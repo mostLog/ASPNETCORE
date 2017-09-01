@@ -6,31 +6,26 @@ using System.Data;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace L.SpiderCore
+namespace L.SpiderCore.Crawler
 {
     public abstract class WebDriverSpiderCrawler : ISpiderCrawler
     {
         /// <summary>
         /// 爬虫标识
         /// </summary>
-        protected abstract string Id { get; }
+        public abstract string Id { get; }
         /// <summary>
         /// 爬虫名称
         /// </summary>
-        protected abstract string Name { get; }
+        public abstract string Name { get; }
         /// <summary>
         /// 需要爬取的uri地址集合
         /// </summary>
-        protected abstract IList<string> Uris { get; }
+        public abstract IList<string> Uris { get; set; }
         /// <summary>
         /// 规则
         /// </summary>
-        protected abstract IDictionary<string, string> Rules { get; set; }
-        /// <summary>
-        /// 获取爬取数据结果
-        /// </summary>
-
-        public DataTable Result { get; set; }
+        public abstract IDictionary<string, string> Rules { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -77,7 +72,7 @@ namespace L.SpiderCore
         /// <summary>
         /// 启动爬取
         /// </summary>
-        public async virtual void Run()
+        public async virtual void Run(SpiderConfig config)
         {
             //批量
             for (int i = 0; i < Uris.Count; i++)
@@ -96,9 +91,18 @@ namespace L.SpiderCore
                     stopWatch.Stop();
                     completeArgs.Duration = stopWatch.ElapsedMilliseconds;
                     this.OnCompleted(this, completeArgs);
-                    
                 });
             }
+        }
+
+        public void InitConfig(SpiderConfig config)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Run()
+        {
+            throw new NotImplementedException();
         }
     }
 }

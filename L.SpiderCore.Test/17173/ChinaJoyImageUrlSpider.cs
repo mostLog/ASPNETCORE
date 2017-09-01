@@ -9,6 +9,7 @@ using System.IO;
 using System.Drawing;
 using System.Net;
 using System.Linq;
+using L.SpiderCore.Crawler;
 
 namespace L.SpiderCore.Test
 {
@@ -17,15 +18,21 @@ namespace L.SpiderCore.Test
     /// </summary>
     public class ChinaJoyImageUrlSpider : WebDriverSpiderCrawler
     {
-        protected override string Id => "ChinaJoyImageUrlSpider";
+        public override string Id => "ChinaJoyImageUrlSpider";
 
-        protected override string Name => "chinajoy图片";
+        public override string Name => "chinajoy图片";
 
-        protected override IList<string> Uris => new List<string>() {
-            "http://news.17173.com/chinajoy/2017/"
-        };
-
-        protected override IDictionary<string, string> Rules { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override IDictionary<string, string> Rules { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override IList<string> Uris
+        {
+            get
+            {
+                return new List<string>() {
+                    "http://news.17173.com/chinajoy/2017/"
+                };
+            }
+            set => throw new NotImplementedException();
+        }
 
         public ChinaJoyImageUrlSpider()
         {
@@ -39,7 +46,9 @@ namespace L.SpiderCore.Test
         {
             var ruls = GetAList(e.Page);
             var urls = GenerateUrls(ruls);
-            var imageSpider=new ChinaJoyImageSpider(urls);
+            var imageSpider=new ChinaJoyImageSpider() {
+                Uris=urls
+            };
             imageSpider.Run();
         }
         private IList<string> GetImageList(string page)
@@ -61,6 +70,11 @@ namespace L.SpiderCore.Test
             }
             return imageList;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
         private IList<string> GetAList(string page)
         {
             IList<string> u = new List<string>();
@@ -84,6 +98,11 @@ namespace L.SpiderCore.Test
             
             return u.Distinct().ToList();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rules"></param>
+        /// <returns></returns>
         private IList<string> GenerateUrls(IList<string> rules)
         {
             IList<string> urls = new List<string>();

@@ -5,12 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Crawler\Base\WebDriverSpiderCrawler.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CoreCompat.Selenium.WebDriver" Version="3.4.0-beta001" />
     <PackageReference Include="HtmlAgilityPack" Version="1.5.2-beta6" />
     <PackageReference Include="PhantomJS" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\L.Application\L.Application.csproj" />
+    <ProjectReference Include="..\L.Domain\L.Domain.csproj" />
     <ProjectReference Include="..\L.LCore\L.LCore.csproj" />
   </ItemGroup>
 

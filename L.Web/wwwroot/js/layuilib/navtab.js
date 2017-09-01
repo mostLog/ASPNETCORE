@@ -1,6 +1,6 @@
-layui.define(['jquery','elements','layer','common'],function(exports){
+layui.define(['elements','layer','common'],function(exports){
    "use strict";
-   var $ = layui.jquery,
+   var $ = layui.$,
        layer = parent.layer === undefined ? layui.layer : parent.layer,
 	   module_name = 'navtab',
 	   elements = layui.elements(),

@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace L.Application.Services.Dto
+namespace L.Application.Dto
 {
     public class TaskListOutput
     {
         public int? Id { get; set; }
+        /// <summary>
+        /// 任务id
+        /// </summary>
+        public string SpiderId { get; set; }
         /// <summary>
         /// 任务名称
         /// </summary>

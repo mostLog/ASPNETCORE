@@ -7,6 +7,10 @@ namespace L.Domain.Entities
     public class SpiderTask: AuditEntity
     {
         /// <summary>
+        /// 爬虫id
+        /// </summary>
+        public string SpiderId { get; set; }
+        /// <summary>
         /// 任务名称
         /// </summary>
         public string Name { get; set; }

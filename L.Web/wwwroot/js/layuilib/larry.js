@@ -1,25 +1,24 @@
-layui.define(['jquery', 'layer', 'element', 'common'], function (exports) {
-    var $ = layui.jquery,
+layui.define(['layer', 'element', 'common'], function (exports) {
+    var $ = layui.$,
         layer = layui.layer,
-        element = layui.element(),
+        element = layui.element,
         common = layui.common,
         cacheName = 'navbarCache';
 
-    var Navbar = function () {
+    var Navbar={
         /**
          *  默认配置
          */
-        this.config = {
+        config:{
             elem: undefined, //容器
             data: undefined, //数据源
             url: undefined, //数据源地址
             type: 'GET', //读取方式
             cached: false, //是否使用缓存
             spreadOne: false //设置是否只展开一个二级菜单
-        };
+        }
     };
-
-    Navbar.prototype.render = function () {
+    Navbar.render = function () {
         var _that = this;
         var _config = _that.config;
         if (typeof(_config.elem) !== 'string' && typeof(_config.elem) !== 'object') {
@@ -117,7 +116,7 @@ layui.define(['jquery', 'layer', 'element', 'common'], function (exports) {
 
 
     // Navbar设置
-    Navbar.prototype.set = function (options) {
+    Navbar.set = function (options) {
         var that = this;
         // 传入参数进行配置
         $.extend(that.config, options);
@@ -135,7 +134,7 @@ layui.define(['jquery', 'layer', 'element', 'common'], function (exports) {
      * @param     {Function}               callback [description]
      * @return    {[type]}                          [description]
      */
-    Navbar.prototype.on = function (events, callback) {
+    Navbar.on = function (events, callback) {
         var that = this;
         var _con = that.config.elem;
         if (typeof(events) !== 'string') {
@@ -191,7 +190,7 @@ layui.define(['jquery', 'layer', 'element', 'common'], function (exports) {
     /**
      * 清除缓存
      */
-    Navbar.prototype.cleanCached = function () {
+    Navbar.cleanCached = function () {
         layui.data(cacheName, null);
         localStorage.clear();
     };
@@ -268,9 +267,11 @@ layui.define(['jquery', 'layer', 'element', 'common'], function (exports) {
     }
 
 
-    var larry = new Navbar();
+    //var larry = new Navbar();
 
-    exports('larry', function (options) {
-        return larry.set(options);
-    })
+    //exports('larry', function (options) {
+    //    return larry.set(options);
+    //});
+    exports('larry', Navbar);
+
 })

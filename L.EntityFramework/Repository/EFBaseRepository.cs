@@ -162,5 +162,15 @@ namespace L.EntityFramework
             Entities.Remove(t);
             return Task.FromResult(t);
         }
+        /// <summary>
+        /// 更具id删除数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Task<T> DeleteAsync(int id)
+        {
+            T model=GetEntityById(id);
+            return DeleteAsync(model);
+        }
     }
 }

@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,10 +25,29 @@
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="Views\_ViewImports.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\lib\layui\font\iconfont.svg" />
+    <None Include="wwwroot\lib\layui\lay\modules\carousel.js" />
+    <None Include="wwwroot\lib\layui\lay\modules\code.js" />
+    <None Include="wwwroot\lib\layui\lay\modules\element.js" />
+    <None Include="wwwroot\lib\layui\lay\modules\flow.js" />
+    <None Include="wwwroot\lib\layui\lay\modules\form.js" />
+    <None Include="wwwroot\lib\layui\lay\modules\jquery.js" />
+    <None Include="wwwroot\lib\layui\lay\modules\laydate.js" />
+    <None Include="wwwroot\lib\layui\lay\modules\layedit.js" />
+    <None Include="wwwroot\lib\layui\lay\modules\layer.js" />
+    <None Include="wwwroot\lib\layui\lay\modules\laypage.js" />
+    <None Include="wwwroot\lib\layui\lay\modules\laytpl.js" />
+    <None Include="wwwroot\lib\layui\lay\modules\mobile.js" />
+    <None Include="wwwroot\lib\layui\lay\modules\table.js" />
+    <None Include="wwwroot\lib\layui\lay\modules\tree.js" />
+    <None Include="wwwroot\lib\layui\lay\modules\upload.js" />
+    <None Include="wwwroot\lib\layui\lay\modules\util.js" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\L.Application\L.Application.csproj" />
+    <ProjectReference Include="..\L.HangFire.AspNetCore\L.HangFire.AspNetCore.csproj" />
+    <ProjectReference Include="..\L.SpiderCore\L.SpiderCore.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace L.Application.Services.Dto
+namespace L.Application.Dto
 {
     public class TaskSearchInput: PagedInputDto
     {

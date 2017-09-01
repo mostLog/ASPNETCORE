@@ -1,12 +1,12 @@
 ﻿using L.Application.Dto;
-using L.Application.Services.Dto;
+using L.Application.Dto;
 using L.EntityFramework.Uow;
 using System.Threading.Tasks;
 
 namespace L.Application.Services
 {
     [UnitOfWork]
-    public interface ISpiderService
+    public interface ISpiderService: IAppService
     {
         /// <summary>
         /// 分页获取数据
@@ -27,6 +27,12 @@ namespace L.Application.Services
         /// <returns></returns>
         [NoUnitOfWork]
         Task<TaskEditDto> GetTaskById(BaseDto input);
+        /// <summary>
+        /// 更具id删除实体
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task DeleteSpiderTask(BaseDto input);
 
     }
 }

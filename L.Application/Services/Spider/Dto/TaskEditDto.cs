@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace L.Application.Services.Dto
+namespace L.Application.Dto
 {
     public class TaskEditDto
     {
         public int? Id { get; set; }
+        /// <summary>
+        /// 爬虫id
+        /// </summary>
+        public string SpiderId { get; set; }
         /// <summary>
         /// 任务名称
         /// </summary>

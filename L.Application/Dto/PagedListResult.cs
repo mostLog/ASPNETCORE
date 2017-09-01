@@ -9,18 +9,18 @@ namespace L.Application.Dto
         /// <summary>
         /// 数据行数
         /// </summary>
-        public IList<T> Rows { get; set; }
+        public IList<T> Data { get; set; }
         /// <summary>
         /// 总数
         /// </summary>
-        public int Total { get; set; }
+        public int Count { get; set; }
         /// <summary>
-        /// 错误消息
+        /// 状态信息
         /// </summary>
-        public string Message { get; set; }
+        public string Msg { get; set; }
         /// <summary>
         /// 判断是否成功
         /// </summary>
-        public bool Flag { get; set; }
+        public int Code { get; set; }
     }
 }

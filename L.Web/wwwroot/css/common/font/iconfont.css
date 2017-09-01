@@ -7,8 +7,8 @@
 }*/
 @font-face {
     font-family: 'iconfont'; /* project id 350379 */
-    src: url('//at.alicdn.com/t/font_xq5dpggbpf2edn29.eot');
-    src: url('//at.alicdn.com/t/font_xq5dpggbpf2edn29.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_xq5dpggbpf2edn29.woff') format('woff'), url('//at.alicdn.com/t/font_xq5dpggbpf2edn29.ttf') format('truetype'), url('//at.alicdn.com/t/font_xq5dpggbpf2edn29.svg#iconfont') format('svg');
+    src: url('//at.alicdn.com/t/font_350379_09bd6rcp0k162yb9.eot');
+    src: url('//at.alicdn.com/t/font_350379_09bd6rcp0k162yb9.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_350379_09bd6rcp0k162yb9.woff') format('woff'), url('//at.alicdn.com/t/font_350379_09bd6rcp0k162yb9.ttf') format('truetype'), url('//at.alicdn.com/t/font_350379_09bd6rcp0k162yb9.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -87,4 +87,12 @@
 }
 .icon-close{
     font-size:12px;
+}
+/*小说*/
+.icon-novel:before {
+    content: "\e644";
+}
+/*数据管理*/
+.icon-data:before {
+    content: "\e666";
 }

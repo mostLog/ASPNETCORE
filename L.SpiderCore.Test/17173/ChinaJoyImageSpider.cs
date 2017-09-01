@@ -1,4 +1,5 @@
-﻿using L.SpiderCore.Event;
+﻿using L.SpiderCore.Crawler;
+using L.SpiderCore.Event;
 using L.SpiderCore.Tools;
 using System;
 using System.Collections.Generic;
@@ -13,20 +14,20 @@ namespace L.SpiderCore.Test
     /// </summary>
     public class ChinaJoyImageSpider : SpiderCrawler
     {
-        protected override string Id => "ChinaJoyImageSpider";
+        public override string Id => "ChinaJoyImageSpider";
 
-        protected override string Name => "chinajoy图片爬取";
+        public override string Name => "chinajoy图片爬取";
 
         
-        protected override IDictionary<string, string> Rules { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override IDictionary<string, string> Rules { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         /// <summary>
         /// 
         /// </summary>
-        protected override IList<string> Uris {get; set; }
+        public override IList<string> Uris {get; set; }
 
-        public ChinaJoyImageSpider(IList<string> uris)
+        public ChinaJoyImageSpider()
         {
-            Uris = uris;
+            
         }
         /// <summary>
         /// html解析

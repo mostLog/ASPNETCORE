@@ -1,17 +1,15 @@
 ﻿using L.Application.Dto;
-using L.Application.Services.Dto;
-using L.EntityFramework;
 using L.Domain.Entities;
+using L.EntityFramework;
 using L.LCore.Infrastructure.Extension;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace L.Application.Services
 {
-    public class SpiderService : ISpiderService
+    public class SpiderService : AppService, ISpiderService
     {
         //爬虫任务仓储
         private readonly IBaseRepository<SpiderTask> _spiderRepository;
@@ -42,9 +40,9 @@ namespace L.Application.Services
             int count = list.Count();
 
             return new PagedListResult<TaskListOutput>() {
-                Rows= AutoMapper.Mapper.Map<IList<TaskListOutput>>(list),
-                Total=count,
-                Flag=true
+                Data= AutoMapper.Mapper.Map<IList<TaskListOutput>>(list),
+                Count=count,
+                Code=0
             };
         }
         /// <summary>
@@ -84,9 +82,12 @@ namespace L.Application.Services
         /// 删除
         /// </summary>
         /// <returns></returns>
-        public async Task DeleteSpiderTask()
+        public async Task DeleteSpiderTask(BaseDto input)
         {
-
+            if (input.Id.HasValue)
+            {
+                await _spiderRepository.DeleteAsync(input.Id.Value);
+            }
         }
         /// <summary>
         /// 更具id获取实体
@@ -98,5 +99,6 @@ namespace L.Application.Services
             var task=await _spiderRepository.GetEntityByIdAsync(input.Id.Value);
             return task.MapTo<TaskEditDto>();
         }
+         
     }
 }

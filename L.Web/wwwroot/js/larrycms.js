@@ -4,22 +4,21 @@ layui.config({
 }).extend({
     larry: 'larry',
     navtab: 'navtab',
-    elemnts: 'elements',
+    elemnt: 'element',
     common: 'common',
-    services:'services'
+    services: 'services'
 });
-layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], function () {
-    var $ = layui.jquery,
+layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function () {
+    var $ = layui.$,
         layer = layui.layer,
         device = layui.device(),
-        elements = layui.elements(),
-        larry = layui.larry(),
-        form = layui.form(),
+        element = layui.element,
+        larry = layui.larry,
+        form = layui.form,
         common = layui.common;
     navtab = layui.navtab({
         elem: '#larry-tab'
     });
-
     // 页面禁止双击选中
     $('body').bind("selectstart", function () {
         return false;
@@ -45,19 +44,19 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
             larry.render();
         });*/
 
-		var result = [
-		  {
-			"title": "系统管理",
-            "icon": "fa-list",
-			"pid": "0"
-		  }
-		]
-		larry.set({
-			elem: '#menu',
-			data: result,
-			cached: false
-		});
-		larry.render();
+        var result = [
+            {
+                "title": "系统管理",
+                "icon": "fa-list",
+                "pid": "0"
+            }
+        ]
+        larry.set({
+            elem: '#menu',
+            data: result,
+            cached: false
+        });
+        larry.render();
 
         var $menu = $('#menu');
         $menu.find('li.layui-nav-item').each(function () {
@@ -82,7 +81,7 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
                         navtab.tabAdd(data.field);
                     });
                 });*/
-				
+
                 var pid_0 = [
                     {
                         "pid": "100",
@@ -91,7 +90,17 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
                         "href": "html/main.php"
                     },
                     {
-                        "pid": "101",
+                        "pid": "102",
+                        "title": "数据管理",
+                        "icon": "icon-data",
+                        "spread": "true",
+                        "children": [
+                            {
+                                "title": "小说管理", "icon": "icon-novel", "href": "/Novel/"
+                            }]
+                    },
+                    {
+                        "pid": "102",
                         "title": "数据采集",
                         "icon": "icon-spider",
                         "spread": "true",
@@ -100,34 +109,34 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
                                 "title": "采集规则定义", "icon": "icon-rule", "href": "/CrawlerRule/"
                             },
                             {
-                                "title": "采集任务", "icon": "icon-task", "href": "html/changepwd.html"
+                                "title": "采集任务", "icon": "icon-task", "href": "/SpiderTask/"
                             },
                             {
                                 "title": "数据类型维护", "icon": "icon-category", "href": "html/myloginfo.html"
                             }]
                     }];
-               
-				var result;
-				if(id == 0)
-					result = pid_0;
-				if(id == 35)
-					result = pid_35;
-				if(id == 40)
-					result = pid_40;
-				if(id == 46)
-					result = pid_46;
 
-				larry.set({
-					elem: '#larrySideNav',
-					data: result,
-					spreadOne: true
-				});
-				larry.render();
-				//监听左侧导航点击事件
+                var result;
+                if (id == 0)
+                    result = pid_0;
+                if (id == 35)
+                    result = pid_35;
+                if (id == 40)
+                    result = pid_40;
+                if (id == 46)
+                    result = pid_46;
+
+                larry.set({
+                    elem: '#larrySideNav',
+                    data: result,
+                    spreadOne: true
+                });
+                larry.render();
+                //监听左侧导航点击事件
                 larry.on('click(side)', function (data) {
                     console.log(data);
-					navtab.tabAdd(data.field);
-				});
+                    navtab.tabAdd(data.field);
+                });
 
             });
 
@@ -181,7 +190,7 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
     //清除缓存
     $('#clearCached').on('click', function () {
         larry.cleanCached();
-        layer.alert('缓存清除完成!本地存储数据也清理成功！', {icon: 1, title: '系统提示'}, function () {
+        layer.alert('缓存清除完成!本地存储数据也清理成功！', { icon: 1, title: '系统提示' }, function () {
             location.reload();//刷新
         });
     });
@@ -297,7 +306,7 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
     $('#toggle').click(function () {
         var sideWidth = $(this).width();
         var bodyW = $('#larry-body').width();
-    if (sideWidth === 200) {
+        if (sideWidth === 200) {
             bodyW += 130;
             $(this).addClass('sidebar-mix')
             $('#larry-side').addClass('sidebar-mix');
@@ -355,7 +364,7 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
                     layer.alert('锁屏失败，请稍后再试！');
                 }
             });*/
-			checkLockStatus(1);
+        checkLockStatus(1);
         startTimer();
     }
 

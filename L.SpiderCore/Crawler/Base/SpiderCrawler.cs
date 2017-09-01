@@ -10,8 +10,9 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using L.Application.Services;
 
-namespace L.SpiderCore
+namespace L.SpiderCore.Crawler
 {
     /// <summary>
     /// 爬虫抽象类
@@ -19,26 +20,13 @@ namespace L.SpiderCore
     public abstract class SpiderCrawler : ISpiderCrawler
     {
         /// <summary>
-        /// 爬虫标识
+        /// 爬虫配置信息
         /// </summary>
-        protected abstract string Id { get; }
-        /// <summary>
-        /// 爬虫名称
-        /// </summary>
-        protected abstract string Name { get; }
-        /// <summary>
-        /// 需要爬取的uri地址集合
-        /// </summary>
-        protected abstract IList<string> Uris { get; set; }
-        /// <summary>
-        /// 规则
-        /// </summary>
-        protected abstract IDictionary<string, string> Rules{ get; set; }
-        /// <summary>
-        /// 获取爬取数据结果
-        /// </summary>
-
-        public DataTable Result { get; set; }
+        protected SpiderConfig Config
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// 爬虫完成事件
         /// </summary>
@@ -69,12 +57,15 @@ namespace L.SpiderCore
         /// </summary>
         public async virtual void Run()
         {
-            //批量
-            for (int i = 0; i < Uris.Count; i++)
+            //获取地址集合
+            var uris = Config.Uris;
+            for (int i = 0; i < uris.Count; i++)
             {
-                string uri = Uris[i];
+                string uri = uris[i];
                 //开启新线程
-                await Task.Factory.StartNew(async () => {
+                var task=await Task.Factory.StartNew(async () => {
+                    //休眠30秒
+                    System.Threading.Thread.Sleep(10000);
                     var stopWatch = new Stopwatch();
                     stopWatch.Start();
                     var http = new HttpClient();
@@ -100,7 +91,7 @@ namespace L.SpiderCore
                     using (var response=(HttpWebResponse)request.GetResponse())
                     {
                         //判断如果已压缩 解压
-                        if (response.ContentEncoding.ToLower().Contains("gzip"))
+                        if (response.ContentEncoding!=null&&response.ContentEncoding.ToLower().Contains("gzip"))
                         {
                             using (GZipStream stream = new GZipStream(response.GetResponseStream(), CompressionMode.Decompress))
                             {
@@ -122,10 +113,20 @@ namespace L.SpiderCore
                     }
                     stopWatch.Stop();
                     completeArgs.Duration = stopWatch.ElapsedMilliseconds;
+                    //通知
+                    Config.CallBack("请求Url:"+ uri+"成功！"+" "+"花费时间："+completeArgs.Duration);
                     this.OnCompleted(this, completeArgs);
                 });
+                
             }
         }
-
+        /// <summary>
+        /// 初始化当前爬虫信息
+        /// </summary>
+        /// <param name="config"></param>
+        public virtual void InitConfig(SpiderConfig config)
+        {
+            Config = config;
+        }
     }
 }

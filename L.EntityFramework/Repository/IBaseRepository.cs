@@ -57,5 +57,11 @@ namespace L.EntityFramework
         /// </summary>
         /// <returns></returns>
         Task<T> DeleteAsync(T t);
+        /// <summary>
+        /// 通过id删除实体
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<T> DeleteAsync(int id);
     }
 }

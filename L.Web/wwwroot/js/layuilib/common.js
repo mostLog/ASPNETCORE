@@ -1,6 +1,6 @@
 layui.define(['layer'],function(exports){
     "use strict";
-	var $ = layui.jquery,
+	var $ = layui.$,
 	    layer = layui.layer;
        
 	var CmsCommon = {
