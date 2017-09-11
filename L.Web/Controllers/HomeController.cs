@@ -5,19 +5,17 @@ namespace L.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly INoticeService _noticeService;
 
         public HomeController(
-            INoticeService noticeService
+            
             )
         {
-            _noticeService = noticeService;
+            
         }
         public IActionResult Index()
         {
-            _noticeService.AddNotice();
-
-            return View(_noticeService.GetNotices());
+            
+            return View();
         }
 
         public IActionResult About()

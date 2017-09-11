@@ -118,9 +118,19 @@ namespace L.EntityFramework
         /// <param name="entity"></param>
         public virtual void AttachIfNot(T entity)
         {
-            if (!Entities.Local.Contains(entity))
+
+            try
             {
-                Entities.Attach(entity);
+                var b = Entities.Local.Contains(entity);
+                if (!b)
+                {
+                    Entities.Attach(entity);
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw;
             }
         }
         /// <summary>

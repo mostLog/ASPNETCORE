@@ -1,4 +1,5 @@
-﻿using L.Application.Services;
+﻿using L.Application.Dto;
+using L.Application.Services;
 using L.LCore.Infrastructure.Dependeny;
 using L.LCore.Json;
 using L.SpiderCore;
@@ -33,11 +34,10 @@ namespace L.Web.Hubs
                         input.Count);
                 if (!string.IsNullOrEmpty(tmp))
                 {
-                    var p=JsonHelper.ToObject<Tmp>(tmp);
+                    var p=JsonHelper.ToObject<TaskRunOrStopInput>(tmp);
                     var spiderManager = ContainerManager.Resolve<SpiderManager>();
                     var config = new SpiderConfig()
                     {
-                        AppService = ContainerManager.Resolve<INovelService>(),
                         CallBack = (msg) =>
                         {
                             Socket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(msg)), WebSocketMessageType.Text, true, CancellationToken.None);
@@ -71,10 +71,5 @@ namespace L.Web.Hubs
             app.UseWebSockets();
             app.Use(NotcieSocketHandler.Acceptor);
         }
-    }
-    public class Tmp
-    {
-        public string SpiderId { get; set; }
-        public IList<string> Uris { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using L.Application.Dto;
-using L.Application.Dto;
 using L.EntityFramework.Uow;
 using System.Threading.Tasks;
 
@@ -33,6 +32,15 @@ namespace L.Application.Services
         /// <param name="input"></param>
         /// <returns></returns>
         Task DeleteSpiderTask(BaseDto input);
+        /// <summary>
+        /// 是否开启定时任务
+        /// </summary>
+        /// <param name="spiderId"></param>
+        /// <param name="runOrStop"></param>
+        /// <returns></returns>
+        void RunOrStopRecurrentTask(string spiderId, bool runOrStop);
+
+
 
     }
 }

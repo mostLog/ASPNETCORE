@@ -5,8 +5,7 @@ layui.config({
     larry: 'larry',
     navtab: 'navtab',
     elemnt: 'element',
-    common: 'common',
-    services: 'services'
+    common: 'common'
 });
 layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function () {
     var $ = layui.$,
@@ -114,6 +113,22 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                             {
                                 "title": "数据类型维护", "icon": "icon-category", "href": "html/myloginfo.html"
                             }]
+                    }, {
+                        "pid": "103",
+                        "title": "系统维护",
+                        "icon": "icon-maintain",
+                        "spread": "true",
+                        "children": [
+                            {
+                                "title": "错误日志", "icon": "icon-errorlog", "href": "/Loger/"
+                            },
+                            {
+                                "title": "操作日志", "icon": "icon-operlog", "href": "/Loger/"
+                            },
+                            {
+                                "title": "数据库管理", "icon": "icon-novel", "href": "/Loger/"
+                            }
+                        ]
                     }];
 
                 var result;

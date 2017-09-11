@@ -31,7 +31,15 @@
                 url: '/SpiderTask/RunTask',
                 data: param
             });
+        },
+        startOrStopRecurrentTask: function (param) {
+            return $.ajax({
+                type: 'POST',
+                url: '/SpiderTask/StartOrStopRecurrentTask',
+                data: param
+            });
         }
     };
     exports(module_name, Service);
 });
+

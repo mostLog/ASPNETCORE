@@ -1,5 +1,4 @@
-﻿using L.Application.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace L.SpiderCore.Crawler
@@ -14,16 +13,12 @@ namespace L.SpiderCore.Crawler
         /// </summary>
         public IList<string> Uris { get; set; }
         /// <summary>
-        /// 消息通知形式
+        /// 消息通知形式回掉
         /// </summary>
         public Action<string> CallBack { get; set; }
         /// <summary>
-        /// 数据服务提供对象
+        /// 数据处理回掉
         /// </summary>
-        public IAppService AppService { get; set; }
-        /// <summary>
-        /// 额外信息
-        /// </summary>
-        public object ExtraObject { get; set; }
+        public Action<ICrawlerResult> DataHandleCallBack { get; set; }
     }
 }

@@ -28,21 +28,32 @@ namespace L.Application.Services
             await _novelRepository.InsertAsync(input);
         }
         /// <summary>
+        /// 更新小说信息
+        /// </summary>
+        public async void UpdateNovel(Novel input)
+        {
+            var novel=await _novelRepository.GetEntityByIdAsync(input.Id);
+            novel.IsOpenEmail = input.IsOpenEmail;
+            //更新小说
+            await _novelRepository.UpdateAsync(novel);
+        }
+        /// <summary>
         /// 返回小说信息
         /// </summary>
         /// <returns></returns>
         public async Task<PagedListResult<NovelListOutput>> GetNovelPagedList(NovelSearchInput input)
         {
             var query = _novelRepository.Table;
-            var list = await query
+            var tmplist = query
                 .AsNoTracking()
                 .WhereIf(!string.IsNullOrEmpty(input.Name), m => m.Name.Contains(input.Name))
-                .OrderByDescending(m => m.CreateDateTime)
+                .OrderByDescending(m => m.CreateDateTime); 
+            var list =await tmplist
                 .PageBy(input.PageIndex, input.PageSize)
                 .ToListAsync();
             AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<Novel, NovelListOutput>());
             //总数
-            int count = list.Count();
+            int count = tmplist.Count();
             return new PagedListResult<NovelListOutput>()
             {
                 Data = AutoMapper.Mapper.Map<IList<NovelListOutput>>(list),
@@ -114,7 +125,19 @@ namespace L.Application.Services
                 .Where(m => m.IsCrawlerContent == input.IsCrawlerContent)
                 .WhereIf(input.Seq!=null&&input.Seq.Value!=0,m=>m.Seq==input.Seq.Value)
                 .Include(m => m.Novel)
+                .Take(input.RowCount)
                 .ToList();
+        }
+        /// <summary>
+        /// 获取数据库最新小说
+        /// </summary>
+        /// <returns></returns>
+        public Article GetLaestArticle()
+        {
+            return _articleRepository.Table
+                .AsNoTracking()
+                .OrderByDescending(m=>m.Seq)
+                .FirstOrDefault();
         }
         /// <summary>
         /// 添加文章

@@ -1,9 +1,4 @@
-﻿layui.config({
-    base: '../js/layuilib/' //layui自定义layui组件目录
-}).extend({
-
-});
-layui.use(['layer'], function () {
+﻿layui.use(['layer'], function () {
     var layer = layui.layer,
         services = layui.services;
 

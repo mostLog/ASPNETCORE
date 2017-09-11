@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\L.EntityFramework\L.EntityFramework.csproj" />
+    <ProjectReference Include="..\L.HangFire.AspNetCore\L.HangFire.AspNetCore.csproj" />
     <ProjectReference Include="..\L.LCore\L.LCore.csproj" />
   </ItemGroup>
 

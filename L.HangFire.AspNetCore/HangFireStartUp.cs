@@ -16,7 +16,7 @@ namespace L.HangFire
         public void ConfigureServices(IServiceCollection services)
         {
             //添加HangFire
-            services.AddHangfire(h => h.UseSqlServerStorage("data source=.;initial catalog=CoreTestHangFire;Integrated Security=true"));
+            services.AddHangfire(h => h.UseSqlServerStorage("data source=.;initial catalog=CoreTestHangFire;uid=sa;pwd=sa;"));
         }
         /// <summary>
         /// 配置请求中间件 

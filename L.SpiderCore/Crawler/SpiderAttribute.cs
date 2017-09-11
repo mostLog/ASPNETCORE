@@ -11,9 +11,11 @@ namespace L.SpiderCore.Crawler
     public class SpiderAttribute:Attribute
     {
         public string Id { get; set; }
-        public SpiderAttribute(string id)
+        public string Description { get; set; }
+        public SpiderAttribute(string id,string description = "")
         {
             Id = id;
+            Description = description;
         }
     }
 }

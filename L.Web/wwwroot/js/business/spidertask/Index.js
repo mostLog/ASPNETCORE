@@ -1,9 +1,9 @@
 ﻿layui.config({
-    base: '../js/layuilib/' //layui自定义layui组件目录
+    base: '../js/business/spidertask/' //layui自定义layui组件目录
 }).extend({
-
+    
 });
-layui.use(['table','layer','form','spidertaskservice'], function () {
+layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
     var layer = layui.layer,
         form = layui.form,
         service = layui.spidertaskservice,
@@ -21,7 +21,7 @@ layui.use(['table','layer','form','spidertaskservice'], function () {
             {
                 field: 'spiderId',
                 title: '任务id',
-                width: 200
+                width: 120
             },
             {
                 field: 'name',
@@ -44,9 +44,11 @@ layui.use(['table','layer','form','spidertaskservice'], function () {
                 width: 382
             },
             {
-                field: 'status',
-                title: '状态',
-                width: 80
+                field: 'isRecurrent',
+                title: '定时任务',
+                width: 140,
+                align:'center',
+                templet:'#is-recurrent'
             },
             {
                 fixed: 'right',
@@ -57,7 +59,7 @@ layui.use(['table','layer','form','spidertaskservice'], function () {
             },
             {
                 fixed: 'right',
-                title: '是否启动',
+                title: '测试',
                 width: 100,
                 align: 'center',
                 toolbar: '#task-isrun'
@@ -74,16 +76,24 @@ layui.use(['table','layer','form','spidertaskservice'], function () {
         console.log(currRowData);
         if (layEvent==='edit') {
             //编辑
+            layer.open({
+                title: "编辑任务",
+                type: 2,
+                content: '/SpiderTask/AddOrEditSpiderTask/' + currRowData.id,
+                area: ['100%', '100%']
+            });
         } else if (layEvent === 'del') {
-            //删除
-            service.deleteTask({
-                Id: currRowData.id
-            }).done(function (data) {
-                if (!data && data != -1) {
-                    layer.msg("删除成功！");
-                    //刷新页面
-                    taskTable.reload();
-                }
+            layer.confirm('你确定要删除吗？', function (index) {
+                obj.del();
+                layer.close(index);
+                //删除
+                service.deleteTask({
+                    Id: currRowData.id
+                }).done(function (data) {
+                    if (!data && data != -1) {
+                        layer.msg("删除成功！");
+                    }
+                });
             });
         } else if (layEvent==='run') {
             var ck = $(this).prev("input[lay-event='run']").get(0).checked;
@@ -93,10 +103,40 @@ layui.use(['table','layer','form','spidertaskservice'], function () {
                 if (currRowData.urls != null) {
                     uris = currRowData.urls.split("\n");
                 }
-                //建立连接
+                //向服务器发送消息
                 sendMsg(socket, {
                     spiderId: currRowData.spiderId,
                     uris: uris
+                });
+            }
+        } else if (layEvent ==='isRecurrent')
+        {
+            var ck = $(this).prev("input[lay-event='isRecurrent']").get(0).checked;
+            if (ck) {
+                var uris = [];
+                if (currRowData.urls != null) {
+                    uris = currRowData.urls.split("\n");
+                }
+                //开启自动爬取
+                service.startOrStopRecurrentTask({
+                    isRecurrent: ck,
+                    spiderId: currRowData.spiderId,
+                    recurrentCron: currRowData.recurrentCron,
+                    uris: uris
+                }).done(function () {
+                    layer.msg("操作成功！");
+                }).fail(function () {
+                    layer.msg("操作失败！");
+                });
+            } else {
+                //关闭自动爬取
+                service.startOrStopRecurrentTask({
+                    isRecurrent: ck,
+                    spiderId: currRowData.spiderId
+                }).done(function () {
+                    layer.msg("操作成功！");
+                }).fail(function () {
+                    layer.msg("操作失败！");
                 });
             }
         }

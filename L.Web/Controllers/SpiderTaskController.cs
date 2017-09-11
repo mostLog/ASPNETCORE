@@ -1,5 +1,6 @@
 ﻿using L.Application.Dto;
 using L.Application.Services;
+using L.HangFire.AspNetCore.Services;
 using L.SpiderCore;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,11 +11,26 @@ namespace L.Web.Controllers
 {
     public class SpiderTaskController : Controller
     {
-        //爬虫服务
+        /// <summary>
+        /// 爬虫服务
+        /// </summary>
         private readonly ISpiderService _spiderService;
-        public SpiderTaskController(ISpiderService spiderService)
+        /// <summary>
+        /// hangfire服务
+        /// </summary>
+        private readonly IHangFireService _hangFireService;
+        /// <summary>
+        /// 爬虫管理
+        /// </summary>
+        private readonly SpiderManager _spiderManager;
+        public SpiderTaskController(
+            ISpiderService spiderService,
+            IHangFireService hangFireService,
+            SpiderManager spiderManager)
         {
             _spiderService = spiderService;
+            _hangFireService = hangFireService;
+            _spiderManager = spiderManager;
         }
         public IActionResult Index()
         {
@@ -24,10 +40,15 @@ namespace L.Web.Controllers
         /// 添加或者修改对话框页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult AddOrEditSpiderTask()
+        public IActionResult AddOrEditSpiderTask(int? id)
         {
-            
-            return View();
+            var task = new TaskEditDto();
+            if (id.HasValue)
+            {
+                //获取任务信息
+                task = _spiderService.GetTaskById(new BaseDto() { Id = id }).Result;
+            }
+            return View(task);
         }
         /// <summary>
         /// 获取爬虫列表
@@ -55,6 +76,7 @@ namespace L.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddOrUpdateTask(TaskAddOrEditInput input)
         {
+
             int result = 0;
             try
             {
@@ -83,6 +105,38 @@ namespace L.Web.Controllers
             }
             return Json(result);
         }
-        
+        /// <summary>
+        /// 启动循环任务
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public void StartOrStopRecurrentTask(TaskRunOrStopInput input)
+        {
+            if (input==null)
+            {
+                throw new ArgumentException(nameof(input));
+            }
+            if (string.IsNullOrEmpty(input.SpiderId))
+            {
+                throw new ArgumentException(nameof(input.SpiderId));
+            }
+            //开启循环
+            if (input.IsRecurrent)
+            {
+                if (string.IsNullOrEmpty(input.RecurrentCron))
+                {
+                    throw new ArgumentException(nameof(input.RecurrentCron));
+                }
+                //启动爬虫信息
+                _spiderService.RunOrStopRecurrentTask(input.SpiderId, true);
+                _hangFireService.AddRecurrentSchedule<SpiderManager>(input.SpiderId, s => s.RunTask(input.SpiderId, new SpiderCore.Crawler.SpiderConfig() { Uris = input.Uris }), input.RecurrentCron);
+            }
+            else
+            {
+                //关闭爬虫信息
+                _spiderService.RunOrStopRecurrentTask(input.SpiderId, false);
+                _hangFireService.DeleteRecurrentSchedule(input.SpiderId);
+            }
+        }
     }
 }

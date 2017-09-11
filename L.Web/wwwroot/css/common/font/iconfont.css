@@ -7,8 +7,8 @@
 }*/
 @font-face {
     font-family: 'iconfont'; /* project id 350379 */
-    src: url('//at.alicdn.com/t/font_350379_09bd6rcp0k162yb9.eot');
-    src: url('//at.alicdn.com/t/font_350379_09bd6rcp0k162yb9.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_350379_09bd6rcp0k162yb9.woff') format('woff'), url('//at.alicdn.com/t/font_350379_09bd6rcp0k162yb9.ttf') format('truetype'), url('//at.alicdn.com/t/font_350379_09bd6rcp0k162yb9.svg#iconfont') format('svg');
+    src: url('//at.alicdn.com/t/font_350379_cagbh7qmshhq6w29.eot');
+    src: url('//at.alicdn.com/t/font_350379_cagbh7qmshhq6w29.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_350379_cagbh7qmshhq6w29.woff') format('woff'), url('//at.alicdn.com/t/font_350379_cagbh7qmshhq6w29.ttf') format('truetype'), url('//at.alicdn.com/t/font_350379_cagbh7qmshhq6w29.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -95,4 +95,16 @@
 /*数据管理*/
 .icon-data:before {
     content: "\e666";
+}
+/*系统维护*/
+.icon-maintain:before {
+    content: "\e626";
+}
+/*操作日志*/
+.icon-operlog:before {
+    content: "\e739";
+}
+/*错误日志*/
+.icon-errorlog:before {
+    content: "\e6c2";
 }

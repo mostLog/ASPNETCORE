@@ -2,6 +2,8 @@
 using L.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using System;
+using L.Domain.Entities;
 
 namespace L.Web.Controllers
 {
@@ -44,6 +46,17 @@ namespace L.Web.Controllers
                 Code=0,
                 Data=await _novelService.GetArticlesByNovelId(input)
             });
+        }
+        /// <summary>
+        /// 开启Email推送
+        /// </summary>
+        public void StartOrStopEmailPush(NovelSearchInput input)
+        {
+            if (input==null)
+            {
+                throw new ArgumentException(nameof(input));
+            }
+            _novelService.UpdateNovel(new Novel() { Id = input.Id.Value, IsOpenEmail = input.IsOpenEmail });
         }
     }
 }

@@ -64,8 +64,8 @@ namespace L.SpiderCore.Crawler
                 string uri = uris[i];
                 //开启新线程
                 var task=await Task.Factory.StartNew(async () => {
-                    //休眠30秒
-                    System.Threading.Thread.Sleep(10000);
+                    //休眠60秒
+                    System.Threading.Thread.Sleep(60000);
                     var stopWatch = new Stopwatch();
                     stopWatch.Start();
                     var http = new HttpClient();
@@ -113,8 +113,9 @@ namespace L.SpiderCore.Crawler
                     }
                     stopWatch.Stop();
                     completeArgs.Duration = stopWatch.ElapsedMilliseconds;
+                    completeArgs.Host = request.Host;
                     //通知
-                    Config.CallBack("请求Url:"+ uri+"成功！"+" "+"花费时间："+completeArgs.Duration);
+                    Config.CallBack?.Invoke("请求Url:" + uri + "成功！" + " " + "花费时间：" + completeArgs.Duration);
                     this.OnCompleted(this, completeArgs);
                 });
                 

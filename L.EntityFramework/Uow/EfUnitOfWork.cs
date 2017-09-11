@@ -4,6 +4,7 @@ namespace L.EntityFramework.Uow
 {
     public class EFUnitOfWork: UnitOfWorkBase
     {
+        private object lockObj = new object();
         private readonly IDbContext _db;
 
         public EFUnitOfWork(IDbContext db)
@@ -19,22 +20,27 @@ namespace L.EntityFramework.Uow
         }
         public override void Complete()
         {
-            _db.SaveChanges();
-            if (CurrentTransaction!=null)
+            lock (lockObj)
             {
-                try
+                _db.SaveChanges();
+                if (CurrentTransaction != null)
                 {
-                    CurrentTransaction.Commit();
-                }
-                catch (System.Exception)
-                {
+                    try
+                    {
+                        CurrentTransaction.Commit();
+                    }
+                    catch (System.Exception)
+                    {
 
-                    CurrentTransaction.Rollback();
-                }finally
-                {
-                    CurrentTransaction.Dispose();
+                        CurrentTransaction.Rollback();
+                    }
+                    finally
+                    {
+                        CurrentTransaction.Dispose();
+                    }
                 }
             }
+            
         }
         public IDbContextTransaction CurrentTransaction { get; set; }
     }

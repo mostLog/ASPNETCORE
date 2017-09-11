@@ -30,11 +30,15 @@ namespace L.Application.Dto
         /// <summary>
         /// 是否开启定时执行
         /// </summary>
-        public bool? IsOpenTime { get; set; }
+        public bool? IsRecurrent { get; set; }
         /// <summary>
         /// 定时开始时间
         /// </summary>
-        public DateTime? OpenTime { get; set; }
+        public DateTime? RecurrentDateTime { get; set; }
+        /// <summary>
+        /// cron表达式
+        /// </summary>
+        public string RecurrentCron { get; set; }
         /// <summary>
         /// 状态
         /// </summary>

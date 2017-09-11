@@ -26,6 +26,10 @@ namespace L.Application.Dto
         /// 当前章节数量
         /// </summary>
         public string ChapterNum { get; set; }
+        /// <summary>
+        /// 是否开启邮件推送
+        /// </summary>
+        public bool IsOpenEmail { get; set; }
 
     }
 }

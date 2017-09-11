@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="17173\**" />
+    <Compile Remove="D站\**" />
+    <EmbeddedResource Remove="17173\**" />
+    <EmbeddedResource Remove="D站\**" />
+    <None Remove="17173\**" />
+    <None Remove="D站\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.0.6.601" />
   </ItemGroup>
 

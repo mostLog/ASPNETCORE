@@ -45,7 +45,14 @@ pre{padding: 10px 15px; margin: 10px 0; font-size: 12px; border-left: 6px solid 
 .clearfix { *zoom:1; }
 
 .posr{position: relative;}
-.posb{position: absolute;}
+.posb {
+    position: absolute;
+    text-align: center;
+    line-height: 70px;
+    font-size: 20px;
+    color: white;
+    font-family: Monaco;
+}
 .posc{position: static;}
 .posf{position: fixed;}
 i{font-style: normal;font-size: 16px;}

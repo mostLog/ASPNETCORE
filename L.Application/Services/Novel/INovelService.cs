@@ -30,6 +30,7 @@ namespace L.Application.Services
         /// </summary>
         /// <param name="input"></param>
         void AddNovel(Novel input);
+        void UpdateNovel(Novel input);
         /// <summary>
         /// 获取小说章节列表
         /// </summary>
@@ -54,11 +55,18 @@ namespace L.Application.Services
         /// 
         /// </summary>
         /// <param name="article"></param>
+        [NoUnitOfWork]
         void AddArticle(Article article);
         /// <summary>
         /// 
         /// </summary>
         /// <param name="article"></param>
         void UpdateArticel(Article article);
+        /// <summary>
+        /// 获取数据库最新小说
+        /// </summary>
+        /// <returns></returns>
+        [NoUnitOfWork]
+        Article GetLaestArticle();
     }
 }

@@ -1,6 +1,4 @@
-﻿using L.Application.Services;
-using L.LCore.Infrastructure.Dependeny;
-using L.LCore.Infrastructure.Reflection;
+﻿using L.LCore.Infrastructure.Reflection;
 using L.SpiderCore.Crawler;
 using System;
 using System.Collections.Generic;

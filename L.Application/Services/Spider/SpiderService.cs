@@ -3,20 +3,31 @@ using L.Domain.Entities;
 using L.EntityFramework;
 using L.LCore.Infrastructure.Extension;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace L.Application.Services
 {
     public class SpiderService : AppService, ISpiderService
     {
-        //爬虫任务仓储
+        /// <summary>
+        /// 爬虫任务仓储
+        /// </summary>
         private readonly IBaseRepository<SpiderTask> _spiderRepository;
-
-        public SpiderService(IBaseRepository<SpiderTask> spiderRepository)
+        private readonly INoticeService _novelService;
+        private readonly ILogger _logger;
+        public SpiderService(
+            IBaseRepository<SpiderTask> spiderRepository,
+            INoticeService noticeService,
+            ILogger<SpiderService> logger
+            )
         {
             _spiderRepository = spiderRepository;
+            _novelService = noticeService;
+            _logger = logger;
         }
         /// <summary>
         /// 分页获取数据
@@ -25,25 +36,36 @@ namespace L.Application.Services
         /// <returns></returns>
         public async Task<PagedListResult<TaskListOutput>> GetSpiderTaskPagedList(TaskSearchInput input)
         {
-            var tmplist= _spiderRepository.Table
+            _logger.LogError(1000, "fff");
+            var tmplist = _spiderRepository.Table
                 .AsNoTracking()
                 .WhereIf(!input.Name.IsNullOrEmpty(), p => p.Name.Contains(input.Name))
                 .OrderByDescending(p => p.CreateDateTime);
 
-            var list = await tmplist
-                .PageBy(input.PageIndex, input.PageSize)
-                .ToListAsync();
+            try
+            {
+                var list = await tmplist
+                       .PageBy(input.PageIndex, input.PageSize)
+                       .ToListAsync();
+                AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<SpiderTask, TaskListOutput>());
 
-            AutoMapper.Mapper.Initialize(cfg=>cfg.CreateMap<SpiderTask, TaskListOutput>());
+                //总数
+                int count = list.Count();
+
+                return new PagedListResult<TaskListOutput>()
+                {
+                    Data = AutoMapper.Mapper.Map<IList<TaskListOutput>>(list),
+                    Count = count,
+                    Code = 0
+                };
+            }
+            catch (System.Exception e)
+            {
+
+                throw;
+            }
+
             
-            //总数
-            int count = list.Count();
-
-            return new PagedListResult<TaskListOutput>() {
-                Data= AutoMapper.Mapper.Map<IList<TaskListOutput>>(list),
-                Count=count,
-                Code=0
-            };
         }
         /// <summary>
         /// 添加或者更新
@@ -55,7 +77,8 @@ namespace L.Application.Services
             if (input.SpiderTask.Id.HasValue)
             {
                 await UpdateSpiderTask(input);
-            }else
+            }
+            else
             {
                 await CreateSpiderTask(input);
             }
@@ -66,7 +89,7 @@ namespace L.Application.Services
         /// <returns></returns>
         private async Task CreateSpiderTask(TaskAddOrEditInput input)
         {
-            SpiderTask task=input.SpiderTask.MapTo<SpiderTask>();
+            SpiderTask task = input.SpiderTask.MapTo<SpiderTask>();
             await _spiderRepository.InsertAsync(task);
         }
         /// <summary>
@@ -75,8 +98,17 @@ namespace L.Application.Services
         /// <returns></returns>
         private async Task UpdateSpiderTask(TaskAddOrEditInput input)
         {
-            SpiderTask task = input.SpiderTask.MapTo<SpiderTask>();
-            await _spiderRepository.UpdateAsync(task);
+            var spiderTask = await _spiderRepository.GetEntityByIdAsync(input.SpiderTask.Id.Value);
+            if (spiderTask != null)
+            {
+                var newSpiderTask = input.SpiderTask.MapTo<SpiderTask>();
+                spiderTask.Name = newSpiderTask.Name;
+                spiderTask.Description = newSpiderTask.Description;
+                spiderTask.Urls = newSpiderTask.Urls;
+                spiderTask.RecurrentCron = newSpiderTask.RecurrentCron;
+                await _spiderRepository.UpdateAsync(spiderTask);
+            }
+           
         }
         /// <summary>
         /// 删除
@@ -96,9 +128,22 @@ namespace L.Application.Services
         /// <returns></returns>
         public async Task<TaskEditDto> GetTaskById(BaseDto input)
         {
-            var task=await _spiderRepository.GetEntityByIdAsync(input.Id.Value);
+            var task = await _spiderRepository.GetEntityByIdAsync(input.Id.Value);
             return task.MapTo<TaskEditDto>();
         }
-         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="spiderId"></param>
+        /// <param name="runOrStop"></param>
+        public void RunOrStopRecurrentTask(string spiderId,bool runOrStop)
+        {
+            var spiderTask= _spiderRepository.Table.FirstOrDefault(m => m.SpiderId == spiderId);
+            if (spiderTask!=null)
+            {
+                spiderTask.IsRecurrent = runOrStop;
+            }
+             _spiderRepository.UpdateAsync(spiderTask);
+        }
     }
 }

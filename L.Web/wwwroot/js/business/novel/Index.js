@@ -1,16 +1,21 @@
 ﻿layui.config({
-    base: '../js/layuilib/' //layui自定义layui组件目录
+    base: '../js/business/novel/' //layui自定义layui组件目录
 }).extend({
 
 });
-layui.use(['table', 'layer', 'form'], function () {
+layui.use(['table', 'layer', 'form','novelservice'], function () {
     var layer = layui.layer,
         form = layui.form,
+        service=layui.novelservice,
         table = layui.table;
 
     var novelTable = table.render({
         elem: '#novel-table',
         url: '/Novel/GetPagedList/',
+        request: {
+            pageName: 'PageIndex',
+            limitName:'PageSize'
+        },
         cols: [[
             {
                 field: 'name',
@@ -33,6 +38,12 @@ layui.use(['table', 'layer', 'form'], function () {
                 width:200
             },
             {
+                title: '邮件推送',
+                width: 200,
+                align: 'center',
+                toolbar:'#novel-isemail'
+            },
+            {
                 fixed: 'right',
                 title: '操作',
                 width: 200,
@@ -40,6 +51,7 @@ layui.use(['table', 'layer', 'form'], function () {
                 toolbar: '#novel-bar'
             }
         ]],
+        width:1206,
         page: true,
         height: 315
     });
@@ -52,8 +64,22 @@ layui.use(['table', 'layer', 'form'], function () {
             article.reload({
                 url: '/Novel/GetAritcles/',
                 where: {
-                    Id:currRowData.id
+                    id:currRowData.id
                 }
+            });
+        } else if (layEvent ==='email')
+        {
+            //推送email
+            var ck = $(this).prev("input[lay-event='email']").get(0).checked;
+            service.startOrStopEmailPush({
+                id: currRowData.id,
+                isOpenEmail: ck
+            }).done(function (data, textStatus, jqXHR) {
+                if (textStatus = "success") {
+                    layer.msg("操作成功！");
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                layer.msg(errorThrown);
             });
         }
     });
@@ -83,6 +109,7 @@ layui.use(['table', 'layer', 'form'], function () {
                 toolbar: '#article-bar'
             }
         ]],
+        width:1106,
         page: false,
         height: 'full-100'
     });

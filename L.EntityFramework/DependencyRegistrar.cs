@@ -18,7 +18,7 @@ namespace L.EntityFramework
             //注册数据库上下文对象
             builder.Register<IDbContext>(c => new LDbContext(
                     new DbContextOptionsBuilder()
-                    .UseSqlServer("data source=.;initial catalog=CoreTest;Integrated Security=true")
+                    .UseSqlServer("data source=.;initial catalog=CoreTest;uid=sa;pwd=sa;Integrated Security=true")
                     .Options
                 ))
                 .SingleInstance();

@@ -149,7 +149,37 @@ namespace L.EntityFramework.Migrations
 
                     b.Property<bool>("IsCrawlerArticle");
 
+                    b.Property<bool>("IsOpenEmail");
+
+                    b.Property<bool>("IsRecurrent");
+
                     b.Property<DateTime>("LastUpdateTime");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("NovelTypeId");
+
+                    b.Property<DateTime?>("OperaterDateTime");
+
+                    b.Property<string>("OperaterPerson");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NovelTypeId");
+
+                    b.ToTable("T_Novel");
+                });
+
+            modelBuilder.Entity("L.Domain.Entities.NovelType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreateDateTime");
+
+                    b.Property<string>("CreatePerson");
 
                     b.Property<string>("Name");
 
@@ -159,7 +189,7 @@ namespace L.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("T_Novel");
+                    b.ToTable("NovelType");
                 });
 
             modelBuilder.Entity("L.Domain.Entities.SpiderTask", b =>
@@ -177,15 +207,17 @@ namespace L.EntityFramework.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<bool?>("IsOpenTime");
+                    b.Property<bool>("IsRecurrent");
 
                     b.Property<string>("Name");
-
-                    b.Property<DateTime?>("OpenTime");
 
                     b.Property<DateTime?>("OperaterDateTime");
 
                     b.Property<string>("OperaterPerson");
+
+                    b.Property<string>("RecurrentCron");
+
+                    b.Property<DateTime?>("RecurrentDateTime");
 
                     b.Property<string>("SpiderId");
 
@@ -219,6 +251,13 @@ namespace L.EntityFramework.Migrations
                     b.HasOne("L.Domain.Entities.CrawlerRule", "CrawlerRule")
                         .WithMany()
                         .HasForeignKey("CrawlerRuleId");
+                });
+
+            modelBuilder.Entity("L.Domain.Entities.Novel", b =>
+                {
+                    b.HasOne("L.Domain.Entities.NovelType", "NovelType")
+                        .WithMany("Novels")
+                        .HasForeignKey("NovelTypeId");
                 });
 
             modelBuilder.Entity("L.Domain.Entities.SpiderTask", b =>

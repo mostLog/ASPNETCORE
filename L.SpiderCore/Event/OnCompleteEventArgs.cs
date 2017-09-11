@@ -21,6 +21,10 @@ namespace L.SpiderCore.Event
         /// 花费时间
         /// </summary>
         public long Duration { get; set; }
+        /// <summary>
+        /// 域名
+        /// </summary>
+        public string Host { get; set; }
 
         public OnCompleteEventArgs()
         {
