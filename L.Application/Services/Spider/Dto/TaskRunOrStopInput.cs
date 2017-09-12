@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace L.Application.Dto
 {
@@ -10,14 +8,17 @@ namespace L.Application.Dto
         /// 是否开启循环任务
         /// </summary>
         public bool IsRecurrent { get; set; }
+
         /// <summary>
         /// 爬虫id
         /// </summary>
         public string SpiderId { get; set; }
+
         /// <summary>
         /// 定时任务cron表达式
         /// </summary>
         public string RecurrentCron { get; set; }
+
         /// <summary>
         /// 爬取地址
         /// </summary>

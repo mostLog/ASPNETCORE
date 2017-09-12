@@ -8,16 +8,17 @@ namespace L.EntityFramework.Uow
     {
         private UnitOfWorkAttribute(Service interceptorService) : base(interceptorService)
         {
-
         }
-        public UnitOfWorkAttribute(bool isTransactional=false, string interceptorServiceName= "UnitOfWork") : base(interceptorServiceName)
+
+        public UnitOfWorkAttribute(bool isTransactional = false, string interceptorServiceName = "UnitOfWork") : base(interceptorServiceName)
         {
             IsTransactional = isTransactional;
         }
+
         private UnitOfWorkAttribute(Type interceptorServiceType) : base(interceptorServiceType)
         {
-
         }
+
         /// <summary>
         /// 是否开启事务
         /// </summary>

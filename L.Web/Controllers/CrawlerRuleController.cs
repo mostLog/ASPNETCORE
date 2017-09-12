@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace L.Web.Controllers
@@ -12,8 +8,9 @@ namespace L.Web.Controllers
         {
             return View();
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public IActionResult AddOrEditRule()

@@ -2,7 +2,6 @@
 using L.LCore.Infrastructure.Dependeny;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace L.HangFire
 {
@@ -18,8 +17,9 @@ namespace L.HangFire
             //添加HangFire
             services.AddHangfire(h => h.UseSqlServerStorage("data source=.;initial catalog=CoreTestHangFire;uid=sa;pwd=sa;"));
         }
+
         /// <summary>
-        /// 配置请求中间件 
+        /// 配置请求中间件
         /// </summary>
         /// <param name="app"></param>
         public void Configure(IApplicationBuilder app)
@@ -27,6 +27,7 @@ namespace L.HangFire
             app.UseHangfireServer();
             app.UseHangfireDashboard();
         }
+
         /// <summary>
         /// 序号
         /// </summary>

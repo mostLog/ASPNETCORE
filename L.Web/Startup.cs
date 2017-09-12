@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using L.LCore.Infrastructure.Extension;
+using L.Web.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using L.LCore.Infrastructure.Extension;
-using L.Web.Hubs;
+using System;
 
 namespace L.Web
 {
@@ -22,11 +19,11 @@ namespace L.Web
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-
             services.AddMvc();
             //services.AddSignalR();
             return services.ConfigureApplicationServices(Configuration);
         }
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())

@@ -12,6 +12,7 @@ namespace L.LCore.Infrastructure.Dependeny
         /// </summary>
         /// <param name="builder"></param>
         void Register(ContainerBuilder builder);
+
         /// <summary>
         /// 序号
         /// </summary>

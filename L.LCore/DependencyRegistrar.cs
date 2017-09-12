@@ -10,9 +10,8 @@ namespace L.LCore
     {
         public void Register(ContainerBuilder builder)
         {
-            
-           
         }
+
         public int Order { get; set; } = 1;
     }
 }

@@ -20,8 +20,4 @@
     <ProjectReference Include="..\L.LCore\L.LCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Crawler\apic.in\" />
-  </ItemGroup>
-
 </Project>

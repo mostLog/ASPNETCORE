@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace L.LCore.Infrastructure.Extension
+﻿namespace L.LCore.Infrastructure.Extension
 {
     public static class CommonExtension
     {
@@ -15,6 +11,5 @@ namespace L.LCore.Infrastructure.Extension
         {
             return string.IsNullOrEmpty(value);
         }
-
     }
 }

@@ -1,7 +1,6 @@
 ﻿layui.config({
     base: '../js/business/spidertask/' //layui自定义layui组件目录
 }).extend({
-    
 });
 layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
     var layer = layui.layer,
@@ -36,7 +35,8 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
             {
                 field: 'crawlerType',
                 title: '爬取模式',
-                width: 120
+                width: 120,
+                templet:'#task-crawlerType'
             },
             {
                 field: 'urls',
@@ -155,7 +155,7 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
      * @param url 地址
      */
     function doConnect() {
-        var uri = "ws://" + window.location.host + "/Notice";  
+        var uri = "ws://" + window.location.host + "/Notice";
         socket = new WebSocket(uri);
         socket.onopen = function (e) {
             console.log("连接已开启");

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
+﻿using AutoMapper;
 
 namespace L.LCore.Infrastructure.Extension
 {
@@ -13,7 +10,7 @@ namespace L.LCore.Infrastructure.Extension
         public static T MapTo<T>(this object obj)
         {
             if (obj == null) return default(T);
-            Mapper.Initialize(cfg=>cfg.CreateMap(obj.GetType(),typeof(T)));
+            Mapper.Initialize(cfg => cfg.CreateMap(obj.GetType(), typeof(T)));
             return Mapper.Map<T>(obj);
         }
     }

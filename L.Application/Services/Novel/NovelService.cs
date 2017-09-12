@@ -13,6 +13,7 @@ namespace L.Application.Services
     {
         //公共仓储
         private readonly IBaseRepository<Novel> _novelRepository;
+
         private readonly IBaseRepository<Article> _articleRepository;
 
         public NovelService(
@@ -27,16 +28,18 @@ namespace L.Application.Services
         {
             await _novelRepository.InsertAsync(input);
         }
+
         /// <summary>
         /// 更新小说信息
         /// </summary>
         public async void UpdateNovel(Novel input)
         {
-            var novel=await _novelRepository.GetEntityByIdAsync(input.Id);
+            var novel = await _novelRepository.GetEntityByIdAsync(input.Id);
             novel.IsOpenEmail = input.IsOpenEmail;
             //更新小说
             await _novelRepository.UpdateAsync(novel);
         }
+
         /// <summary>
         /// 返回小说信息
         /// </summary>
@@ -47,8 +50,8 @@ namespace L.Application.Services
             var tmplist = query
                 .AsNoTracking()
                 .WhereIf(!string.IsNullOrEmpty(input.Name), m => m.Name.Contains(input.Name))
-                .OrderByDescending(m => m.CreateDateTime); 
-            var list =await tmplist
+                .OrderByDescending(m => m.CreateDateTime);
+            var list = await tmplist
                 .PageBy(input.PageIndex, input.PageSize)
                 .ToListAsync();
             AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<Novel, NovelListOutput>());
@@ -61,6 +64,7 @@ namespace L.Application.Services
                 Code = 0
             };
         }
+
         /// <summary>
         /// 获取小说
         /// </summary>
@@ -71,6 +75,7 @@ namespace L.Application.Services
             var query = _novelRepository.Table;
             return query.WhereIf(!string.IsNullOrEmpty(input.Name), m => m.Name.Contains(input.Name)).FirstOrDefault();
         }
+
         /// <summary>
         /// 获取小说列表
         /// </summary>
@@ -84,6 +89,7 @@ namespace L.Application.Services
                 .WhereIf(!string.IsNullOrEmpty(input.Name), m => m.Name.Contains(input.Name))
                 .ToList();
         }
+
         /// <summary>
         /// 获取小说列表
         /// </summary>
@@ -100,14 +106,15 @@ namespace L.Application.Services
                     .FirstOrDefaultAsync(c => c.Id == input.Id.Value);
                 if (novel != null)
                 {
-                    var articles = novel.Articles.OrderByDescending(m=>m.Seq);
+                    var articles = novel.Articles.OrderByDescending(m => m.Seq);
                     return AutoMapper.Mapper.Map<IList<ArticleListOutput>>(articles);
                 }
             }
             return new List<ArticleListOutput>();
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -115,6 +122,7 @@ namespace L.Application.Services
         {
             return _articleRepository.GetEntityById(id);
         }
+
         /// <summary>
         /// 获取所有未爬取章节内容的文章
         /// </summary>
@@ -123,11 +131,12 @@ namespace L.Application.Services
         {
             return _articleRepository.Table
                 .Where(m => m.IsCrawlerContent == input.IsCrawlerContent)
-                .WhereIf(input.Seq!=null&&input.Seq.Value!=0,m=>m.Seq==input.Seq.Value)
+                .WhereIf(input.Seq != null && input.Seq.Value != 0, m => m.Seq == input.Seq.Value)
                 .Include(m => m.Novel)
                 .Take(input.RowCount)
                 .ToList();
         }
+
         /// <summary>
         /// 获取数据库最新小说
         /// </summary>
@@ -136,9 +145,10 @@ namespace L.Application.Services
         {
             return _articleRepository.Table
                 .AsNoTracking()
-                .OrderByDescending(m=>m.Seq)
+                .OrderByDescending(m => m.Seq)
                 .FirstOrDefault();
         }
+
         /// <summary>
         /// 添加文章
         /// </summary>
@@ -147,6 +157,7 @@ namespace L.Application.Services
         {
             _articleRepository.Insert(article);
         }
+
         /// <summary>
         /// 更新文章
         /// </summary>

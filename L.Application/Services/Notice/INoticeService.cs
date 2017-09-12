@@ -1,10 +1,10 @@
-﻿using L.EntityFramework.Uow;
-using L.Domain.Entities;
+﻿using L.Domain.Entities;
+using L.EntityFramework.Uow;
 using System.Collections.Generic;
 
 namespace L.Application
 {
-    [UnitOfWork(isTransactional:true)]
+    [UnitOfWork(isTransactional: true)]
     public interface INoticeService
     {
         [NoUnitOfWork]

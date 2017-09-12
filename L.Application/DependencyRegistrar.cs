@@ -17,8 +17,8 @@ namespace L.Application
              .Where(t => t.Name.EndsWith("Service"))
              .EnableInterfaceInterceptors()
              .AsImplementedInterfaces();
-           
         }
-        public int Order { get; set; } =2;
+
+        public int Order { get; set; } = 2;
     }
 }

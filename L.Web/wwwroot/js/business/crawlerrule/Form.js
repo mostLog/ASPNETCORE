@@ -2,10 +2,8 @@
     var $ = layui.jquery,
         form = layui.form();
 
-
     //添加规则绑定单击事件
     $("#btn-add-rule").click(function () {
-
     });
 
     //监听提交
@@ -14,7 +12,6 @@
         service.addOrUpdateTask({
             SpiderTask: data.field
         }).done(function (data) {
-            
         });
         return false;
     });

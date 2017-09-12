@@ -1,6 +1,4 @@
 ﻿using Autofac;
-using L.Application;
-using L.Application.Services;
 using L.LCore.Infrastructure.Dependeny;
 using L.SpiderCore.Crawler;
 using System.Linq;
@@ -24,6 +22,7 @@ namespace L.SpiderCore
                 .InstancePerLifetimeScope();
             builder.RegisterType<SpiderManager>();
         }
-        public int Order { get; set; } =6;
+
+        public int Order { get; set; } = 6;
     }
 }

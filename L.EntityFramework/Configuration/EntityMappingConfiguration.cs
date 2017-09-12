@@ -12,6 +12,7 @@ namespace L.EntityFramework.Configuration
             Map(b.Entity<T>());
         }
     }
+
     public interface IEntityMappingConfiguration
     {
         void Configuration(ModelBuilder b);

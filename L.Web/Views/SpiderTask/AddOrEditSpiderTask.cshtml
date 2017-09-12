@@ -36,7 +36,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">爬取模式</label>
             <div class="layui-input-block">
-                <input type="radio" name="CrawlerType" value="0" title="网址爬取（多网址）" lay-filter="radCrawlerType" checked>
+                <input type="radio" name="CrawlerType" value="0" title="基于网址" lay-filter="radCrawlerType" checked>
+                <input type="radio" name="CrawlerType" value="1" title="基于数据库" lay-filter="radCrawlerType">
             </div>
         </div>
         <div class="layui-form-item" id="ItemToCOne">
@@ -68,9 +69,3 @@
     <script src="~/js/business/spidertask/Form.js"></script>
 </body>
 </html>
-
-
-
-
-
-

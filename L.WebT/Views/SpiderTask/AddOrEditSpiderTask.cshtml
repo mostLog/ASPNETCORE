@@ -1,0 +1,77 @@
+﻿@model TaskEditDto
+@{
+    ViewData["Title"] = "AddOrEditSpiderTask";
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <link href="~/lib/layui/css/layui.css" rel="stylesheet" />
+</head>
+<body style="margin:10px;">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">任务Id</label>
+            <div class="layui-input-block">
+                <input type="text" name="SpiderId" lay-verify="required" autocomplete="off" placeholder="请输入任务Id" class="layui-input" value="@Model.SpiderId">
+                <input type="hidden" name="Id" value="@Model.Id" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">任务名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="Name" lay-verify="required" autocomplete="off" placeholder="请输入任务名称" class="layui-input" value="@Model.Name">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">任务描述</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入任务描述" class="layui-textarea" name="Description" value="@Model.Description"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">爬取模式</label>
+            <div class="layui-input-block">
+                <input type="radio" name="CrawlerType" value="0" title="基于网址" lay-filter="radCrawlerType" checked>
+                <input type="radio" name="CrawlerType" value="1" title="基于数据库" lay-filter="radCrawlerType">
+            </div>
+        </div>
+        <div class="layui-form-item" id="ItemToCOne">
+            <div class="layui-input-block">
+                <textarea class="layui-textarea" name="Urls" value="@Model.Urls">@Model.Urls</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+                @*<input type="checkbox" name="IsRecurrent" lay-skin="switch" lay-text="开启|关闭" value="1" lay-filter="switchIsRecurrent" @(Model.IsRecurrent?"checked":"")>*@
+                <input id="RecurrentCron" name="RecurrentCron" class="layui-input" placeholder="cron表达式" value="@Model.RecurrentCron">
+            </div>
+        </div>
+        @*<div  class="layui-form-item" id="ItemToOpenTime">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-inline">
+                <input id="RecurrentCron" name="RecurrentCron" class="layui-input" placeholder="cron表达式" value="@Model.RecurrentCron">
+            </div>
+        </div>*@
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="btnSubmit">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+    <script src="~/lib/layui/layui.js"></script>
+    <script src="~/js/business/spidertask/Form.js"></script>
+</body>
+</html>
+
+
+
+
+
+

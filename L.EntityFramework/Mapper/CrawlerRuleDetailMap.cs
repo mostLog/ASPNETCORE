@@ -10,7 +10,7 @@ namespace L.EntityFramework.Mapper
         public override void Map(EntityTypeBuilder<CrawlerRuleDetail> b)
         {
             b.ToTable("T_CrawlerRuleDetail");
-            b.HasKey(c=>c.Id);
+            b.HasKey(c => c.Id);
         }
     }
 }

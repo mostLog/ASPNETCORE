@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace L.Dapper.AspNetCore
+﻿namespace L.Dapper.AspNetCore
 {
     /// <summary>
     /// 数据库类型
     /// </summary>
     public enum DbType
     {
-        MSSQLServer=1,
-        MySql=2
+        MSSQLServer = 1,
+        MySql = 2
     }
 }

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Dapper;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Data;
 using System.Linq;
 
 namespace L.Dapper.AspNetCore
@@ -11,12 +7,14 @@ namespace L.Dapper.AspNetCore
     public class SqlTool
     {
         #region Sql Server
+
         private IDbConnection OpenSqlServerConnection(string conString)
         {
             IDbConnection con = new SqlConnection(conString);
             con.Open();
             return con;
         }
+
         /// <summary>
         /// 判断表是否存在
         /// </summary>
@@ -38,6 +36,7 @@ namespace L.Dapper.AspNetCore
                 return false;
             }
         }
+
         /// <summary>
         /// 判断数据库是否存在
         /// </summary>
@@ -58,7 +57,8 @@ namespace L.Dapper.AspNetCore
                 }
                 return false;
             }
-        } 
-        #endregion
+        }
+
+        #endregion Sql Server
     }
 }

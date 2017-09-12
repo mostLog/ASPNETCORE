@@ -12,22 +12,22 @@ namespace L.LCore
         {
             if (Singleton<ILCoreEngine>.Instance == null)
             {
-                Singleton<ILCoreEngine>.Instance= new LCoreEngine();
+                Singleton<ILCoreEngine>.Instance = new LCoreEngine();
             }
             return Singleton<ILCoreEngine>.Instance;
         }
+
         /// <summary>
         /// 获取当前引擎对象
         /// </summary>
         /// <returns></returns>
         public static ILCoreEngine CurrentEngine()
         {
-            if (Singleton<ILCoreEngine>.Instance==null)
+            if (Singleton<ILCoreEngine>.Instance == null)
             {
                 CreateEngine();
             }
             return Singleton<ILCoreEngine>.Instance;
         }
-
     }
 }

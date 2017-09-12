@@ -1,7 +1,6 @@
 ﻿layui.config({
     base: '../js/business/novel/' //layui自定义layui组件目录
 }).extend({
-
 });
 layui.use(['table', 'layer', 'form','novelservice'], function () {
     var layer = layui.layer,
@@ -127,5 +126,4 @@ layui.use(['table', 'layer', 'form','novelservice'], function () {
             });
         }
     });
-
 });

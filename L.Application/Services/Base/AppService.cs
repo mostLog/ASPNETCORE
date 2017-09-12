@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace L.Application.Services
+﻿namespace L.Application.Services
 {
-    public class AppService: IAppService
+    public class AppService : IAppService
     {
-
     }
 }

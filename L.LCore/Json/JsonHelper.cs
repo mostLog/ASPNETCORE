@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace L.LCore.Json
 {
@@ -14,12 +12,13 @@ namespace L.LCore.Json
         /// <returns></returns>
         public static string ToJson(object val)
         {
-            if (val==null)
+            if (val == null)
             {
                 throw new ArgumentException(nameof(val));
             }
             return JsonConvert.SerializeObject(val);
         }
+
         /// <summary>
         /// 反序列号为对象
         /// </summary>

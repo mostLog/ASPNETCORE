@@ -108,6 +108,56 @@ namespace L.EntityFramework.Migrations
                     b.ToTable("T_CrawlerRuleDetail");
                 });
 
+            modelBuilder.Entity("L.Domain.Entities.ImageInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreateDateTime");
+
+                    b.Property<string>("CreatePerson");
+
+                    b.Property<int>("Height");
+
+                    b.Property<int?>("ImgId");
+
+                    b.Property<DateTime?>("OperaterDateTime");
+
+                    b.Property<string>("OperaterPerson");
+
+                    b.Property<string>("Url");
+
+                    b.Property<int>("Width");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ImgId");
+
+                    b.ToTable("T_ImageInfo");
+                });
+
+            modelBuilder.Entity("L.Domain.Entities.Img", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreateDateTime");
+
+                    b.Property<string>("CreatePerson");
+
+                    b.Property<string>("Introduce");
+
+                    b.Property<DateTime?>("OperaterDateTime");
+
+                    b.Property<string>("OperaterPerson");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("T_Img");
+                });
+
             modelBuilder.Entity("L.Domain.Entities.Notice", b =>
                 {
                     b.Property<int>("Id")
@@ -197,6 +247,8 @@ namespace L.EntityFramework.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("AcquisitionInterval");
+
                     b.Property<int?>("CrawlerRuleId");
 
                     b.Property<int>("CrawlerType");
@@ -220,8 +272,6 @@ namespace L.EntityFramework.Migrations
                     b.Property<DateTime?>("RecurrentDateTime");
 
                     b.Property<string>("SpiderId");
-
-                    b.Property<int>("Status");
 
                     b.Property<string>("Urls");
 
@@ -251,6 +301,13 @@ namespace L.EntityFramework.Migrations
                     b.HasOne("L.Domain.Entities.CrawlerRule", "CrawlerRule")
                         .WithMany()
                         .HasForeignKey("CrawlerRuleId");
+                });
+
+            modelBuilder.Entity("L.Domain.Entities.ImageInfo", b =>
+                {
+                    b.HasOne("L.Domain.Entities.Img", "Img")
+                        .WithMany("ImageInfos")
+                        .HasForeignKey("ImgId");
                 });
 
             modelBuilder.Entity("L.Domain.Entities.Novel", b =>

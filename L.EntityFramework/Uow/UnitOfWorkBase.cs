@@ -4,12 +4,10 @@
     {
         public virtual void Begin(UnitOfWorkOptions options)
         {
-            
         }
 
         public virtual void Complete()
         {
-           
         }
     }
 }

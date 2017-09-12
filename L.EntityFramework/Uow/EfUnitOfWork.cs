@@ -2,7 +2,7 @@
 
 namespace L.EntityFramework.Uow
 {
-    public class EFUnitOfWork: UnitOfWorkBase
+    public class EFUnitOfWork : UnitOfWorkBase
     {
         private object lockObj = new object();
         private readonly IDbContext _db;
@@ -11,6 +11,7 @@ namespace L.EntityFramework.Uow
         {
             _db = db;
         }
+
         public override void Begin(UnitOfWorkOptions options)
         {
             if (options.IsTransactional)
@@ -18,6 +19,7 @@ namespace L.EntityFramework.Uow
                 CurrentTransaction = _db.CreateTransaction();
             }
         }
+
         public override void Complete()
         {
             lock (lockObj)
@@ -31,7 +33,6 @@ namespace L.EntityFramework.Uow
                     }
                     catch (System.Exception)
                     {
-
                         CurrentTransaction.Rollback();
                     }
                     finally
@@ -40,8 +41,8 @@ namespace L.EntityFramework.Uow
                     }
                 }
             }
-            
         }
+
         public IDbContextTransaction CurrentTransaction { get; set; }
     }
 }

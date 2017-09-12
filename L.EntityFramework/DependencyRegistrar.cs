@@ -27,6 +27,7 @@ namespace L.EntityFramework
             //注册工作单元
             builder.RegisterType<EFUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
         }
+
         public int Order { get; set; } = 1;
     }
 }

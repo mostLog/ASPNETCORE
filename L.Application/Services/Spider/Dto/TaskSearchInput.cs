@@ -1,11 +1,6 @@
-﻿using L.Application.Dto;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace L.Application.Dto
+﻿namespace L.Application.Dto
 {
-    public class TaskSearchInput: PagedInputDto
+    public class TaskSearchInput : PagedInputDto
     {
         /// <summary>
         /// 任务名称

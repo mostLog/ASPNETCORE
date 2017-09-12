@@ -1,11 +1,10 @@
 ﻿using System;
 
-
 namespace L.SpiderCore.Test
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //var spider = new NovelSpider();
             //spider.Run();
@@ -19,6 +18,15 @@ namespace L.SpiderCore.Test
             //{
             //    Console.WriteLine(task.Name);
             //}
+            //
+
+            string uri = "http://www.apic.in/anime/page/{1~100}";
+            int sIndex = uri.IndexOf('{');
+            int eIndex = uri.LastIndexOf('}');
+            //
+            string urlStartPart = uri.Substring(0, sIndex);
+            var s = uri.Substring(sIndex + 1, eIndex - sIndex - 1);
+            Console.WriteLine(urlStartPart);
             Console.ReadKey();
         }
     }

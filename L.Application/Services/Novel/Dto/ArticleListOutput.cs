@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace L.Application.Dto
+﻿namespace L.Application.Dto
 {
     /// <summary>
     /// 小说章节列表输出对象
@@ -10,10 +6,12 @@ namespace L.Application.Dto
     public class ArticleListOutput
     {
         public int Id { get; set; }
+
         /// <summary>
         /// 标题
         /// </summary>
         public string Title { get; set; }
+
         /// <summary>
         /// 地址
         /// </summary>

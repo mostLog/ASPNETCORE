@@ -20,8 +20,8 @@ namespace L.LCore
 
         public void Initial(IServiceCollection services)
         {
-            
         }
+
         /// <summary>
         /// 通过IHttpContextAccessor 提供服务
         /// </summary>
@@ -32,6 +32,7 @@ namespace L.LCore
             var context = accessor.HttpContext;
             return context != null ? context.RequestServices : ServiceProvider;
         }
+
         /// <summary>
         /// 配置服务
         /// </summary>
@@ -41,11 +42,9 @@ namespace L.LCore
         {
             var typeFinder = new AssemblyTypeFinder();
 
-            services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             //var config = GetServiceProvider().GetRequiredService<ILConfig>();
-
 
             //配置服务
             var startUps = typeFinder.FindTypesByInterface<IStartUp>();
@@ -62,17 +61,18 @@ namespace L.LCore
 
             return ServiceProvider;
         }
+
         /// <summary>
         /// 配置请求中间件
         /// </summary>
         /// <param name="app"></param>
         public void ConfigureRequestMiddleware(IApplicationBuilder app)
         {
-            var typeFinder= (ITypeFinder)GetServiceProvider().GetRequiredService(typeof(ITypeFinder));
+            var typeFinder = (ITypeFinder)GetServiceProvider().GetRequiredService(typeof(ITypeFinder));
 
-            var startUps=typeFinder.FindTypesByInterface<IStartUp>();
+            var startUps = typeFinder.FindTypesByInterface<IStartUp>();
 
-            var instances=startUps
+            var instances = startUps
                 .Select(r => (IStartUp)Activator.CreateInstance(r))
                 .OrderBy(r => r.Order);
 
@@ -88,9 +88,8 @@ namespace L.LCore
         /// <param name="services"></param>
         /// <returns></returns>
 
-        protected virtual IServiceProvider RegisterDependencies(IServiceCollection services,ITypeFinder typeFinder)
+        protected virtual IServiceProvider RegisterDependencies(IServiceCollection services, ITypeFinder typeFinder)
         {
-
             var containerBuilder = new ContainerBuilder();
 
             containerBuilder.RegisterInstance(this).As<ILCoreEngine>().SingleInstance();
@@ -109,13 +108,11 @@ namespace L.LCore
             }
 
             containerBuilder.Populate(services);
-            var container=containerBuilder.Build();
+            var container = containerBuilder.Build();
             ServiceProvider = new AutofacServiceProvider(container);
             //
             ContainerManager.SetContainer(container);
             return ServiceProvider;
         }
-
-
     }
 }

@@ -11,13 +11,14 @@ namespace L.LCore.Infrastructure.Extension
         {
             var engine = LCoreEngineManager.CreateEngine();
 
-            var serviceProvider = engine.ConfigureServices(services,configuration);
+            var serviceProvider = engine.ConfigureServices(services, configuration);
 
             return serviceProvider;
         }
+
         public static void ConfigureRequestMiddleware(this IApplicationBuilder app)
         {
-            var engine=LCoreEngineManager.CurrentEngine();
+            var engine = LCoreEngineManager.CurrentEngine();
 
             engine.ConfigureRequestMiddleware(app);
         }

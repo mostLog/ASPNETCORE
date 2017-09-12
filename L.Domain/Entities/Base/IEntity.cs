@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace L.Domain.Base
+﻿namespace L.Domain.Base
 {
     /// <summary>
     /// 实体接口

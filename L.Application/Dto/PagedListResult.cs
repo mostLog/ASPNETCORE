@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace L.Application.Dto
 {
@@ -10,14 +8,17 @@ namespace L.Application.Dto
         /// 数据行数
         /// </summary>
         public IList<T> Data { get; set; }
+
         /// <summary>
         /// 总数
         /// </summary>
         public int Count { get; set; }
+
         /// <summary>
         /// 状态信息
         /// </summary>
         public string Msg { get; set; }
+
         /// <summary>
         /// 判断是否成功
         /// </summary>

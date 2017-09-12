@@ -1,6 +1,5 @@
 ﻿using L.EntityFramework.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +17,7 @@ namespace L.EntityFramework.Extension
                     !x.GetTypeInfo().IsAbstract &&
                     x.GetInterfaces().Any(y => y.GetTypeInfo().IsGenericType && y.GetGenericTypeDefinition() == mappingInterface));
         }
+
         /// <summary>
         /// 从程序集动态加载实体配置文件
         /// </summary>
@@ -31,7 +31,5 @@ namespace L.EntityFramework.Extension
             foreach (var config in mappingTypes.Select(Activator.CreateInstance).Cast<IEntityMappingConfiguration>())
                 config.Configuration(modelBuilder);
         }
-
-        
     }
 }

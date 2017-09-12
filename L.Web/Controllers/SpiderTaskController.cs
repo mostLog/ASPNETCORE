@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
-
 namespace L.Web.Controllers
 {
     public class SpiderTaskController : Controller
@@ -15,14 +14,17 @@ namespace L.Web.Controllers
         /// 爬虫服务
         /// </summary>
         private readonly ISpiderService _spiderService;
+
         /// <summary>
         /// hangfire服务
         /// </summary>
         private readonly IHangFireService _hangFireService;
+
         /// <summary>
         /// 爬虫管理
         /// </summary>
         private readonly SpiderManager _spiderManager;
+
         public SpiderTaskController(
             ISpiderService spiderService,
             IHangFireService hangFireService,
@@ -32,10 +34,12 @@ namespace L.Web.Controllers
             _hangFireService = hangFireService;
             _spiderManager = spiderManager;
         }
+
         public IActionResult Index()
         {
             return View();
         }
+
         /// <summary>
         /// 添加或者修改对话框页面
         /// </summary>
@@ -50,6 +54,7 @@ namespace L.Web.Controllers
             }
             return View(task);
         }
+
         /// <summary>
         /// 获取爬虫列表
         /// </summary>
@@ -59,6 +64,7 @@ namespace L.Web.Controllers
         {
             return Json(await _spiderService.GetSpiderTaskPagedList(input));
         }
+
         /// <summary>
         /// 根据id获取实体
         /// </summary>
@@ -68,15 +74,15 @@ namespace L.Web.Controllers
         {
             return Json(await _spiderService.GetTaskById(input));
         }
+
         /// <summary>
-        /// 添加或者更新任务 
+        /// 添加或者更新任务
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AddOrUpdateTask(TaskAddOrEditInput input)
         {
-
             int result = 0;
             try
             {
@@ -88,6 +94,7 @@ namespace L.Web.Controllers
             }
             return Json(result);
         }
+
         /// <summary>
         /// 删除任务
         /// </summary>
@@ -105,6 +112,7 @@ namespace L.Web.Controllers
             }
             return Json(result);
         }
+
         /// <summary>
         /// 启动循环任务
         /// </summary>
@@ -112,7 +120,7 @@ namespace L.Web.Controllers
         [HttpPost]
         public void StartOrStopRecurrentTask(TaskRunOrStopInput input)
         {
-            if (input==null)
+            if (input == null)
             {
                 throw new ArgumentException(nameof(input));
             }

@@ -9,6 +9,7 @@
         /// 工作单元开始
         /// </summary>
         void Begin(UnitOfWorkOptions options);
+
         /// <summary>
         /// 工作单元结束
         /// </summary>

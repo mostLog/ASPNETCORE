@@ -19,14 +19,15 @@ namespace L.SpiderCore
         {
             Init();
         }
+
         /// <summary>
         /// 初始化
         /// </summary>
         public static void Init()
         {
             //判断当前使用的数据库中是否存在爬虫表
-
         }
+
         /// <summary>
         /// 获取所有爬虫信息
         /// </summary>
@@ -34,7 +35,7 @@ namespace L.SpiderCore
         {
             var att = typeof(SpiderAttribute);
             var typeFinder = new AssemblyTypeFinder();
-            var crawlers=typeFinder.FindTypesByInterface<ISpiderCrawler>();
+            var crawlers = typeFinder.FindTypesByInterface<ISpiderCrawler>();
             return crawlers.Where(c => c.GetCustomAttribute(att) != null).ToList();
         }
 
@@ -46,9 +47,10 @@ namespace L.SpiderCore
         public Type GetSpiderCrawler(string crawlerId)
         {
             var att = typeof(SpiderAttribute);
-            var list=GetCrawlers();
-            return list.FirstOrDefault(c=>((SpiderAttribute)c.GetTypeInfo().GetCustomAttribute(att)).Id==crawlerId);
+            var list = GetCrawlers();
+            return list.FirstOrDefault(c => ((SpiderAttribute)c.GetTypeInfo().GetCustomAttribute(att)).Id == crawlerId);
         }
+
         /// <summary>
         /// 启动爬虫
         /// </summary>
@@ -58,17 +60,16 @@ namespace L.SpiderCore
         public void RunTask(string crawlerId, SpiderConfig config)
         {
             var crawler = GetSpiderCrawler(crawlerId);
-            var spiderCrawler=(ISpiderCrawler)Activator.CreateInstance(crawler);
+            var spiderCrawler = (ISpiderCrawler)Activator.CreateInstance(crawler);
             spiderCrawler.InitConfig(config);
             spiderCrawler.Run();
         }
+
         /// <summary>
         /// 创建爬虫表
         /// </summary>
         private void CreateSpiderTaskTable()
         {
-
         }
-
     }
 }

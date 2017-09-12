@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Dapper;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using Dapper;
 
 namespace L.Dapper.AspNetCore
 {
@@ -13,7 +11,7 @@ namespace L.Dapper.AspNetCore
     public static class MSSQLServer
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static IDbConnection GetDbInstance()
         {
@@ -21,20 +19,21 @@ namespace L.Dapper.AspNetCore
             db.Open();
             return db;
         }
+
         /// <summary>
         /// 查询
         /// </summary>
-        public static IEnumerable<T> Query<T>(this IDbConnection db,string sql,object param) 
+        public static IEnumerable<T> Query<T>(this IDbConnection db, string sql, object param)
         {
-            return db.Query<T>(sql,param);
+            return db.Query<T>(sql, param);
         }
+
         /// <summary>
         /// 添加
         /// </summary>
-        public static int Insert<T>(this IDbConnection db,string sql,T t) where T:class
+        public static int Insert<T>(this IDbConnection db, string sql, T t) where T : class
         {
-             return db.Execute(sql,t);
+            return db.Execute(sql, t);
         }
-        
     }
 }

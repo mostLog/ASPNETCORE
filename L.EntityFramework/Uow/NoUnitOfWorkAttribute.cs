@@ -6,8 +6,7 @@ namespace L.EntityFramework.Uow
     /// 过滤不需要拦截的方法
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class NoUnitOfWorkAttribute:Attribute
+    public class NoUnitOfWorkAttribute : Attribute
     {
-
     }
 }

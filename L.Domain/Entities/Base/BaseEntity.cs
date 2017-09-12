@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace L.Domain.Base
+﻿namespace L.Domain.Base
 {
     /// <summary>
     /// int类型主键
@@ -12,7 +8,8 @@ namespace L.Domain.Base
         /// <summary>
         /// 主键
         /// </summary>
-        public T Id {
+        public T Id
+        {
             get;
             set;
         }

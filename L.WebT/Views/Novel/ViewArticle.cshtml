@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = null;
+    var article = ViewBag.Article as string;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewArticle</title>
+    <link href="~/lib/layui/css/layui.css" rel="stylesheet" />
+    <style>
+        .article {
+            background-color: #F1E5C9;
+        }
+    </style>
+</head>
+<body>
+    <div id="content" class="article">
+        @{
+            if (!string.IsNullOrEmpty(article))
+            {
+                @Html.Raw(article)
+            }
+        }
+    </div>
+</body>
+</html>

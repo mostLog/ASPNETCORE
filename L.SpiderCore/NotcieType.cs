@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace L.SpiderCore
+﻿namespace L.SpiderCore
 {
     public enum NotcieType
     {
-        Console=1,//控制台
+        Console = 1,//控制台
         SignalR //signalr
     }
 }

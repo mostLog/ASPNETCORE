@@ -9,12 +9,12 @@ namespace L.EntityFramework
     /// EF仓储实现类
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class EFBaseRepository<T>:IBaseRepository<T> where T: class
+    public class EFBaseRepository<T> : IBaseRepository<T> where T : class
     {
         private readonly IDbContext _context;
 
         private DbSet<T> _entities;
-        
+
         public EFBaseRepository(IDbContext context)
         {
             _context = context;
@@ -29,6 +29,7 @@ namespace L.EntityFramework
         {
             return Entities.Find(id);
         }
+
         /// <summary>
         /// 添加实体
         /// </summary>
@@ -47,8 +48,8 @@ namespace L.EntityFramework
             {
                 throw;
             }
-            
-        }    
+        }
+
         /// <summary>
         /// 更新数据
         /// </summary>
@@ -57,7 +58,7 @@ namespace L.EntityFramework
         {
             try
             {
-                if (t==null)
+                if (t == null)
                 {
                     throw new ArgumentNullException(nameof(t));
                 }
@@ -67,10 +68,10 @@ namespace L.EntityFramework
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
+
         /// <summary>
         /// 删除数据
         /// </summary>
@@ -87,10 +88,10 @@ namespace L.EntityFramework
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
+
         /// <summary>
         /// 整表数据
         /// </summary>
@@ -101,7 +102,8 @@ namespace L.EntityFramework
             {
                 return Entities;
             }
-        } 
+        }
+
         /// <summary>
         /// 获取上下文实体对象
         /// </summary>
@@ -112,13 +114,13 @@ namespace L.EntityFramework
                 return _entities ?? _context.SetEntity<T>();
             }
         }
+
         /// <summary>
         /// 如果上下文对象不纯在当前实体则附加上
         /// </summary>
         /// <param name="entity"></param>
         public virtual void AttachIfNot(T entity)
         {
-
             try
             {
                 var b = Entities.Local.Contains(entity);
@@ -129,10 +131,10 @@ namespace L.EntityFramework
             }
             catch (Exception e)
             {
-
                 throw;
             }
         }
+
         /// <summary>
         /// 异步获取
         /// </summary>
@@ -142,6 +144,7 @@ namespace L.EntityFramework
         {
             return await Entities.FindAsync(id);
         }
+
         /// <summary>
         /// 异步插入
         /// </summary>
@@ -149,8 +152,9 @@ namespace L.EntityFramework
         /// <returns></returns>
         public Task<T> InsertAsync(T t)
         {
-            return Task.FromResult(Insert(t)) ;
+            return Task.FromResult(Insert(t));
         }
+
         /// <summary>
         /// 异步更新
         /// </summary>
@@ -162,6 +166,7 @@ namespace L.EntityFramework
             _context.GetEntry(t).State = EntityState.Modified;
             return Task.FromResult(t);
         }
+
         /// <summary>
         /// 异步删除
         /// </summary>
@@ -172,6 +177,7 @@ namespace L.EntityFramework
             Entities.Remove(t);
             return Task.FromResult(t);
         }
+
         /// <summary>
         /// 更具id删除数据
         /// </summary>
@@ -179,7 +185,7 @@ namespace L.EntityFramework
         /// <returns></returns>
         public Task<T> DeleteAsync(int id)
         {
-            T model=GetEntityById(id);
+            T model = GetEntityById(id);
             return DeleteAsync(model);
         }
     }

@@ -1,7 +1,5 @@
 ﻿using OpenQA.Selenium.PhantomJS;
 using System;
-using System.Xml;
-
 
 namespace L.SpiderCore.Event
 {
@@ -14,24 +12,27 @@ namespace L.SpiderCore.Event
         /// 爬取地址
         /// </summary>
         public string Uri { get; set; }
+
         /// <summary>
         /// 页面html
         /// </summary>
         public string Page { get; set; }
+
         /// <summary>
         /// 花费时间
         /// </summary>
         public long Duration { get; set; }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public PhantomJSDriver Driver { get; set; }
 
         public OnWebDriverCompleteEventArgs()
         {
-
         }
-        public OnWebDriverCompleteEventArgs(string uri,string page,long duration)
+
+        public OnWebDriverCompleteEventArgs(string uri, string page, long duration)
         {
             Uri = uri;
             Page = page;

@@ -1,29 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26724.1
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.Web", "L.Web\L.Web.csproj", "{E2E87CFB-5432-4BAB-B3FA-3F488861AB39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L.Web", "L.Web\L.Web.csproj", "{E2E87CFB-5432-4BAB-B3FA-3F488861AB39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.Application", "L.Application\L.Application.csproj", "{003F6A71-4A09-46A5-AD20-18F8DB42C4DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L.Application", "L.Application\L.Application.csproj", "{003F6A71-4A09-46A5-AD20-18F8DB42C4DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.Dapper.AspNetCore", "L.Dapper\L.Dapper.AspNetCore.csproj", "{DBCAE00A-3B98-483D-87F3-8DAA0E085645}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L.Dapper.AspNetCore", "L.Dapper\L.Dapper.AspNetCore.csproj", "{DBCAE00A-3B98-483D-87F3-8DAA0E085645}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.EntityFramework", "L.EntityFramework\L.EntityFramework.csproj", "{47CECE4F-BCBA-4C6C-AAC8-745CD0974DA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L.EntityFramework", "L.EntityFramework\L.EntityFramework.csproj", "{47CECE4F-BCBA-4C6C-AAC8-745CD0974DA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.HangFire.AspNetCore", "L.HangFire.AspNetCore\L.HangFire.AspNetCore.csproj", "{4DE7A270-0144-42C2-A316-2AB78FAC3A34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L.HangFire.AspNetCore", "L.HangFire.AspNetCore\L.HangFire.AspNetCore.csproj", "{4DE7A270-0144-42C2-A316-2AB78FAC3A34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.LCore", "L.LCore\L.LCore.csproj", "{9CFED898-DBBF-4544-84D7-B423D5A9DF74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L.LCore", "L.LCore\L.LCore.csproj", "{9CFED898-DBBF-4544-84D7-B423D5A9DF74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.SpiderCore", "L.SpiderCore\L.SpiderCore.csproj", "{D502153B-7F1D-4AED-8BB1-17AB47D55CED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L.SpiderCore", "L.SpiderCore\L.SpiderCore.csproj", "{D502153B-7F1D-4AED-8BB1-17AB47D55CED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{F5271666-4A36-4F93-AB79-E38ED7C447B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.SpiderCore.Test", "L.SpiderCore.Test\L.SpiderCore.Test.csproj", "{D42D3453-6CC1-4584-9DC2-9F097262C7FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L.SpiderCore.Test", "L.SpiderCore.Test\L.SpiderCore.Test.csproj", "{D42D3453-6CC1-4584-9DC2-9F097262C7FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.Domain", "L.Domain\L.Domain.csproj", "{82B144D9-64AE-48E9-B4B8-EFFB37B5AE08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L.Domain", "L.Domain\L.Domain.csproj", "{82B144D9-64AE-48E9-B4B8-EFFB37B5AE08}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutonComponent", "SolutonComponent", "{0955B38B-32F0-495D-8071-464450169EFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.WebT", "L.WebT\L.WebT.csproj", "{8C524E9B-F14B-4CE2-A073-EA9DAB9B398A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,10 @@ Global
 		{82B144D9-64AE-48E9-B4B8-EFFB37B5AE08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82B144D9-64AE-48E9-B4B8-EFFB37B5AE08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82B144D9-64AE-48E9-B4B8-EFFB37B5AE08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C524E9B-F14B-4CE2-A073-EA9DAB9B398A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C524E9B-F14B-4CE2-A073-EA9DAB9B398A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C524E9B-F14B-4CE2-A073-EA9DAB9B398A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C524E9B-F14B-4CE2-A073-EA9DAB9B398A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

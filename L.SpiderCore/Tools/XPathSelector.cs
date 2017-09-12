@@ -15,6 +15,7 @@ namespace L.SpiderCore.Tools
             //加载html
             htmlDoc.LoadHtml(html);
         }
+
         /// <summary>
         /// 获取匹配xpath规则的第一个元素
         /// </summary>
@@ -22,6 +23,7 @@ namespace L.SpiderCore.Tools
         {
             return SelectNodes(xpath).First();
         }
+
         /// <summary>
         /// 选择匹配xpath的所有元素集合
         /// </summary>
@@ -32,16 +34,18 @@ namespace L.SpiderCore.Tools
                 .SelectSingleNode("//body")
                 .SelectNodes(xpath);
         }
+
         /// <summary>
         /// 获取html元素属性值
         /// </summary>
         /// <param name="node"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public string GetAttribute(HtmlNode node,string name)
+        public string GetAttribute(HtmlNode node, string name)
         {
             return node.Attributes[name].Value;
         }
+
         /// <summary>
         /// javascript  innerText
         /// </summary>
@@ -49,7 +53,7 @@ namespace L.SpiderCore.Tools
         /// <returns></returns>
         public string GetInnerText(HtmlNode node)
         {
-            if (node.ChildNodes.Count>0)
+            if (node.ChildNodes.Count > 0)
             {
                 return string.Empty;
             }

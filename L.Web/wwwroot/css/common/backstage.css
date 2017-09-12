@@ -148,7 +148,7 @@ body{
 	position: relative;
 	cursor: pointer;
 }
-.header-menu .layui-main ul.layui-nav li.layui-nav-item a i{	
+.header-menu .layui-main ul.layui-nav li.layui-nav-item a i{
 	line-height: 70px;
 	padding-right: 1px;
 }
@@ -345,7 +345,7 @@ body{
 .layui-tab .larry-title-box .go-left{
 	position: absolute;
 	top: 0px;
-	left: 0px;	
+	left: 0px;
 	z-index: 1005;
 }
 ul.layui-tab-title{
@@ -478,7 +478,7 @@ ul.layui-tab-title .layui-this:hover{
 }
 .often ul.layui-nav li.layui-nav-item a.top:hover i{
     color: #FF784E;
-} 
+}
 .often ul.layui-nav li.layui-nav-item a.top cite{
     display: inline-block;
     width: 65px;
@@ -541,7 +541,7 @@ ul.layui-tab-title .layui-this:hover{
 }
 .often ul.layui-nav li.layui-nav-item dl dd.layui-this a{
     color: #ffffff;
-} 
+}
 .often ul.layui-nav li.layui-nav-item dl dd.layui-this a i{
 	color: #ffffff;
 }
@@ -558,7 +558,6 @@ ul.layui-tab-title .layui-this:hover{
 	border: 0;
 	height: 100%;
 }
-
 
 /*底部*/
 .layui-larry-foot .layui-main{
@@ -671,8 +670,6 @@ ul.layui-tab-title .layui-this:hover{
 	margin-right: 55px;
 }
 
-
-
 /*锁屏css*/
 .lock-screen{
    position: fixed;
@@ -762,11 +759,9 @@ ul.layui-tab-title .layui-this:hover{
 	background: #F8C64F;
 }
 
-
 /* 后台界面主题配色解决方案 */
 /*默认主题*/
 .larryTheme-larry{
-
 }
 /*深蓝风主题A*/
 .larryTheme-A .header-menu{
@@ -889,7 +884,6 @@ ul.layui-tab-title .layui-this:hover{
 .larryTheme-A #larry-body .larry-title-box ul.layui-tab-title .layui-this{
 	background: #5FB878;
 }
-
 
 .larryTheme-A .layui-footer{
     background-color: #22282e;
@@ -1021,7 +1015,6 @@ ul.layui-tab-title .layui-this:hover{
 .larryTheme-B  #larry-body .larry-title-box ul.layui-tab-title .layui-this{
 	background: #5FB878;
 }
-
 
 .larryTheme-B  .layui-footer{
     background-color: #22282e;

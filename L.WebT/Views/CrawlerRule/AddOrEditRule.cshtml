@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewData["Title"] = "添加规则";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="~/lib/layui/css/layui.css" rel="stylesheet" />
+</head>
+<body style="margin:10px;">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">规则名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="Name" lay-verify="required" autocomplete="off" placeholder="请输入规则名称" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">规则信息</label>
+            <div class="layui-input-block">
+                <table class="layui-table">
+                    <colgroup>
+                        <col style="width:10%;" />
+                        <col style="width:90%;" />
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" style="border:0;">
+                                <button class="layui-btn layui-btn-small" type="button" id="btn-add-rule">添加规则</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                小说章节
+                            </td>
+                            <td>
+                                <input type="text" autocomplete="off" placeholder="请输入取值规则" class="layui-input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>章节地址</td>
+                            <td>
+                                <input type="text" autocomplete="off" placeholder="请输入取值规则" class="layui-input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>小说内容</td>
+                            <td>
+                                <input type="text" autocomplete="off" placeholder="请输入取值规则" class="layui-input">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="btnSubmit">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+    <script src="~/lib/layui/layui.js"></script>
+    <script src="~/js/business/spidertask/Form.js"></script>
+</body>
+</html>
+
+
+
+

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using Microsoft.Extensions.DependencyModel;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
-using Microsoft.Extensions.DependencyModel;
 using System.Runtime.Loader;
 
 namespace L.LCore.Infrastructure.Reflection
@@ -23,18 +23,18 @@ namespace L.LCore.Infrastructure.Reflection
             {
                 typeList.AddRange(assembly
                     .GetTypes()
-                    .Where(c =>c.GetTypeInfo().GetInterfaces().Contains(typeof(T))&&c.GetTypeInfo().IsAbstract==false||(c.GetTypeInfo().BaseType!=null&&c.GetTypeInfo().BaseType==typeof(T)))
+                    .Where(c => c.GetTypeInfo().GetInterfaces().Contains(typeof(T)) && c.GetTypeInfo().IsAbstract == false || (c.GetTypeInfo().BaseType != null && c.GetTypeInfo().BaseType == typeof(T)))
                     .ToList());
             }
             return typeList;
         }
+
         /// <summary>
         /// 获取所有程序集
         /// </summary>
         /// <returns></returns>
         public IList<Assembly> GetAssemblys()
         {
-
             var list = new List<Assembly>();
             var deps = DependencyContext.Default;
             var libs = deps.CompileLibraries.Where(lib => !lib.Serviceable && lib.Type != "package");//排除所有的系统程序集、Nuget下载包
@@ -47,7 +47,6 @@ namespace L.LCore.Infrastructure.Reflection
                 }
                 catch (Exception)
                 {
-                    
                 }
             }
             return list;

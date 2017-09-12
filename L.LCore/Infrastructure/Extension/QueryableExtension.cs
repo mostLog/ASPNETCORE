@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace L.LCore.Infrastructure.Extension
 {
@@ -27,6 +25,7 @@ namespace L.LCore.Infrastructure.Extension
             }
             return query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
         }
+
         /// <summary>
         /// 如果条件为true执行Where条件
         /// </summary>

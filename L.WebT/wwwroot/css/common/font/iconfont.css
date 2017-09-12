@@ -1,0 +1,110 @@
+/*.icon {
+    font-size: 42px;
+    margin: 10px 0;
+    -webkit-transition: font-size 0.25s ease-out 0s;
+    -moz-transition: font-size 0.25s ease-out 0s;
+    transition: font-size 0.25s ease-out 0s;
+}*/
+@font-face {
+    font-family: 'iconfont'; /* project id 350379 */
+    src: url('//at.alicdn.com/t/font_350379_cagbh7qmshhq6w29.eot');
+    src: url('//at.alicdn.com/t/font_350379_cagbh7qmshhq6w29.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_350379_cagbh7qmshhq6w29.woff') format('woff'), url('//at.alicdn.com/t/font_350379_cagbh7qmshhq6w29.ttf') format('truetype'), url('//at.alicdn.com/t/font_350379_cagbh7qmshhq6w29.svg#iconfont') format('svg');
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 26px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/*主题设置*/
+.icon-themesetting:before { content: "\e637"; }
+/*清理缓存*/
+.icon-clearcache:before { content: "\e802"; }
+/*锁屏*/
+.icon-screenlock:before { content: "\e6a7"; }
+/*全屏*/
+.icon-fullscreen:before { content: "\e634"; }
+/*登出*/
+.icon-signout:before { content: "\e60f"; }
+/*手*/
+.icon-hand:before {
+    content: "\e83e";
+}
+/*关闭所有选项卡*/
+.icon-closeall:before {
+    content: "\e636";
+}
+/*刷新*/
+.icon-refresh:before {
+    content: "\e600";
+}
+/*home*/
+.icon-home:before {
+    content: "\e778";
+}
+/*爬虫*/
+.icon-spider:before {
+    content: "\e601";
+}
+/*菜单*/
+.icon-menu:before {
+    content: "\e61e";
+}
+/*类别*/
+.icon-category:before {
+    content: "\e647";
+}
+/*任务*/
+.icon-task:before{
+    content: "\e630";
+}
+/*规则*/
+.icon-rule:before {
+    content: "\e602";
+}
+/*左*/
+.icon-left:before {
+    content: "\e720";
+}
+/*右*/
+.icon-right:before {
+    content: "\e6f8";
+}
+/*关闭*/
+.icon-close:before {
+    content: "\e6b1";
+
+}
+/*编辑*/
+.icon-edit:before {
+    content: "\e649";
+}
+/*删除*/
+.icon-delete:before {
+    content: "\e6b4";
+}
+.icon-close{
+    font-size:12px;
+}
+/*小说*/
+.icon-novel:before {
+    content: "\e644";
+}
+/*数据管理*/
+.icon-data:before {
+    content: "\e666";
+}
+/*系统维护*/
+.icon-maintain:before {
+    content: "\e626";
+}
+/*操作日志*/
+.icon-operlog:before {
+    content: "\e739";
+}
+/*错误日志*/
+.icon-errorlog:before {
+    content: "\e6c2";
+}

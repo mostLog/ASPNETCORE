@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace L.LCore.Infrastructure
+﻿namespace L.LCore.Infrastructure
 {
     /// <summary>
     /// 单例对象
@@ -12,8 +8,8 @@ namespace L.LCore.Infrastructure
     {
         private Singleton()
         {
-
         }
+
         public static T Instance { get; set; }
     }
 }

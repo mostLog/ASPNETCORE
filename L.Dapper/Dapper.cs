@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace L.Dapper.AspNetCore
+﻿namespace L.Dapper.AspNetCore
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class Dapper
     {
@@ -14,9 +10,9 @@ namespace L.Dapper.AspNetCore
         /// </summary>
         public static void InitConfig(DapperConfig config)
         {
-
         }
     }
+
     /// <summary>
     /// 配置参数类
     /// </summary>
@@ -26,6 +22,7 @@ namespace L.Dapper.AspNetCore
         /// 连接字符串
         /// </summary>
         public string ConnectionString { get; set; }
+
         /// <summary>
         /// 数据库类型
         /// </summary>

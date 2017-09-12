@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace L.Application.Services
 {
     public class SpiderService : AppService, ISpiderService
@@ -17,8 +16,10 @@ namespace L.Application.Services
         /// 爬虫任务仓储
         /// </summary>
         private readonly IBaseRepository<SpiderTask> _spiderRepository;
+
         private readonly INoticeService _novelService;
         private readonly ILogger _logger;
+
         public SpiderService(
             IBaseRepository<SpiderTask> spiderRepository,
             INoticeService noticeService,
@@ -29,6 +30,7 @@ namespace L.Application.Services
             _novelService = noticeService;
             _logger = logger;
         }
+
         /// <summary>
         /// 分页获取数据
         /// </summary>
@@ -61,12 +63,10 @@ namespace L.Application.Services
             }
             catch (System.Exception e)
             {
-
                 throw;
             }
-
-            
         }
+
         /// <summary>
         /// 添加或者更新
         /// </summary>
@@ -83,6 +83,7 @@ namespace L.Application.Services
                 await CreateSpiderTask(input);
             }
         }
+
         /// <summary>
         /// 创建爬虫任务
         /// </summary>
@@ -92,6 +93,7 @@ namespace L.Application.Services
             SpiderTask task = input.SpiderTask.MapTo<SpiderTask>();
             await _spiderRepository.InsertAsync(task);
         }
+
         /// <summary>
         /// 更新爬虫任务
         /// </summary>
@@ -103,13 +105,14 @@ namespace L.Application.Services
             {
                 var newSpiderTask = input.SpiderTask.MapTo<SpiderTask>();
                 spiderTask.Name = newSpiderTask.Name;
+                spiderTask.CrawlerType = newSpiderTask.CrawlerType;
                 spiderTask.Description = newSpiderTask.Description;
                 spiderTask.Urls = newSpiderTask.Urls;
                 spiderTask.RecurrentCron = newSpiderTask.RecurrentCron;
                 await _spiderRepository.UpdateAsync(spiderTask);
             }
-           
         }
+
         /// <summary>
         /// 删除
         /// </summary>
@@ -121,6 +124,7 @@ namespace L.Application.Services
                 await _spiderRepository.DeleteAsync(input.Id.Value);
             }
         }
+
         /// <summary>
         /// 更具id获取实体
         /// </summary>
@@ -131,19 +135,20 @@ namespace L.Application.Services
             var task = await _spiderRepository.GetEntityByIdAsync(input.Id.Value);
             return task.MapTo<TaskEditDto>();
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="spiderId"></param>
         /// <param name="runOrStop"></param>
-        public void RunOrStopRecurrentTask(string spiderId,bool runOrStop)
+        public void RunOrStopRecurrentTask(string spiderId, bool runOrStop)
         {
-            var spiderTask= _spiderRepository.Table.FirstOrDefault(m => m.SpiderId == spiderId);
-            if (spiderTask!=null)
+            var spiderTask = _spiderRepository.Table.FirstOrDefault(m => m.SpiderId == spiderId);
+            if (spiderTask != null)
             {
                 spiderTask.IsRecurrent = runOrStop;
             }
-             _spiderRepository.UpdateAsync(spiderTask);
+            _spiderRepository.UpdateAsync(spiderTask);
         }
     }
 }

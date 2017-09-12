@@ -16,6 +16,7 @@ namespace L.HangFire.AspNetCore
                 .As<IHangFireService>()
                 .InstancePerLifetimeScope();
         }
-        public int Order { get; set; } =2;
+
+        public int Order { get; set; } = 2;
     }
 }

@@ -42,4 +42,3 @@
     };
     exports(module_name, Service);
 });
-

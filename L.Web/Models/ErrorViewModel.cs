@@ -1,5 +1,3 @@
-using System;
-
 namespace L.Web.Models
 {
     public class ErrorViewModel

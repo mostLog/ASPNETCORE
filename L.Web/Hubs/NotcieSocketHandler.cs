@@ -1,5 +1,4 @@
 ﻿using L.Application.Dto;
-using L.Application.Services;
 using L.LCore.Infrastructure.Dependeny;
 using L.LCore.Json;
 using L.SpiderCore;
@@ -7,7 +6,6 @@ using L.SpiderCore.Crawler;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -18,15 +16,17 @@ namespace L.Web.Hubs
     public class NotcieSocketHandler
     {
         public WebSocket Socket { get; set; }
-        NotcieSocketHandler(WebSocket socket)
+
+        private NotcieSocketHandler(WebSocket socket)
         {
             this.Socket = socket;
         }
+
         private async Task RunTask()
         {
             var buffer = new byte[1024 * 4];
             var seg = new ArraySegment<byte>(buffer);
-            while (this.Socket.State==WebSocketState.Open)
+            while (this.Socket.State == WebSocketState.Open)
             {
                 var input = await this.Socket.ReceiveAsync(seg, CancellationToken.None);
 
@@ -34,7 +34,7 @@ namespace L.Web.Hubs
                         input.Count);
                 if (!string.IsNullOrEmpty(tmp))
                 {
-                    var p=JsonHelper.ToObject<TaskRunOrStopInput>(tmp);
+                    var p = JsonHelper.ToObject<TaskRunOrStopInput>(tmp);
                     var spiderManager = ContainerManager.Resolve<SpiderManager>();
                     var config = new SpiderConfig()
                     {
@@ -48,13 +48,15 @@ namespace L.Web.Hubs
                 }
             }
         }
+
         private async void SendMsg(string message)
         {
             var buffer = new byte[4096];
             var output = new ArraySegment<byte>(buffer, 0, message.Length);
             await this.Socket.SendAsync(output, WebSocketMessageType.Text, true, CancellationToken.None);
         }
-        static async Task Acceptor(HttpContext hc, Func<Task> n)
+
+        private static async Task Acceptor(HttpContext hc, Func<Task> n)
         {
             if (!hc.WebSockets.IsWebSocketRequest)
                 return;
@@ -62,10 +64,11 @@ namespace L.Web.Hubs
             var h = new NotcieSocketHandler(socket);
             await h.RunTask();
         }
-        /// <summary>  
-        /// 路由绑定处理  
-        /// </summary>  
-        /// <param name="app"></param>  
+
+        /// <summary>
+        /// 路由绑定处理
+        /// </summary>
+        /// <param name="app"></param>
         public static void Map(IApplicationBuilder app)
         {
             app.UseWebSockets();

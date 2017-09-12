@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace L.Domain.Base
 {
@@ -14,13 +12,16 @@ namespace L.Domain.Base
             get;
             set;
         } = DateTime.Now;
+
         /// <summary>
         /// 创建人
         /// </summary>
-        public string CreatePerson {
+        public string CreatePerson
+        {
             get;
             set;
         }
+
         /// <summary>
         /// 操作时间
         /// </summary>
@@ -29,10 +30,12 @@ namespace L.Domain.Base
             get;
             set;
         } = DateTime.Now;
+
         /// <summary>
         /// 操作人
         /// </summary>
-        public string OperaterPerson {
+        public string OperaterPerson
+        {
             get;
             set;
         }
