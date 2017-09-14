@@ -21,7 +21,7 @@
             return $.ajax({
                 type: 'POST',
                 url: '/SpiderTask/DeleteTask',
-                data:param
+                data: param
             });
         },
         //启动爬虫

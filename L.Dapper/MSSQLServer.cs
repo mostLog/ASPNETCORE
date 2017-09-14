@@ -13,9 +13,9 @@ namespace L.Dapper.AspNetCore
         /// <summary>
         ///
         /// </summary>
-        public static IDbConnection GetDbInstance()
+        public static IDbConnection GetDbInstance(string connections)
         {
-            IDbConnection db = new SqlConnection();
+            IDbConnection db = new SqlConnection(connections);
             db.Open();
             return db;
         }
@@ -23,9 +23,28 @@ namespace L.Dapper.AspNetCore
         /// <summary>
         /// 查询
         /// </summary>
-        public static IEnumerable<T> Query<T>(this IDbConnection db, string sql, object param)
+        public static IEnumerable<T> QueryList<T>(this IDbConnection db, string sql, object param)
         {
             return db.Query<T>(sql, param);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="db"></param>
+        /// <param name="sql"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public static T QueryScalar<T>(this IDbConnection db,string sql,object param=null)
+        {
+            if (param==null)
+            {
+                return db.ExecuteScalar<T>(sql);
+            }
+            else
+            {
+                return db.ExecuteScalar<T>(sql, param);
+            }
         }
 
         /// <summary>
@@ -34,6 +53,18 @@ namespace L.Dapper.AspNetCore
         public static int Insert<T>(this IDbConnection db, string sql, T t) where T : class
         {
             return db.Execute(sql, t);
+        }
+        /// <summary>
+        /// 执行sql语句
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="db"></param>
+        /// <param name="sql"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public static int ExcuteSql<T>(this IDbConnection db,string sql,T p)
+        {
+            return db.Execute(sql,p);
         }
     }
 }

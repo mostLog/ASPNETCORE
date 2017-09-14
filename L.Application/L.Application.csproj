@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\L.Dapper\L.Dapper.AspNetCore.csproj" />
     <ProjectReference Include="..\L.EntityFramework\L.EntityFramework.csproj" />
     <ProjectReference Include="..\L.HangFire.AspNetCore\L.HangFire.AspNetCore.csproj" />
     <ProjectReference Include="..\L.LCore\L.LCore.csproj" />

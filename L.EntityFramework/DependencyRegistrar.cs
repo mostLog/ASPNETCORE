@@ -21,7 +21,7 @@ namespace L.EntityFramework
                     .UseSqlServer("data source=.;initial catalog=CoreTest;uid=sa;pwd=sa;Integrated Security=true")
                     .Options
                 ))
-                .SingleInstance();
+                .InstancePerLifetimeScope();
             //注册拦截器
             builder.RegisterType<UnitOfWorkInterceptor>().Named<IInterceptor>("UnitOfWork").InstancePerLifetimeScope();
             //注册工作单元

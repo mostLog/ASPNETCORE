@@ -6,31 +6,64 @@ using L.SpiderCore.Event;
 using L.SpiderCore.Tools;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace L.SpiderCore.Crawler
 {
     [Spider("ApiInImageUrlCrawler")]
     public class ImageSourceCrawler : SpiderCrawler
     {
+        private IImageService _imageService = ContainerManager.Resolve<IImageService>();
+        private ILoggerService _loggerService = ContainerManager.Resolve<ILoggerService>();
+        private static Object _lock = new Object();
         public override void HtmlParser(OnCompleteEventArgs e)
         {
-            //获取服务
-            var appService = ContainerManager.Resolve<IImageService>();
-            //初始化解析器
-            var selector = new XPathSelector(e.Page);
-            var aEles = selector.SelectNodes("//*[@id='main']/div/div[1]/a");
-            //开启工作单元
-            var unitOfWork = ContainerManager.Resolve<IUnitOfWork>();
-            unitOfWork.Begin(new UnitOfWorkOptions());
-            foreach (var aEle in aEles)
+            try
             {
-                string url = aEle.GetAttributeValue("href", "");
-                appService.AddImage(new Img()
+                lock (_lock)
                 {
-                    Url = url
+                    var stopWatch = new Stopwatch();
+                    stopWatch.Start();
+                    //初始化解析器
+                    var selector = new XPathSelector(e.Page);
+                    var aEles = selector.SelectNodes("//*[@id='main']/div/div[1]/a");
+                    //开启工作单元
+                    var unitOfWork = ContainerManager.Resolve<IUnitOfWork>();
+                    unitOfWork.Begin(new UnitOfWorkOptions());
+                    foreach (var aEle in aEles)
+                    {
+                        string url = aEle.GetAttributeValue("href", "");
+                        _imageService.AddImage(new Img()
+                        {
+                            Url = url
+                        });
+                    }
+                    unitOfWork.Complete();
+                    stopWatch.Stop();
+                    //记录爬取日志
+                    _loggerService.WriteLog(new Log()
+                    {
+                        DateTime = DateTime.Now,
+                        Msg = e.Uri + "请求消耗:" + e.Duration + "---" + "数据解析消耗:" + stopWatch.ElapsedMilliseconds,
+                        ClassName = "",
+                        ActionName = "",
+                        Duration = e.Duration + stopWatch.ElapsedMilliseconds,
+                        LogLevel = (int)LCore.Logger.LogLevel.Info
+                    });
+                }
+            }
+            catch (Exception exception)
+            {
+                //记录错误信息
+                _loggerService.WriteLog(new Log()
+                {
+                    DateTime = DateTime.Now,
+                    LogLevel = (int)LCore.Logger.LogLevel.Error,
+                    ClassName = this.GetType().Name,
+                    ActionName = exception.TargetSite.Name,
+                    Msg = e.Uri + "---" + exception.Message
                 });
             }
-            unitOfWork.Complete();
         }
 
         public override void InitConfig(SpiderConfig config)

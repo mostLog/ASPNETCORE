@@ -24,11 +24,11 @@ namespace L.Dapper.AspNetCore
         {
             using (IDbConnection con = OpenSqlServerConnection(""))
             {
-                int result = con.Query<int>("select count(1) from sys.objects where name = '@tableName'",
+                int result = con.QueryScalar<int>("select count(1) from sys.objects where name = '@tableName'",
                    new
                    {
                        tableName = tableName
-                   }).FirstOrDefault();
+                   });
                 if (result == 1)
                 {
                     return true;
@@ -46,11 +46,11 @@ namespace L.Dapper.AspNetCore
         {
             using (IDbConnection con = OpenSqlServerConnection(""))
             {
-                int result = con.Query<int>("select count(1) From master.dbo.sysdatabases where name='@dbName'",
+                int result = con.QueryScalar<int>("select count(1) From master.dbo.sysdatabases where name='@dbName'",
                     new
                     {
                         dbName = dbName
-                    }).FirstOrDefault();
+                    });
                 if (result == 1)
                 {
                     return true;

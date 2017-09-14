@@ -45,8 +45,16 @@ namespace L.HangFire.AspNetCore.Services
         /// </summary>
         public string AddEnqueue<T>(Expression<Action<T>> action)
         {
+            
             var jobId = BackgroundJob.Enqueue(action);
             return jobId;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void AddEnqueue(Expression<Action> action)
+        {
+            BackgroundJob.Enqueue(action);
         }
     }
 }

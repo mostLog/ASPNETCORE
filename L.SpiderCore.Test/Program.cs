@@ -1,4 +1,6 @@
-﻿using System;
+﻿using L.SpiderCore.Crawler.Common;
+using System;
+using System.IO;
 
 namespace L.SpiderCore.Test
 {
@@ -19,14 +21,13 @@ namespace L.SpiderCore.Test
             //    Console.WriteLine(task.Name);
             //}
             //
+            string s="http://img.gov.com.de/2017/07/apic.in_2017-07-03_14-53-42.jpg!origin";
 
-            string uri = "http://www.apic.in/anime/page/{1~100}";
-            int sIndex = uri.IndexOf('{');
-            int eIndex = uri.LastIndexOf('}');
-            //
-            string urlStartPart = uri.Substring(0, sIndex);
-            var s = uri.Substring(sIndex + 1, eIndex - sIndex - 1);
-            Console.WriteLine(urlStartPart);
+            Console.WriteLine(Path.GetExtension(s));
+            Console.WriteLine(Path.GetFileName(s));
+            ImgHelper.GetImageAndSave("http://img.gov.com.de/2017/07/apic.in_2017-07-03_14-53-42.jpg!origin", @"C:\Temp\ApiInImages\");
+            
+
             Console.ReadKey();
         }
     }

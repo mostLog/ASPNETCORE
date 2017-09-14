@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\L.Domain\L.Domain.csproj" />
     <ProjectReference Include="..\L.LCore\L.LCore.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,6 @@
 ﻿layui.config({
     base: '../js/business/spidertask/' //layui自定义layui组件目录
 }).extend({
-    
 });
 layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
     var layer = layui.layer,
@@ -10,7 +9,7 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
         table = layui.table,
         socket;
 
-    var taskTable=table.render({
+    var taskTable = table.render({
         elem: '#task-table',
         url: '/SpiderTask/GetPagedList/',
         cols: [[
@@ -37,7 +36,7 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
                 field: 'crawlerType',
                 title: '爬取模式',
                 width: 120,
-                templet:'#task-crawlerType'
+                templet: '#task-crawlerType'
             },
             {
                 field: 'urls',
@@ -48,8 +47,8 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
                 field: 'isRecurrent',
                 title: '定时任务',
                 width: 140,
-                align:'center',
-                templet:'#is-recurrent'
+                align: 'center',
+                templet: '#is-recurrent'
             },
             {
                 fixed: 'right',
@@ -75,7 +74,7 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
         var currRowData = obj.data;
         var layEvent = obj.event;
         console.log(currRowData);
-        if (layEvent==='edit') {
+        if (layEvent === 'edit') {
             //编辑
             layer.open({
                 title: "编辑任务",
@@ -96,7 +95,7 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
                     }
                 });
             });
-        } else if (layEvent==='run') {
+        } else if (layEvent === 'run') {
             var ck = $(this).prev("input[lay-event='run']").get(0).checked;
             //如果开启
             if (ck) {
@@ -110,8 +109,7 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
                     uris: uris
                 });
             }
-        } else if (layEvent ==='isRecurrent')
-        {
+        } else if (layEvent === 'isRecurrent') {
             var ck = $(this).prev("input[lay-event='isRecurrent']").get(0).checked;
             if (ck) {
                 var uris = [];
@@ -156,7 +154,7 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
      * @param url 地址
      */
     function doConnect() {
-        var uri = "ws://" + window.location.host + "/Notice";  
+        var uri = "ws://" + window.location.host + "/Notice";
         socket = new WebSocket(uri);
         socket.onopen = function (e) {
             console.log("连接已开启");
@@ -174,7 +172,7 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
         return socket;
     }
     doConnect();
-    function sendMsg(s,param) {
+    function sendMsg(s, param) {
         s.send(JSON.stringify(param));
     }
 });

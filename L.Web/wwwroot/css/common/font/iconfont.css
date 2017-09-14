@@ -1,4 +1,4 @@
-/*.icon {
+ï»¿/*.icon {
     font-size: 42px;
     margin: 10px 0;
     -webkit-transition: font-size 0.25s ease-out 0s;
@@ -7,8 +7,8 @@
 }*/
 @font-face {
     font-family: 'iconfont'; /* project id 350379 */
-    src: url('//at.alicdn.com/t/font_350379_cagbh7qmshhq6w29.eot');
-    src: url('//at.alicdn.com/t/font_350379_cagbh7qmshhq6w29.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_350379_cagbh7qmshhq6w29.woff') format('woff'), url('//at.alicdn.com/t/font_350379_cagbh7qmshhq6w29.ttf') format('truetype'), url('//at.alicdn.com/t/font_350379_cagbh7qmshhq6w29.svg#iconfont') format('svg');
+    src: url('//at.alicdn.com/t/font_350379_ehydhi905k84obt9.eot');
+    src: url('//at.alicdn.com/t/font_350379_ehydhi905k84obt9.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_350379_ehydhi905k84obt9.woff') format('woff'), url('//at.alicdn.com/t/font_350379_ehydhi905k84obt9.ttf') format('truetype'), url('//at.alicdn.com/t/font_350379_ehydhi905k84obt9.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -18,25 +18,25 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-/*Ö÷ÌâÉèÖÃ*/
+/*ä¸»é¢˜è®¾ç½®*/
 .icon-themesetting:before { content: "\e637"; }
-/*ÇåÀí»º´æ*/
+/*æ¸…ç†ç¼“å­˜*/
 .icon-clearcache:before { content: "\e802"; }
-/*ËøÆÁ*/
+/*é”å±*/
 .icon-screenlock:before { content: "\e6a7"; }
-/*È«ÆÁ*/
+/*å…¨å±*/
 .icon-fullscreen:before { content: "\e634"; }
-/*µÇ³ö*/
+/*ç™»å‡º*/
 .icon-signout:before { content: "\e60f"; }
-/*ÊÖ*/
+/*æ‰‹*/
 .icon-hand:before {
     content: "\e83e";
 }
-/*¹Ø±ÕËùÓĞÑ¡Ïî¿¨*/
+/*å…³é—­æ‰€æœ‰é€‰é¡¹å¡*/
 .icon-closeall:before {
     content: "\e636";
 }
-/*Ë¢ĞÂ*/
+/*åˆ·æ–°*/
 .icon-refresh:before {
     content: "\e600";
 }
@@ -44,66 +44,70 @@
 .icon-home:before {
     content: "\e778";
 }
-/*ÅÀ³æ*/
+/*çˆ¬è™«*/
 .icon-spider:before {
     content: "\e601";
 }
-/*²Ëµ¥*/
+/*èœå•*/
 .icon-menu:before {
     content: "\e61e";
 }
-/*Àà±ğ*/
+/*ç±»åˆ«*/
 .icon-category:before {
     content: "\e647";
 }
-/*ÈÎÎñ*/
+/*ä»»åŠ¡*/
 .icon-task:before{
     content: "\e630";
 }
-/*¹æÔò*/
+/*è§„åˆ™*/
 .icon-rule:before {
     content: "\e602";
 }
-/*×ó*/
+/*å·¦*/
 .icon-left:before {
     content: "\e720";
 }
-/*ÓÒ*/
+/*å³*/
 .icon-right:before {
     content: "\e6f8";
 }
-/*¹Ø±Õ*/
+/*å…³é—­*/
 .icon-close:before {
     content: "\e6b1";
 }
-/*±à¼­*/
+/*ç¼–è¾‘*/
 .icon-edit:before {
     content: "\e649";
 }
-/*É¾³ı*/
+/*åˆ é™¤*/
 .icon-delete:before {
     content: "\e6b4";
 }
 .icon-close{
     font-size:12px;
 }
-/*Ğ¡Ëµ*/
+/*å°è¯´*/
 .icon-novel:before {
     content: "\e644";
 }
-/*Êı¾İ¹ÜÀí*/
+/*æ•°æ®ç®¡ç†*/
 .icon-data:before {
     content: "\e666";
 }
-/*ÏµÍ³Î¬»¤*/
+/*ç³»ç»Ÿç»´æŠ¤*/
 .icon-maintain:before {
     content: "\e626";
 }
-/*²Ù×÷ÈÕÖ¾*/
+/*æ“ä½œæ—¥å¿—*/
 .icon-operlog:before {
-    content: "\e739";
+    content: "\e60c";
 }
-/*´íÎóÈÕÖ¾*/
+/*é”™è¯¯æ—¥å¿—*/
 .icon-errorlog:before {
     content: "\e6c2";
+}
+/*å›¾ç‰‡ç®¡ç†*/
+.icon-imgmanage:before {
+    content: "\e6b5";
 }

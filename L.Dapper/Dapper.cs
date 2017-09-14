@@ -5,12 +5,12 @@
     /// </summary>
     public class Dapper
     {
-        /// <summary>
-        /// 初始化数据库配置
-        /// </summary>
-        public static void InitConfig(DapperConfig config)
+        public DapperConfig Config { get; set; }
+        public Dapper(DapperConfig config)
         {
+            Config = config;
         }
+
     }
 
     /// <summary>

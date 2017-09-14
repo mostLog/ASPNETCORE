@@ -1,7 +1,6 @@
 ﻿layui.config({
     base: '../../js/business/spidertask/' //layui自定义layui组件目录
 }).extend({
-
 });
 layui.use(['form', 'layer', 'laydate', 'spidertaskservice'], function () {
     var $ = layui.$,
@@ -14,7 +13,7 @@ layui.use(['form', 'layer', 'laydate', 'spidertaskservice'], function () {
     //form.on('switch(switchIsRecurrent)', function (data) {
     //    if (data.elem.checked) {
     //        $("#ItemToOpenTime").css("display", "");
-            
+
     //    } else {
     //        $("#ItemToOpenTime").css("display", "none");
     //    }

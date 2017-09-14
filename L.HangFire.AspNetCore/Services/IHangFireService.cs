@@ -42,6 +42,8 @@ namespace L.HangFire.AspNetCore.Services
         /// <returns></returns>
         string AddEnqueue<T>(Expression<Action<T>> action);
 
+        void AddEnqueue(Expression<Action> action);
+
         void DeleteRecurrentSchedule(string recurrentJobId);
     }
 }

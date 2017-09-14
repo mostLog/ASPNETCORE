@@ -1,0 +1,79 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="~/lib/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/css/common/layuie.css" rel="stylesheet" />
+    <link href="~/lib/animate.css/animate.min.css" rel="stylesheet" />
+    <link href="~/css/common/font/iconfont.css" rel="stylesheet" />
+
+    <link href="~/css/index.css" rel="stylesheet" />
+    <base target="_blank">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-title">
+                        <h5>日志列表</h5>
+                    </div>
+                    <div class="box-content">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div class="layui-form">
+                                    记录日期：
+                                    <div class="layui-inline">
+                                        <input type="text" class="layui-input" name="search-record-date" id="search-record-date">
+                                    </div>
+                                    <div class="layui-inline">
+                                        <select id="search-log-level" lay-filter="search-log-level">
+                                            <option value="">日志等级</option>
+                                            <option value="1">警告</option>
+                                            <option value="2">信息</option>
+                                            <option value="3">错误</option>
+                                        </select>
+                                        <input type="hidden" id="search-log-level-hidden" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="data-list">
+                            <table id="log-table" lay-filter="log-table"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script id="log-level" type="text/html">
+        {{# if (d.logLevel == "1") { }}
+        <span style="color:orange;">警告</span>
+        {{# }else if(d.logLevel=="2"){ }}
+        <span style="color:#66ff66;">信息</span>
+        {{# }else if(d.logLevel=="3"){ }}
+        <span style="color:red;">错误</span>
+        {{# }else{ }}
+        <span></span>
+        {{# } }}
+    </script>
+    <script id="duration" type="text/html">
+        {{# if(d.duration>=1000){ }}
+        <span>{{d.duration/1000}}秒</span>
+        {{# }else{ }}
+        <span>{{d.duration}}毫秒</span>
+        {{# } }}
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/layui/layui.js"></script>
+    <script src="~/js/business/logger/Index.js"></script>
+</body>
+</html>

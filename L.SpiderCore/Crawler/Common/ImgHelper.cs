@@ -12,31 +12,44 @@ namespace L.SpiderCore.Crawler.Common
         /// </summary>
         /// <param name="imgUri">远程图片地址</param>
         /// <param name="savePath">保持本地路径</param>
-        private static void GetImageAndSave(string imgUri, string savePath)
+        public static ImageBaseInfo GetImageAndSave(string imgUri, string savePath)
         {
             var request = (HttpWebRequest)HttpWebRequest.Create(imgUri);
             request.UserAgent = "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36";
             request.KeepAlive = true;
             request.Accept = "image/webp,image/apng,image/*,*/*;q=0.8";
-            using (var response = request.GetResponse())
+            try
             {
-                var stream = response.GetResponseStream();
-                if (stream.Length != 0)
+                using (var response = request.GetResponse())
                 {
+                    var stream = response.GetResponseStream();
                     using (var image = Image.FromStream(stream))
                     {
-                        string saveUri = savePath + Path.GetFileName(imgUri);
-                        try
+                        string fileName = Path.GetFileName(imgUri);
+                        if (fileName.Contains("!"))
                         {
-                            image.Save(saveUri);
+                            fileName = fileName.Substring(0,fileName.IndexOf("!"));
                         }
-                        catch (Exception e)
+                        string saveUri = savePath + fileName;
+                        image.Save(saveUri);
+                        return new ImageBaseInfo()
                         {
-                            throw new Exception("图片保存失败" + e.Message);
-                        }
+                            Width = image.Width,
+                            Height = image.Height
+                        };
                     }
                 }
             }
+            catch (Exception e)
+            {
+                return new ImageBaseInfo();
+            }
+            
         }
+    }
+    public class ImageBaseInfo
+    {
+        public int Width { get; set; }
+        public int Height { get; set; }
     }
 }

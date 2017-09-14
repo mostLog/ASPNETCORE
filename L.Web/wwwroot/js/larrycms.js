@@ -96,7 +96,11 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                         "children": [
                             {
                                 "title": "小说管理", "icon": "icon-novel", "href": "/Novel/"
-                            }]
+                            },
+                            {
+                                "title": "图片管理", "icon": "icon-imgmanage", "href": "/Images/ViewImages"
+                            }
+                        ]
                     },
                     {
                         "pid": "102",
@@ -120,13 +124,10 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                         "spread": "true",
                         "children": [
                             {
-                                "title": "错误日志", "icon": "icon-errorlog", "href": "/Loger/"
+                                "title": "Crawler日志", "icon": "icon-operlog", "href": "/Logger/"
                             },
                             {
-                                "title": "操作日志", "icon": "icon-operlog", "href": "/Loger/"
-                            },
-                            {
-                                "title": "数据库管理", "icon": "icon-novel", "href": "/Loger/"
+                                "title": "数据库管理", "icon": "icon-novel", "href": "/Db/"
                             }
                         ]
                     }];

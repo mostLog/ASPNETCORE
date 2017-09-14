@@ -1,12 +1,11 @@
 ﻿layui.config({
     base: '../js/business/novel/' //layui自定义layui组件目录
 }).extend({
-
 });
-layui.use(['table', 'layer', 'form','novelservice'], function () {
+layui.use(['table', 'layer', 'form', 'novelservice'], function () {
     var layer = layui.layer,
         form = layui.form,
-        service=layui.novelservice,
+        service = layui.novelservice,
         table = layui.table;
 
     var novelTable = table.render({
@@ -14,7 +13,7 @@ layui.use(['table', 'layer', 'form','novelservice'], function () {
         url: '/Novel/GetPagedList/',
         request: {
             pageName: 'PageIndex',
-            limitName:'PageSize'
+            limitName: 'PageSize'
         },
         cols: [[
             {
@@ -30,18 +29,18 @@ layui.use(['table', 'layer', 'form','novelservice'], function () {
             {
                 field: '',
                 title: '当前章节数量',
-                width:200
+                width: 200
             },
             {
                 field: 'newChapter',
                 title: '最新章节',
-                width:200
+                width: 200
             },
             {
                 title: '邮件推送',
                 width: 200,
                 align: 'center',
-                toolbar:'#novel-isemail'
+                toolbar: '#novel-isemail'
             },
             {
                 fixed: 'right',
@@ -51,7 +50,7 @@ layui.use(['table', 'layer', 'form','novelservice'], function () {
                 toolbar: '#novel-bar'
             }
         ]],
-        width:1206,
+        width: 1206,
         page: true,
         height: 315
     });
@@ -64,11 +63,10 @@ layui.use(['table', 'layer', 'form','novelservice'], function () {
             article.reload({
                 url: '/Novel/GetAritcles/',
                 where: {
-                    id:currRowData.id
+                    id: currRowData.id
                 }
             });
-        } else if (layEvent ==='email')
-        {
+        } else if (layEvent === 'email') {
             //推送email
             var ck = $(this).prev("input[lay-event='email']").get(0).checked;
             service.startOrStopEmailPush({
@@ -109,7 +107,7 @@ layui.use(['table', 'layer', 'form','novelservice'], function () {
                 toolbar: '#article-bar'
             }
         ]],
-        width:1106,
+        width: 1106,
         page: false,
         height: 'full-100'
     });
@@ -120,12 +118,20 @@ layui.use(['table', 'layer', 'form','novelservice'], function () {
             //查看章节
             parent.layer.open({
                 title: currRowData.title,
-                shade: [1,"#7d7980"],
+                shade: [1, "#7d7980"],
                 type: 2,
-                content: '/Novel/ViewArticle/'+currRowData.id,
+                content: '/Novel/ViewArticle/' + currRowData.id,
                 area: ['800px', '100%']
             });
         }
     });
 
+    $("#btn-search").on('click', function () {
+        var novelName = $("input[name='novelName']").val();
+        novelTable.reload({
+            where: {
+                name:novelName
+            }
+        });
+    });
 });

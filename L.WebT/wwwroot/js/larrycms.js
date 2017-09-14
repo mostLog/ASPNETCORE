@@ -96,7 +96,11 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                         "children": [
                             {
                                 "title": "小说管理", "icon": "icon-novel", "href": "/Novel/"
-                            }]
+                            },
+                            {
+                                "title": "图片管理", "icon": "icon-imgmanage", "href": "/Images/ViewImages"
+                            }
+                        ]
                     },
                     {
                         "pid": "102",
@@ -120,13 +124,10 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                         "spread": "true",
                         "children": [
                             {
-                                "title": "错误日志", "icon": "icon-errorlog", "href": "/Loger/"
+                                "title": "Crawler日志", "icon": "icon-operlog", "href": "/Loger/"
                             },
                             {
-                                "title": "操作日志", "icon": "icon-operlog", "href": "/Loger/"
-                            },
-                            {
-                                "title": "数据库管理", "icon": "icon-novel", "href": "/Loger/"
+                                "title": "数据库管理", "icon": "icon-novel", "href": "/Db/"
                             }
                         ]
                     }];
@@ -152,16 +153,12 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                     console.log(data);
                     navtab.tabAdd(data.field);
                 });
-
             });
-
         });
         // 左侧导航点击事件
         $menu.find('li[data-pid=0]').click();
         $("#larrySideNav").find("li").eq(0).addClass('layui-this');
         $.ajaxSettings.async = true;
-
-
     });
 
     $('#larry-tab').bind("contextmenu", function () {
@@ -175,7 +172,7 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
             navtab.tabCtrl(eName);
         });
     });
-    // 窗口自适应    
+    // 窗口自适应
     $(window).on('resize', function () {
         AdminInit();
         // iframe窗口自适应
@@ -259,7 +256,6 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
         form.on('switch(fullscreen)', function (data) {
             var fValue = data.elem.checked;
             localStorage.setItem('fullscreen_info', fValue); //fullscreen_info:fValue
-
         });
         // 主题设置
         form.on('select(larryTheme)', function (data) {
@@ -273,10 +269,8 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
         });
 
         // form.on('submit(submitlocal)',function(data){
-
         // })
     });
-
 
     // 全屏切换
     $('#FullScreen').bind('click', function () {
@@ -433,7 +427,6 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
             $('#layui_layout').show();
         }
     }
-
 
     $('#dianzhan').click(function (event) {
         layer.open({

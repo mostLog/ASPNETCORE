@@ -3,7 +3,7 @@
  @Name：layui.form 表单组件
  @Author：贤心
  @License：MIT
-    
+
  */
 
 layui.define('layer', function (exports) {
@@ -77,7 +77,6 @@ layui.define('layer', function (exports) {
                 return filter ? ('[lay-filter="' + filter + '"]') : '';
             }())
             , items = {
-
                 //下拉选择框
                 select: function () {
                     var TIPS = '请选择', CLASS = 'layui-form-select', TITLE = 'layui-select-title'
@@ -97,7 +96,6 @@ layui.define('layer', function (exports) {
                                 , input = title.find('input')
                                 , dl = reElem.find('dl')
                                 , dds = dl.children('dd')
-
 
                             if (disabled) return;
 
@@ -331,7 +329,7 @@ layui.define('layer', function (exports) {
                         //替代元素
                         var hasRender = othis.next('.' + RE_CLASS[0]);
                         var reElem = $(['<div class="layui-unselect ' + RE_CLASS[0] + (
-                            check.checked ? (' ' + RE_CLASS[1]) : '') + (disabled ? ' layui-checkbox-disbaled ' + DISABLED : '') + '" lay-event="' + (event || "") +'" lay-skin="' + (skin || '') + '">'
+                            check.checked ? (' ' + RE_CLASS[1]) : '') + (disabled ? ' layui-checkbox-disbaled ' + DISABLED : '') + '" lay-event="' + (event || "") + '" lay-skin="' + (skin || '') + '">'
                             , {
                                 _switch: '<em>' + ((check.checked ? text[0] : text[1]) || '') + '</em><i></i>'
                             }[skin] || ((check.title.replace(/\s/g, '') ? ('<span>' + check.title + '</span>') : '') + '<i class="layui-icon">' + (skin ? '&#xe605;' : '&#xe618;') + '</i>')
@@ -470,4 +468,3 @@ layui.define('layer', function (exports) {
 
     exports(MOD_NAME, form);
 });
-

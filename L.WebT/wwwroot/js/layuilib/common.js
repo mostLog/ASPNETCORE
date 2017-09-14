@@ -1,25 +1,25 @@
-layui.define(['layer'],function(exports){
+layui.define(['layer'], function (exports) {
     "use strict";
-	var $ = layui.$,
-	    layer = layui.layer;
-       
-	var CmsCommon = {
+    var $ = layui.$,
+        layer = layui.layer;
+
+    var CmsCommon = {
         /**
          * 抛出异常错误信息
          * @param {String} msg
          */
-        cmsError: function(msg,title){
-			parent.layer.alert(msg, {
-				title: title,
-				icon: 2,
-				time: 0,
-				resize: false,
-				zIndex: layer.zIndex,
-				anim: Math.ceil(Math.random() * 6)
-			});
-			return;
+        cmsError: function (msg, title) {
+            parent.layer.alert(msg, {
+                title: title,
+                icon: 2,
+                time: 0,
+                resize: false,
+                zIndex: layer.zIndex,
+                anim: Math.ceil(Math.random() * 6)
+            });
+            return;
         },
-        cmsInfo: function(msg,title){
+        cmsInfo: function (msg, title) {
             parent.layer.alert(msg, {
                 title: title,
                 icon: 6,
@@ -30,21 +30,18 @@ layui.define(['layer'],function(exports){
             });
             return;
         },
-        cmsConfirm: function(){
-
+        cmsConfirm: function () {
         },
         //退出系统
-        logOut: function (title, text, url,type, dataType, data, callback) {
+        logOut: function (title, text, url, type, dataType, data, callback) {
             parent.layer.confirm(text, {
                 title: title,
                 resize: false,
                 btn: ['确定退出系统', '不，我点错了！'],
                 btnAlign: 'c',
                 icon: 3
-
             }, function () {
-
-			location.href = url;
+                location.href = url;
             }, function () {
                 layer.msg('返回系统', {
                     time: 1500,
@@ -53,8 +50,7 @@ layui.define(['layer'],function(exports){
                 });
             });
         }
+    };
 
-	};
-
-	exports('common',CmsCommon);
+    exports('common', CmsCommon);
 })

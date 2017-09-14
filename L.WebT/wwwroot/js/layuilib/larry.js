@@ -5,11 +5,11 @@ layui.define(['layer', 'element', 'common'], function (exports) {
         common = layui.common,
         cacheName = 'navbarCache';
 
-    var Navbar={
+    var Navbar = {
         /**
          *  默认配置
          */
-        config:{
+        config: {
             elem: undefined, //容器
             data: undefined, //数据源
             url: undefined, //数据源地址
@@ -21,16 +21,16 @@ layui.define(['layer', 'element', 'common'], function (exports) {
     Navbar.render = function () {
         var _that = this;
         var _config = _that.config;
-        if (typeof(_config.elem) !== 'string' && typeof(_config.elem) !== 'object') {
+        if (typeof (_config.elem) !== 'string' && typeof (_config.elem) !== 'object') {
             common.cmsError('LarryCMS Nav error: elem参数未定义或设置出错', 'elem参数出错');
         }
         // 若为字符串
         var $container;
-        if (typeof(_config.elem) === 'string') {
+        if (typeof (_config.elem) === 'string') {
             $container = $('' + _config.elem + '');
         }
         // 若为object
-        if (typeof(_config.elem) === 'object') {
+        if (typeof (_config.elem) === 'object') {
             $container = _config.elem;
         }
         if ($container.length === 0) {
@@ -114,7 +114,6 @@ layui.define(['layer', 'element', 'common'], function (exports) {
         return _that;
     };
 
-
     // Navbar设置
     Navbar.set = function (options) {
         var that = this;
@@ -137,7 +136,7 @@ layui.define(['layer', 'element', 'common'], function (exports) {
     Navbar.on = function (events, callback) {
         var that = this;
         var _con = that.config.elem;
-        if (typeof(events) !== 'string') {
+        if (typeof (events) !== 'string') {
             common.cmsError('LarryCMS Nav error:事件名配置出错，请参考API文档.', '事件名配置出错')
         }
         var lIndex = events.indexOf('(');
@@ -266,12 +265,10 @@ layui.define(['layer', 'element', 'common'], function (exports) {
         return ulHtml;
     }
 
-
     //var larry = new Navbar();
 
     //exports('larry', function (options) {
     //    return larry.set(options);
     //});
     exports('larry', Navbar);
-
 })
