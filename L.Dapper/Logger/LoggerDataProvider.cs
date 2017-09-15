@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace L.Dapper.AspNetCore.Logger
 {
@@ -40,25 +41,25 @@ namespace L.Dapper.AspNetCore.Logger
         /// <returns></returns>
         public IList<Log> GetLogs(DateTime? date, int logLevel, int pageIndex, int pageSize, ref int count)
         {
-            string where = string.Empty;
+            string strWhere = string.Empty;
             var whereValue = new GetLogInput();
             if (date.HasValue)
             {
-                where += " and DateTime between @sDateTime and @eDateTime";
+                strWhere += " and DateTime between @sDateTime and @eDateTime";
                 whereValue.SDateTime = date.Value;
                 whereValue.EDateTime = date.Value.AddDays(1);
             }
             if (logLevel != 0)
             {
-                where += " and logLevel=@logLevel";
+                strWhere += " and logLevel=@logLevel";
                 whereValue.LogLevel = logLevel;
             }
             //分页sql
-            string sql = "SELECT TOP " + pageSize + " * FROM (SELECT ROW_NUMBER() OVER (ORDER BY DateTime desc) AS RowNumber, * FROM T_Log where 1=1 " + where + " ) as A WHERE RowNumber > " + pageSize * (pageIndex - 1);
-            string csql = "select count(id) from T_Log where 1=1 " + where;
+            string strSql = string.Format("select Id,ActionName,ClassName,DateTime,Duration,LogLevel,Msg from T_Log where 1=1 {0} order by DateTime desc offset " + (pageIndex - 1) * pageSize + " row fetch next " + pageSize + " rows only ", strWhere);
+            string csql = "select count(id) from T_Log where 1=1 " + strWhere;
             using (var db = _factory.GetDbInstance())
             {
-                var list = db.QueryList<Log>(sql, whereValue).ToList();
+                var list = db.QueryList<Log>(strSql, whereValue).ToList();
                 //获取数量
                 count = db.QueryScalar<int>(csql, whereValue);
                 return list;
