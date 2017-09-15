@@ -21,12 +21,11 @@ namespace L.SpiderCore.Test
             //    Console.WriteLine(task.Name);
             //}
             //
-            string s="http://img.gov.com.de/2017/07/apic.in_2017-07-03_14-53-42.jpg!origin";
+            string s = "http://img.gov.com.de/2017/07/apic.in_2017-07-03_14-53-42.jpg!origin";
 
             Console.WriteLine(Path.GetExtension(s));
             Console.WriteLine(Path.GetFileName(s));
             ImgHelper.GetImageAndSave("http://img.gov.com.de/2017/07/apic.in_2017-07-03_14-53-42.jpg!origin", @"C:\Temp\ApiInImages\");
-            
 
             Console.ReadKey();
         }

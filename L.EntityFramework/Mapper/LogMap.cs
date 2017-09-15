@@ -10,7 +10,7 @@ namespace L.EntityFramework.Mapper
         public override void Map(EntityTypeBuilder<Log> b)
         {
             b.ToTable("T_Log");
-            b.HasKey(c=>c.Id);
+            b.HasKey(c => c.Id);
         }
     }
 }

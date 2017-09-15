@@ -18,11 +18,14 @@ namespace L.SpiderCore.Crawler
         /// 日志服务
         /// </summary>
         private ILoggerService _loggerService = ContainerManager.Resolve<ILoggerService>();
+
         /// <summary>
         /// 小说服务
         /// </summary>
-        private INovelService _novelService= ContainerManager.Resolve<INovelService>();
+        private INovelService _novelService = ContainerManager.Resolve<INovelService>();
+
         private static Object _lock = new Object();
+
         /// <summary>
         ///
         /// </summary>
@@ -47,6 +50,7 @@ namespace L.SpiderCore.Crawler
                     Novel novel = new Novel();
                     //文章信息
                     novel.Articles = new List<Article>();
+
                     #region 小说信息
 
                     var nameEle = selector.SelectSingleNode("//*[@id='info']/h1");
@@ -62,6 +66,7 @@ namespace L.SpiderCore.Crawler
                     }
 
                     #endregion 小说信息
+
                     var oldNovel = _novelService.GetSingleNovel(new NovelSearchInput() { Name = novel.Name });
                     if (oldNovel == null)
                     {
@@ -84,11 +89,12 @@ namespace L.SpiderCore.Crawler
                         GetArticles(selector, oldNovel, e.Uri, "//*[@id='list']/dl/dd/a[number(translate(@href,'.html',''))>" + laestArticle.Seq + "]");
                         foreach (var article in oldNovel.Articles)
                         {
-                            var ats = _novelService.GetArticles(new ArticleSearchInput() { Seq = article.Seq });
-                            if (ats.Count == 0)
-                            {
-                                _novelService.AddArticle(article);
-                            }
+                            _novelService.AddArticle(article);
+                            //var ats = _novelService.GetArticles(new ArticleSearchInput() { Seq = article.Seq });
+                            //if (ats.Count == 0)
+                            //{
+                            //    _novelService.AddArticle(article);
+                            //}
                         }
                         unitOfWork.Complete();
                     }
@@ -96,7 +102,7 @@ namespace L.SpiderCore.Crawler
                     //记录爬取日志
                     _loggerService.WriteLog(new Log()
                     {
-                        DateTime = DateTime.Now,
+                        DateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                         Msg = e.Uri + "请求消耗:" + e.Duration + "---" + "数据解析消耗:" + stopWatch.ElapsedMilliseconds,
                         ClassName = "",
                         ActionName = "",
@@ -110,7 +116,7 @@ namespace L.SpiderCore.Crawler
                 //记录错误信息
                 _loggerService.WriteLog(new Log()
                 {
-                    DateTime = DateTime.Now,
+                    DateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                     LogLevel = (int)LCore.Logger.LogLevel.Error,
                     ClassName = this.GetType().Name,
                     ActionName = exception.TargetSite.Name,
@@ -130,7 +136,7 @@ namespace L.SpiderCore.Crawler
         private void GetArticles(XPathSelector selector, Novel novel, string uri, string xpath)
         {
             var aEles = selector.SelectNodes(xpath);
-            if (aEles!=null)
+            if (aEles != null)
             {
                 foreach (var ele in aEles)
                 {
@@ -151,7 +157,6 @@ namespace L.SpiderCore.Crawler
                     novel.Articles.Add(article);
                 }
             }
-           
         }
     }
 }

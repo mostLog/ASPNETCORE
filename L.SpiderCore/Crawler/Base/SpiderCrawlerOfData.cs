@@ -5,7 +5,6 @@ using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace L.SpiderCore.Crawler
 {

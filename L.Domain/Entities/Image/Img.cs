@@ -19,14 +19,17 @@ namespace L.Domain.Entities
         /// 是否已经抓取图片信息
         /// </summary>
         public bool IsCrawlerImgInfo { get; set; }
+
         /// <summary>
         /// 开始索引
         /// </summary>
         public int PageStartIndex { get; set; } = 1;
+
         /// <summary>
         /// 结束索引
         /// </summary>
         public int PageEndIndex { get; set; } = 1;
+
         /// <summary>
         /// 图片信息
         /// </summary>

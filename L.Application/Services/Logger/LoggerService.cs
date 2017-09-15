@@ -1,10 +1,8 @@
 ﻿using L.Application.Dto;
 using L.Dapper.AspNetCore.Logger;
 using L.Domain.Entities;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace L.Application.Services
 {
@@ -17,13 +15,15 @@ namespace L.Application.Services
         /// 日志服务
         /// </summary>
         private readonly ILoggerDataProvider _loggerDataProvider;
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public LoggerService(ILoggerDataProvider loggerDataProvider)
         {
             _loggerDataProvider = loggerDataProvider;
         }
+
         /// <summary>
         /// 写入日志
         /// </summary>
@@ -32,14 +32,15 @@ namespace L.Application.Services
         {
             _loggerDataProvider.WriteLog(log);
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public PagedListResult<LogListOutput> GetLogPagedList(LogSearchInput input)
         {
             int count = 0;
-            var list= _loggerDataProvider.GetLogs(input.DateTime,input.LogLevel,input.PageIndex, input.PageSize,ref count);
+            var list = _loggerDataProvider.GetLogs(input.DateTime, input.LogLevel, input.PageIndex, input.PageSize, ref count);
             AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<Log, LogListOutput>());
             return new PagedListResult<LogListOutput>()
             {

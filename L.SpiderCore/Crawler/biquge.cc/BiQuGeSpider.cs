@@ -13,6 +13,7 @@ namespace L.SpiderCore.Crawler
     {
         private ILoggerService _loggerService = ContainerManager.Resolve<ILoggerService>();
         private static Object _lock = new Object();
+
         public override void HtmlParser(OnCompleteEventArgs e)
         {
             try
@@ -53,11 +54,11 @@ namespace L.SpiderCore.Crawler
                 //记录错误信息
                 _loggerService.WriteLog(new Log()
                 {
-                    DateTime = DateTime.Now,
+                    DateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                     LogLevel = (int)LCore.Logger.LogLevel.Error,
-                    ClassName = this.GetType().Name,
+                    ClassName = this.GetType().FullName,
                     ActionName = exception.TargetSite.Name,
-                    Msg = e.Uri + "---" + exception.Message
+                    Msg = e.Uri + "---" + exception.StackTrace
                 });
             }
         }

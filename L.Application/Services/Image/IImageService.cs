@@ -21,11 +21,13 @@ namespace L.Application.Services
 
         [NoUnitOfWork]
         void AddImageInfo(ImageInfo info);
+
         [NoUnitOfWork]
         void UpdateImage(Img img);
 
         [NoUnitOfWork]
         Task<IList<Img>> GetSourceImgs(ImageSearchInput input);
+
         [NoUnitOfWork]
         Task<PagedListResult<ImageListOutput>> GetImagePagedList(ImageSearchInput input);
     }

@@ -6,11 +6,11 @@
     public class Dapper
     {
         public DapperConfig Config { get; set; }
+
         public Dapper(DapperConfig config)
         {
             Config = config;
         }
-
     }
 
     /// <summary>

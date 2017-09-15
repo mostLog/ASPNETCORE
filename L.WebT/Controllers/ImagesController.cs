@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using L.Application.Dto;
 using L.Application.Services;
-using L.Application.Dto;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace L.Web.Controllers
 {
@@ -14,10 +11,12 @@ namespace L.Web.Controllers
         /// 图片服务
         /// </summary>
         private readonly IImageService _iamgeService;
+
         public ImagesController(IImageService imageService)
         {
             _iamgeService = imageService;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -27,8 +26,9 @@ namespace L.Web.Controllers
         {
             return View();
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

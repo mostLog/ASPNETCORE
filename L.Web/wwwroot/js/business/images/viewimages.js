@@ -169,7 +169,5 @@ function getDats() {
             PBL('wrap', 'box');
         }
     }).fail(function () {
-
     });
-    
 }

@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
+﻿using System.Data;
 
 namespace L.Dapper.AspNetCore
 {
     public class DbFactory
     {
         private readonly Dapper _dapper;
+
         public DbFactory(Dapper dapper)
         {
             _dapper = dapper;
         }
+
         public IDbConnection GetDbInstance()
         {
             //获取配置信息
@@ -20,8 +19,9 @@ namespace L.Dapper.AspNetCore
             switch (config.DbType)
             {
                 case DbType.MSSQLServer:
-                    db=MSSQLServer.GetDbInstance(config.ConnectionString);
+                    db = MSSQLServer.GetDbInstance(config.ConnectionString);
                     break;
+
                 default:
                     break;
             }

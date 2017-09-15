@@ -59,6 +59,7 @@ namespace L.SpiderCore.Crawler
             var request = (HttpWebRequest)HttpWebRequest.Create(uri);
 
             #region 请求参数
+
             request.Headers.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
             //设置User-Agent，伪装成Google Chrome浏览器
             request.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36");
@@ -74,6 +75,7 @@ namespace L.SpiderCore.Crawler
             request.Method = "GET";
 
             #endregion 请求参数
+
             var completeArgs = new OnCompleteEventArgs()
             {
                 Uri = uri

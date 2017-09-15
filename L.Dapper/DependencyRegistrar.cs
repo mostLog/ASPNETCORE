@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using L.Dapper.AspNetCore.Logger;
 using L.LCore.Infrastructure.Dependeny;
-using System.Reflection;
 
 namespace L.Dapper.AspNetCore
 {
@@ -13,7 +12,8 @@ namespace L.Dapper.AspNetCore
         public void Register(ContainerBuilder builder)
         {
             //初始化数据库配置
-            builder.Register(c=>new Dapper(new DapperConfig() {
+            builder.Register(c => new Dapper(new DapperConfig()
+            {
                 ConnectionString = "data source=.;initial catalog=CoreTest;uid=sa;pwd=sa;Integrated Security=true",
                 DbType = DbType.MSSQLServer
             })).SingleInstance();

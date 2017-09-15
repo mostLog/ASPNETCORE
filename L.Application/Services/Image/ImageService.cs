@@ -80,20 +80,22 @@ namespace L.Application.Services
                 .Take(input.RowCount)
                 .ToListAsync();
         }
+
         /// <summary>
         /// 获取分页图片信息
         /// </summary>
         /// <returns></returns>
         public async Task<PagedListResult<ImageListOutput>> GetImagePagedList(ImageSearchInput input)
         {
-            var query=_imageInfoRepository.Table.AsNoTracking();
-            var list=await query
+            var query = _imageInfoRepository.Table.AsNoTracking();
+            var list = await query
                 .PageBy(input.PageIndex, input.PageSize)
                 .ToListAsync();
 
             AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<ImageInfo, ImageListOutput>());
 
-            return new PagedListResult<ImageListOutput>() {
+            return new PagedListResult<ImageListOutput>()
+            {
                 Code = 0,
                 Data = AutoMapper.Mapper.Map<IList<ImageListOutput>>(list)
             };

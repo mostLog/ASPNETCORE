@@ -8,6 +8,7 @@ namespace L.Domain.Entities
         /// 图片名称
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// 图片地址
         /// </summary>
@@ -32,7 +33,5 @@ namespace L.Domain.Entities
         ///
         /// </summary>
         public virtual Img Img { get; set; }
-
-        
     }
 }

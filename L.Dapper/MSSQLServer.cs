@@ -27,17 +27,18 @@ namespace L.Dapper.AspNetCore
         {
             return db.Query<T>(sql, param);
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="db"></param>
         /// <param name="sql"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static T QueryScalar<T>(this IDbConnection db,string sql,object param=null)
+        public static T QueryScalar<T>(this IDbConnection db, string sql, object param = null)
         {
-            if (param==null)
+            if (param == null)
             {
                 return db.ExecuteScalar<T>(sql);
             }
@@ -54,6 +55,7 @@ namespace L.Dapper.AspNetCore
         {
             return db.Execute(sql, t);
         }
+
         /// <summary>
         /// 执行sql语句
         /// </summary>
@@ -62,9 +64,9 @@ namespace L.Dapper.AspNetCore
         /// <param name="sql"></param>
         /// <param name="p"></param>
         /// <returns></returns>
-        public static int ExcuteSql<T>(this IDbConnection db,string sql,T p)
+        public static int ExcuteSql<T>(this IDbConnection db, string sql, T p)
         {
-            return db.Execute(sql,p);
+            return db.Execute(sql, p);
         }
     }
 }

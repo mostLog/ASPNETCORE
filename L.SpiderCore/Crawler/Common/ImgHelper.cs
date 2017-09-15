@@ -28,7 +28,7 @@ namespace L.SpiderCore.Crawler.Common
                         string fileName = Path.GetFileName(imgUri);
                         if (fileName.Contains("!"))
                         {
-                            fileName = fileName.Substring(0,fileName.IndexOf("!"));
+                            fileName = fileName.Substring(0, fileName.IndexOf("!"));
                         }
                         string saveUri = savePath + fileName;
                         image.Save(saveUri);
@@ -44,9 +44,9 @@ namespace L.SpiderCore.Crawler.Common
             {
                 return new ImageBaseInfo();
             }
-            
         }
     }
+
     public class ImageBaseInfo
     {
         public int Width { get; set; }

@@ -15,7 +15,7 @@ namespace L.SpiderCore.Crawler
     [Spider("ImageUrlCrawler")]
     public class ImageUrlCrawler : SpiderCrawlerOfData<Img>
     {
-        private IImageService _imageService= ContainerManager.Resolve<IImageService>();
+        private IImageService _imageService = ContainerManager.Resolve<IImageService>();
         private ILoggerService _loggerService = ContainerManager.Resolve<ILoggerService>();
         private static Object _lock = new Object();
 
@@ -81,7 +81,7 @@ namespace L.SpiderCore.Crawler
                     //记录爬取日志
                     _loggerService.WriteLog(new Log()
                     {
-                        DateTime = DateTime.Now,
+                        DateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                         Msg = e.Uri + "请求消耗:" + e.Duration + "---" + "数据解析消耗:" + stopWatch.ElapsedMilliseconds,
                         ClassName = "",
                         ActionName = "",
@@ -95,7 +95,7 @@ namespace L.SpiderCore.Crawler
                 //记录错误信息
                 _loggerService.WriteLog(new Log()
                 {
-                    DateTime = DateTime.Now,
+                    DateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                     LogLevel = (int)LCore.Logger.LogLevel.Error,
                     ClassName = this.GetType().Name,
                     ActionName = exception.TargetSite.Name,
@@ -110,14 +110,14 @@ namespace L.SpiderCore.Crawler
                 new Application.Dto.ImageSearchInput()
                 {
                     RowCount = 2,
-                    IsCrawlerImgInfo =false
+                    IsCrawlerImgInfo = false
                 }).Result;
             IList<KeyValuePair<string, Img>> l = new List<KeyValuePair<string, Img>>();
             foreach (var img in sourceImgs)
             {
                 for (int i = 1; i < 11; i++)
                 {
-                    if (i==1)
+                    if (i == 1)
                     {
                         l.Add(new KeyValuePair<string, Img>(img.Url, img));
                     }

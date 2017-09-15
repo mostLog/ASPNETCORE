@@ -130,7 +130,7 @@ layui.use(['table', 'layer', 'form', 'novelservice'], function () {
         var novelName = $("input[name='novelName']").val();
         novelTable.reload({
             where: {
-                name:novelName
+                name: novelName
             }
         });
     });

@@ -1,9 +1,5 @@
 ﻿using L.Application.Dto;
 using L.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace L.Application.Services
 {
@@ -17,13 +13,12 @@ namespace L.Application.Services
         /// </summary>
         /// <returns></returns>
         void WriteLog(Log log);
+
         /// <summary>
         /// 获取日志信息
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         PagedListResult<LogListOutput> GetLogPagedList(LogSearchInput input);
-
-
     }
 }

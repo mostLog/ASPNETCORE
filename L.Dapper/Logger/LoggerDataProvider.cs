@@ -11,10 +11,12 @@ namespace L.Dapper.AspNetCore.Logger
     public class LoggerDataProvider : ILoggerDataProvider
     {
         private readonly DbFactory _factory;
+
         public LoggerDataProvider(DbFactory factory)
         {
             _factory = factory;
         }
+
         /// <summary>
         /// 写入日志信息
         /// </summary>
@@ -25,17 +27,18 @@ namespace L.Dapper.AspNetCore.Logger
         {
             int result = 0;
             string sql = "insert into T_Log(DateTime,Msg,ClassName,ActionName,Duration,LogLevel) Values(@DateTime,@Msg,@ClassName,@ActionName,@Duration,@LogLevel)";
-            using (var db=_factory.GetDbInstance())
+            using (var db = _factory.GetDbInstance())
             {
-                result=db.ExcuteSql(sql, log);
+                result = db.ExcuteSql(sql, log);
             }
             return result;
         }
+
         /// <summary>
         /// 获取日志信息
         /// </summary>
         /// <returns></returns>
-        public IList<Log> GetLogs(DateTime? date, int logLevel,int pageIndex,int pageSize,ref int count)
+        public IList<Log> GetLogs(DateTime? date, int logLevel, int pageIndex, int pageSize, ref int count)
         {
             string where = string.Empty;
             var whereValue = new GetLogInput();
@@ -45,24 +48,26 @@ namespace L.Dapper.AspNetCore.Logger
                 whereValue.SDateTime = date.Value;
                 whereValue.EDateTime = date.Value.AddDays(1);
             }
-            if (logLevel!=0)
+            if (logLevel != 0)
             {
                 where += " and logLevel=@logLevel";
                 whereValue.LogLevel = logLevel;
             }
             //分页sql
-            string sql = "SELECT TOP "+pageSize+" * FROM (SELECT ROW_NUMBER() OVER (ORDER BY id) AS RowNumber, * FROM T_Log where 1=1 "+where+" ) as A WHERE RowNumber > "+ pageSize * (pageIndex - 1);
-            string csql = "select count(id) from T_Log where 1=1 "+where;
-            using (var db=_factory.GetDbInstance())
+            string sql = "SELECT TOP " + pageSize + " * FROM (SELECT ROW_NUMBER() OVER (ORDER BY DateTime desc) AS RowNumber, * FROM T_Log where 1=1 " + where + " ) as A WHERE RowNumber > " + pageSize * (pageIndex - 1);
+            string csql = "select count(id) from T_Log where 1=1 " + where;
+            using (var db = _factory.GetDbInstance())
             {
-                var list=db.QueryList<Log>(sql, whereValue).ToList();
+                var list = db.QueryList<Log>(sql, whereValue).ToList();
                 //获取数量
-                count= db.QueryScalar<int>(csql, whereValue);
+                count = db.QueryScalar<int>(csql, whereValue);
                 return list;
             }
         }
     }
-    public class GetLogInput{
+
+    public class GetLogInput
+    {
         public int LogLevel { get; set; }
         public DateTime SDateTime { get; set; }
         public DateTime EDateTime { get; set; }
