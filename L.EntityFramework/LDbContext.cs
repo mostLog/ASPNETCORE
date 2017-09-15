@@ -68,7 +68,7 @@ namespace L.EntityFramework
         {
             var optionsBuilder = new DbContextOptionsBuilder<LDbContext>();
 
-            optionsBuilder.UseSqlServer("data source=.;initial catalog=CoreTest;uid=sa;pwd=sa;Integrated Security=true");
+            optionsBuilder.UseSqlServer("data source=.;initial catalog=CoreTest;Integrated Security=true");
             return new LDbContext(optionsBuilder.Options);
         }
     }
