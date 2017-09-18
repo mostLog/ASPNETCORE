@@ -19,7 +19,7 @@ namespace L.Application.Services
         /// 创建或者更新爬虫
         /// </summary>
         /// <returns></returns>
-        Task AddOrUpdateSpiderTask(TaskAddOrEditInput input);
+        void AddOrUpdateSpiderTask(TaskAddOrEditInput input);
 
         /// <summary>
         /// 更具id获取实体

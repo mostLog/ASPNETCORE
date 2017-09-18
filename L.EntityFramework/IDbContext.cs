@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace L.EntityFramework
 {
@@ -9,6 +11,7 @@ namespace L.EntityFramework
         DbSet<T> SetEntity<T>() where T : class;
 
         int SaveChanges();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
 
         EntityEntry<T> GetEntry<T>(T t) where T : class;
 
@@ -21,5 +24,6 @@ namespace L.EntityFramework
         int SqlQuery<T>(string sql, params object[] parameters);
 
         IDbContextTransaction CreateTransaction();
+        Task<IDbContextTransaction> CreateTransactionAsync();
     }
 }

@@ -81,12 +81,12 @@ namespace L.Web.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> AddOrUpdateTask(TaskAddOrEditInput input)
+        public IActionResult AddOrUpdateTask(TaskAddOrEditInput input)
         {
             int result = 0;
             try
             {
-                await _spiderService.AddOrUpdateSpiderTask(input);
+                _spiderService.AddOrUpdateSpiderTask(input);
             }
             catch (Exception)
             {

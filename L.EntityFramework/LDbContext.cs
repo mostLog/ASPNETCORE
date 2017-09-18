@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace L.EntityFramework
 {
@@ -48,7 +49,15 @@ namespace L.EntityFramework
         /// <returns></returns>
         public IDbContextTransaction CreateTransaction()
         {
-            return this.Database.BeginTransaction();
+            return Database.BeginTransaction();
+        }
+        /// <summary>
+        /// 异步创建事务
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IDbContextTransaction> CreateTransactionAsync()
+        {
+            return await Database.BeginTransactionAsync();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -68,7 +77,7 @@ namespace L.EntityFramework
         {
             var optionsBuilder = new DbContextOptionsBuilder<LDbContext>();
 
-            optionsBuilder.UseSqlServer("data source=.;initial catalog=CoreTest;Integrated Security=true");
+            optionsBuilder.UseSqlServer("data source=.;initial catalog=CoreTest;uid=sa;pwd=sa;Integrated Security=true");
             return new LDbContext(optionsBuilder.Options);
         }
     }

@@ -71,16 +71,16 @@ namespace L.Application.Services
         /// 添加或者更新
         /// </summary>
         /// <returns></returns>
-        public async Task AddOrUpdateSpiderTask(TaskAddOrEditInput input)
+        public void AddOrUpdateSpiderTask(TaskAddOrEditInput input)
         {
             //是否存在有效值
             if (input.SpiderTask.Id.HasValue)
             {
-                await UpdateSpiderTask(input);
+                UpdateSpiderTask(input);
             }
             else
             {
-                await CreateSpiderTask(input);
+                CreateSpiderTask(input);
             }
         }
 
@@ -88,7 +88,7 @@ namespace L.Application.Services
         /// 创建爬虫任务
         /// </summary>
         /// <returns></returns>
-        private async Task CreateSpiderTask(TaskAddOrEditInput input)
+        private async void CreateSpiderTask(TaskAddOrEditInput input)
         {
             SpiderTask task = input.SpiderTask.MapTo<SpiderTask>();
             await _spiderRepository.InsertAsync(task);
@@ -98,7 +98,7 @@ namespace L.Application.Services
         /// 更新爬虫任务
         /// </summary>
         /// <returns></returns>
-        private async Task UpdateSpiderTask(TaskAddOrEditInput input)
+        private async void UpdateSpiderTask(TaskAddOrEditInput input)
         {
             var spiderTask = await _spiderRepository.GetEntityByIdAsync(input.SpiderTask.Id.Value);
             if (spiderTask != null)
