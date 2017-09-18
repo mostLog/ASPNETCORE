@@ -60,11 +60,10 @@ namespace L.Application.Services
         IList<Article> GetArticles(ArticleSearchInput input);
 
         /// <summary>
-        ///
+        /// 添加文章集合
         /// </summary>
         /// <param name="article"></param>
-        [NoUnitOfWork]
-        void AddArticle(Article article);
+        void AddArticles(IList<Article> articles);
 
         /// <summary>
         ///

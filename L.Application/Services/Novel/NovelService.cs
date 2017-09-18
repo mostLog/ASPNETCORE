@@ -153,9 +153,12 @@ namespace L.Application.Services
         /// 添加文章
         /// </summary>
         /// <param name="article"></param>
-        public void AddArticle(Article article)
+        public void AddArticles(IList<Article> articles)
         {
-            _articleRepository.Insert(article);
+            foreach (var article in articles)
+            {
+                _articleRepository.Insert(article);
+            }
         }
 
         /// <summary>

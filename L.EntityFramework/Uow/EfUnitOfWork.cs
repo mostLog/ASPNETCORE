@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
+using System;
 
 namespace L.EntityFramework.Uow
 {
     public class EFUnitOfWork : UnitOfWorkBase
     {
-        private object lockObj = new object();
         private readonly IDbContext _db;
-
+        private static Object _lock = new Object();
         public EFUnitOfWork(IDbContext db)
         {
             _db = db;
@@ -22,7 +22,7 @@ namespace L.EntityFramework.Uow
 
         public override void Complete()
         {
-            lock (lockObj)
+            lock (_lock)
             {
                 _db.SaveChanges();
                 if (CurrentTransaction != null)

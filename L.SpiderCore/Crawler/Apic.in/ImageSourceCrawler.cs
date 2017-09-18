@@ -25,21 +25,19 @@ namespace L.SpiderCore.Crawler
                 {
                     var stopWatch = new Stopwatch();
                     stopWatch.Start();
+                    IList<Img> imgs = new List<Img>();
                     //初始化解析器
                     var selector = new XPathSelector(e.Page);
                     var aEles = selector.SelectNodes("//*[@id='main']/div/div[1]/a");
-                    //开启工作单元
-                    var unitOfWork = ContainerManager.Resolve<IUnitOfWork>();
-                    unitOfWork.Begin(new UnitOfWorkOptions());
                     foreach (var aEle in aEles)
                     {
                         string url = aEle.GetAttributeValue("href", "");
-                        _imageService.AddImage(new Img()
+                        imgs.Add(new Img()
                         {
                             Url = url
                         });
                     }
-                    unitOfWork.Complete();
+                    _imageService.AddImages(imgs);
                     stopWatch.Stop();
                     //记录爬取日志
                     _loggerService.WriteLog(new Log()

@@ -1,13 +1,13 @@
 ﻿using L.Application.Dto;
 using L.Application.Services;
 using L.Domain.Entities;
-using L.EntityFramework.Uow;
 using L.LCore.Infrastructure.Dependeny;
 using L.SpiderCore.Event;
 using L.SpiderCore.Tools;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace L.SpiderCore.Crawler
 {
@@ -81,22 +81,12 @@ namespace L.SpiderCore.Crawler
                     }
                     else
                     {
-                        var unitOfWork = ContainerManager.Resolve<IUnitOfWork>();
-                        unitOfWork.Begin(new UnitOfWorkOptions());
                         var laestArticle = _novelService.GetLaestArticle();
                         oldNovel.Articles = new List<Article>();
                         //获取最新章节
                         GetArticles(selector, oldNovel, e.Uri, "//*[@id='list']/dl/dd/a[number(translate(@href,'.html',''))>" + laestArticle.Seq + "]");
-                        foreach (var article in oldNovel.Articles)
-                        {
-                            _novelService.AddArticle(article);
-                            //var ats = _novelService.GetArticles(new ArticleSearchInput() { Seq = article.Seq });
-                            //if (ats.Count == 0)
-                            //{
-                            //    _novelService.AddArticle(article);
-                            //}
-                        }
-                        unitOfWork.Complete();
+                        //更新新章节
+                        _novelService.AddArticles(oldNovel.Articles.ToList());
                     }
                     stopWatch.Stop();
                     //记录爬取日志

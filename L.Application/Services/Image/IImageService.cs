@@ -13,17 +13,17 @@ namespace L.Application.Services
     public interface IImageService
     {
         /// <summary>
-        /// 添加图片信息
+        /// 添加图片信息集合
         /// </summary>
         /// <param name="img"></param>
-        [NoUnitOfWork]
-        void AddImage(Img img);
+        Task AddImages(IList<Img> imgs);
+
+      
+        Task AddImageInfos(IList<ImageInfo> infos);
+        Task AddImageInfos(IList<ImageInfo> infos, Img img);
 
         [NoUnitOfWork]
-        void AddImageInfo(ImageInfo info);
-
-        [NoUnitOfWork]
-        void UpdateImage(Img img);
+        Task UpdateImage(Img img);
 
         [NoUnitOfWork]
         Task<IList<Img>> GetSourceImgs(ImageSearchInput input);

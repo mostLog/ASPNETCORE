@@ -1,8 +1,6 @@
 ﻿using L.Application.Services;
 using L.Domain.Entities;
-using L.EntityFramework.Uow;
 using L.LCore.Infrastructure.Dependeny;
-using L.SpiderCore.Crawler.Common;
 using L.SpiderCore.Event;
 using L.SpiderCore.Tools;
 using System;
@@ -21,10 +19,10 @@ namespace L.SpiderCore.Crawler
 
         public override void HtmlParser(OnCompleteEventArgs e)
         {
-            try
+            //线程锁
+            lock (_lock)
             {
-                //线程锁
-                lock (_lock)
+                try
                 {
                     var stopWatch = new Stopwatch();
                     stopWatch.Start();
@@ -40,43 +38,45 @@ namespace L.SpiderCore.Crawler
                         }
                         if (imgEles == null)
                         {
-                            System.Diagnostics.Debug.Write(e.Uri);
+                            Debug.Write(e.Uri);
                         }
                     }
                     if (imgEles != null)
                     {
-                        var unitOfWork = ContainerManager.Resolve<IUnitOfWork>();
-                        //开启工作单元
-                        unitOfWork.Begin(new UnitOfWorkOptions());
+                        IList<ImageInfo> imageInfos = new List<ImageInfo>();
                         foreach (var imgEle in imgEles)
                         {
                             string src = imgEle.GetAttributeValue("src", "");
                             if (!string.IsNullOrEmpty(src))
                             {
-                                //保存图片
-                                var imageBaseInfo = ImgHelper.GetImageAndSave(src, @"C:\Temp\ApiInImages\");
+                                //路径
+                                //string savePath = @"C:\Temp\ApiInImages\"+DateTime.Now.ToString("yyyy-MM-dd")+@"\";
+                                //if (!Directory.Exists(savePath))
+                                //{
+                                //    Directory.CreateDirectory(savePath);
+                                //}
+                                ////保存图片
+                                //var imageBaseInfo = ImgHelper.GetImageAndSave(src, savePath);
                                 string fileName = Path.GetFileName(src);
                                 if (fileName.Contains("!"))
                                 {
                                     fileName = fileName.Substring(0, fileName.IndexOf("!"));
                                 }
-                                _imageService.AddImageInfo(
+                                imageInfos.Add(
                                     new ImageInfo()
                                     {
                                         Img = img,
                                         Url = src,
                                         SourceUrl = e.Uri,
-                                        Name = fileName,
-                                        Width = imageBaseInfo.Width,
-                                        Height = imageBaseInfo.Height
+                                        Name = fileName
                                     }
                                 );
                             }
                         }
                         img.IsCrawlerImgInfo = true;
-                        _imageService.UpdateImage(img);
-                        unitOfWork.Complete();
+                        _imageService.AddImageInfos(imageInfos, img);
                     }
+                   
                     stopWatch.Stop();
                     //记录爬取日志
                     _loggerService.WriteLog(new Log()
@@ -89,19 +89,20 @@ namespace L.SpiderCore.Crawler
                         LogLevel = (int)LCore.Logger.LogLevel.Info
                     });
                 }
-            }
-            catch (Exception exception)
-            {
-                //记录错误信息
-                _loggerService.WriteLog(new Log()
+                catch (Exception exception)
                 {
-                    DateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                    LogLevel = (int)LCore.Logger.LogLevel.Error,
-                    ClassName = this.GetType().Name,
-                    ActionName = exception.TargetSite.Name,
-                    Msg = e.Uri + "---" + exception.Message
-                });
+                    //记录错误信息
+                    _loggerService.WriteLog(new Log()
+                    {
+                        DateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                        LogLevel = (int)LCore.Logger.LogLevel.Error,
+                        ClassName = this.GetType().Name,
+                        ActionName = exception.TargetSite.Name,
+                        Msg = e.Uri + "---" + exception.Message
+                    });
+                }
             }
+            
         }
 
         public override void InitConfig(SpiderConfig config)

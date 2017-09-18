@@ -37,19 +37,22 @@ namespace L.Application.Services
         /// 添加图片源
         /// </summary>
         /// <param name="img"></param>
-        public async void AddImage(Img img)
+        public async Task AddImages(IList<Img> imgs)
         {
-            if (img == null)
+            if (imgs == null||imgs.Count==0)
             {
-                throw new ArgumentException(nameof(img));
+                throw new ArgumentException(nameof(imgs));
             }
-            await _imgRepository.InsertAsync(img);
+            foreach (var img in imgs)
+            {
+                await _imgRepository.InsertAsync(img);
+            }
         }
 
         /// <summary>
         /// 更新图片源信息
         /// </summary>
-        public async void UpdateImage(Img img)
+        public async Task UpdateImage(Img img)
         {
             var imageSource = await _imgRepository.GetEntityByIdAsync(img.Id);
             imageSource.IsCrawlerImgInfo = img.IsCrawlerImgInfo;
@@ -61,15 +64,32 @@ namespace L.Application.Services
         /// <summary>
         /// 添加图片信息
         /// </summary>
-        public async void AddImageInfo(ImageInfo info)
+        public async Task AddImageInfos(IList<ImageInfo> infos)
         {
-            if (info == null)
+            if (infos == null&&infos.Count==0)
             {
-                throw new ArgumentException(nameof(info));
+                throw new ArgumentException(nameof(infos));
             }
-            await _imageInfoRepository.InsertAsync(info);
+            foreach (var info in infos)
+            {
+                await _imageInfoRepository.InsertAsync(info);
+            }
         }
-
+        /// <summary>
+        /// 添加图片信息并更新图片源状态
+        /// </summary>
+        public async Task AddImageInfos(IList<ImageInfo> infos, Img img)
+        {
+            if (infos == null && infos.Count == 0)
+            {
+                throw new ArgumentException(nameof(infos));
+            }
+            foreach (var info in infos)
+            {
+                await _imageInfoRepository.InsertAsync(info);
+            }
+            await UpdateImage(img);
+        }
         /// <summary>
         /// 获取Imgs
         /// </summary>
