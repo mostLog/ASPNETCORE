@@ -21,8 +21,8 @@ namespace L.SpiderCore.Tools
         /// </summary>
         public HtmlNode SelectSingleNode(string xpath)
         {
-            var nodes=SelectNodes(xpath);
-            if (nodes!=null&&nodes.Count>0)
+            var nodes = SelectNodes(xpath);
+            if (nodes != null && nodes.Count > 0)
             {
                 return nodes.FirstOrDefault();
             }

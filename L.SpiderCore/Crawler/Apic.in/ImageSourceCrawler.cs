@@ -1,6 +1,5 @@
 ﻿using L.Application.Services;
 using L.Domain.Entities;
-using L.EntityFramework.Uow;
 using L.LCore.Infrastructure.Dependeny;
 using L.SpiderCore.Event;
 using L.SpiderCore.Tools;

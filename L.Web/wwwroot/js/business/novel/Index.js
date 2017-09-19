@@ -81,7 +81,7 @@ layui.use(['table', 'layer', 'form', 'novelservice'], function () {
             });
         }
     });
-   
+
     var article = table.render({
         elem: '#article-table',
         cols: [[

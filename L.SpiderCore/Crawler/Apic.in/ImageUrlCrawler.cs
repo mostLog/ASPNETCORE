@@ -76,7 +76,7 @@ namespace L.SpiderCore.Crawler
                         img.IsCrawlerImgInfo = true;
                         _imageService.AddImageInfos(imageInfos, img);
                     }
-                   
+
                     stopWatch.Stop();
                     //记录爬取日志
                     _loggerService.WriteLog(new Log()
@@ -102,7 +102,6 @@ namespace L.SpiderCore.Crawler
                     });
                 }
             }
-            
         }
 
         public override void InitConfig(SpiderConfig config)

@@ -14,6 +14,7 @@ namespace L.Web.Controllers
         {
             return View();
         }
+
         /// <summary>
         /// 主页
         /// </summary>
@@ -22,7 +23,7 @@ namespace L.Web.Controllers
         {
             return View();
         }
-       
+
         public IActionResult Error()
         {
             return View();
