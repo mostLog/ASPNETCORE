@@ -113,10 +113,10 @@ namespace L.Application.Services
                 .ToListAsync();
 
             AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<ImageInfo, ImageListOutput>());
-
+            int count = list.Count();
             return new PagedListResult<ImageListOutput>()
             {
-                Code = 0,
+                Code = count,
                 Data = AutoMapper.Mapper.Map<IList<ImageListOutput>>(list)
             };
         }

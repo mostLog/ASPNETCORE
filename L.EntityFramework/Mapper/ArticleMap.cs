@@ -11,6 +11,9 @@ namespace L.EntityFramework.Mapper
         {
             b.ToTable("T_Article");
             b.HasKey(c => c.Id);
+            b.Property(c => c.Url).HasMaxLength(300);
+            b.Property(c => c.Title).HasMaxLength(100);
+            b.Property(c => c.OperaterPerson).HasMaxLength(10);
         }
     }
 }
