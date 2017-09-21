@@ -11,9 +11,10 @@ using System;
 namespace L.EntityFramework.Migrations
 {
     [DbContext(typeof(LDbContext))]
-    partial class LDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170920070502_20179201501")]
+    partial class _20179201501
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -294,7 +295,7 @@ namespace L.EntityFramework.Migrations
                     b.Property<string>("IP")
                         .HasMaxLength(20);
 
-                    b.Property<DateTime?>("LastVerifyDateTime");
+                    b.Property<DateTime>("LastVerifyDateTime");
 
                     b.Property<string>("Location")
                         .HasMaxLength(50);

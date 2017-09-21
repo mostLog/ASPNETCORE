@@ -1,0 +1,59 @@
+﻿@model ProxyEditDto
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <link href="~/lib/layui/css/layui.css" rel="stylesheet" />
+</head>
+<body style="margin:10px;">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">IP</label>
+            <div class="layui-input-block">
+                <input type="text" name="IP" lay-verify="required" autocomplete="off" placeholder="请输入IP" class="layui-input" value="@Model.IP">
+                <input type="hidden" name="Id" value="@Model.Id" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">端口</label>
+            <div class="layui-input-block">
+                <input type="text" name="Port" lay-verify="number" autocomplete="off" placeholder="请输入端口" class="layui-input" value="@Model.Port">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block">
+                <select name="Type" lay-filter="Type">
+                    <option value=""></option>
+                    <option value="0">HTTP</option>
+                    <option value="1">HTTPS</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">位置</label>
+            <div class="layui-input-block">
+                <input type="text" name="Location" lay-verify="required" autocomplete="off" placeholder="请输入位置" class="layui-input" value="@Model.Location">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="btnSubmit">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+    <script type="text/html" id="proxy-bar">
+        <a class="layui-btn layui-btn-small" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-small" lay-event="del">删除</a>
+    </script>
+    <script src="~/lib/layui/layui.js"></script>
+    <script src="~/js/business/proxy/Form.js"></script>
+</body>
+</html>
