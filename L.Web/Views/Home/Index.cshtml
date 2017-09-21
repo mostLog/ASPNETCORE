@@ -34,33 +34,25 @@
         <div class="layui-header header-menu">
             <div class="logo posb" id="log">Spider Crawler</div>
             <div class="layui-main posb">
-                <!-- 左侧导航收缩开关 -->
-                @*<div class="side-menu-switch posb" id="toggle"><span class="switch" ara-hidden="true"></span></div>*@
                 <!-- 顶级菜单 -->
                 <div class="larry-top-menu posb">
                     <ul class="layui-nav clearfix" id="menu"></ul>
                 </div>
                 <!-- 右侧常用菜单导航 -->
                 <div class="larry-right-menu posb">
-                    <!--<button class="layui-btn layui-btn-small" id="dianzhan">-->
-                    <!--<i class="larry-icon larry-dianzan"></i>-->
-                    <!--打赏作者-->
-                    <!--</button>-->
                     <ul class="layui-nav clearfix">
                         <li class="layui-nav-item">
-                            <a class="onFullScreen" id="FullScreen"><i class="iconfont icon-fullscreen"></i>全屏</a>
+                            <a>
+                                <img src="~/images/tx.jpg" class="layui-nav-img">
+                                小白
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd><a id="lock" href="javascript:void(0)">锁屏</a></dd>
+                                <dd><a id="logout" href="javascript:void(0)">退出</a></dd>
+                            </dl>
                         </li>
                         <li class="layui-nav-item">
-                            <a id="lock"><i class="iconfont icon-screenlock"></i>锁屏</a>
-                        </li>
-                        <li class="layui-nav-item">
-                            <a id="clearCached"><i class="iconfont icon-clearcache"></i>清除缓存</a>
-                        </li>
-                        <li class="layui-nav-item">
-                            <a id="larryTheme"><i class="iconfont icon-themesetting"></i>设置主题</a>
-                        </li>
-                        <li class="layui-nav-item exit">
-                            <a id="logout"><i class="iconfont icon-signout"></i><cite>退出</cite></a>
+                            <a id="logout" class="oper"><i class=""></i><cite></cite></a>
                         </li>
                     </ul>
                 </div>

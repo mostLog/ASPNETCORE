@@ -40,6 +40,11 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                 "title": "系统管理",
                 "icon": "fa-list",
                 "pid": "0"
+            },
+            {
+                "title": "系统管理",
+                "icon": "fa-list",
+                "pid": "1"
             }
         ]
         larry.set({
