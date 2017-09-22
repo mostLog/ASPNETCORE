@@ -125,7 +125,7 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                                 "title": "Crawler日志", "icon": "icon-operlog", "href": "/Logger/"
                             },
                             {
-                                "title": "数据库管理", "icon": "icon-novel", "href": "/Db/"
+                                "title": "数据库管理", "icon": "icon-novel", "href": "/DbManager/"
                             }
                         ]
                     }];

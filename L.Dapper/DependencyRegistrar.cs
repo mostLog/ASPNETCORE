@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using L.Dapper.AspNetCore.DbManager;
 using L.Dapper.AspNetCore.Logger;
 using L.LCore.Infrastructure.Dependeny;
 
@@ -23,6 +24,10 @@ namespace L.Dapper.AspNetCore
 
             builder.RegisterType<LoggerDataProvider>()
                 .As<ILoggerDataProvider>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<DbManagerDataProvider>()
+                .As<IDbManagerDataProvider>()
                 .InstancePerLifetimeScope();
         }
 
