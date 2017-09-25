@@ -14,10 +14,6 @@ layui.use(['table', 'layer', 'laydate', 'form', 'dbmanagerservice'], function ()
         url: '/DbManager/GetTableData',
         cols: [[
             {
-                checkbox: true,
-                fixed: true
-            },
-            {
                 field: 'name',
                 title: '表名',
                 width: 200
@@ -25,14 +21,17 @@ layui.use(['table', 'layer', 'laydate', 'form', 'dbmanagerservice'], function ()
             {
                 field: 'rows',
                 title: '表中记录数',
-                width: 200
+                width: 200,
+                templet:'#db-rows'
             },
             {
                 field: 'reserved',
                 title: '表空间大小',
-                width: 200
+                width: 200,
+                templet:'#db-reserved'
             }
         ]],
+        width:604
     });
 
     laydate.render({
@@ -46,7 +45,8 @@ layui.use(['table', 'layer', 'laydate', 'form', 'dbmanagerservice'], function ()
             return;
         }
         service.addDataBackup({
-            dateTime: dateTime
+            dateTime: dateTime,
+            dbName:"CoreTest"
         }).done(function (data) {
             if (!data && data != -1) {
                 layer.msg("数据备份成功！");

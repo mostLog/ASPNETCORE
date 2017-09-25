@@ -2,7 +2,7 @@
     base: '../js/business/logger/' //layui自定义layui组件目录
 }).extend({
 });
-layui.use(['table', 'layer','laydate', 'form', 'loggerservice'], function () {
+layui.use(['table', 'layer', 'laydate', 'form', 'loggerservice'], function () {
     var layer = layui.layer,
         form = layui.form,
         laydate = layui.laydate,
@@ -61,7 +61,7 @@ layui.use(['table', 'layer','laydate', 'form', 'loggerservice'], function () {
         logTable.reload({
             where: {
                 dateTime: datetime,
-                logLevel:v
+                logLevel: v
             }
         });
     });

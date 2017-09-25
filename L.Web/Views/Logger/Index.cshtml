@@ -14,43 +14,32 @@
     <link href="~/lib/animate.css/animate.min.css" rel="stylesheet" />
     <link href="~/css/common/font/iconfont.css" rel="stylesheet" />
 
-    <link href="~/css/index.css" rel="stylesheet" />
     <base target="_blank">
 </head>
-<body class="gray-bg">
+<body style="padding:15px;">
     <div class="wrapper wrapper-content animated fadeInUp">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="box">
-                    <div class="box-title">
-                        <h5>日志列表</h5>
-                    </div>
-                    <div class="box-content">
-                        <div class="row">
-                            <div class="col-md-11">
-                                <div class="layui-form">
-                                    记录日期：
-                                    <div class="layui-inline">
-                                        <input type="text" class="layui-input" name="search-record-date" id="search-record-date">
-                                    </div>
-                                    <div class="layui-inline">
-                                        <select id="search-log-level" lay-filter="search-log-level">
-                                            <option value="">日志等级</option>
-                                            <option value="1">警告</option>
-                                            <option value="2">信息</option>
-                                            <option value="3">错误</option>
-                                        </select>
-                                        <input type="hidden" id="search-log-level-hidden" value="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="data-list">
-                            <table id="log-table" lay-filter="log-table"></table>
-                        </div>
-                    </div>
+        <blockquote class="layui-elem-quote">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" name="search-record-date" id="search-record-date" placeholder="请选择日期">
                 </div>
             </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <div class="layui-form">
+                        <select id="search-log-level" lay-filter="search-log-level">
+                            <option value="">日志等级</option>
+                            <option value="1">警告</option>
+                            <option value="2">信息</option>
+                            <option value="3">错误</option>
+                        </select>
+                    </div>
+                    <input type="hidden" id="search-log-level-hidden" value="" />
+                </div>
+            </div>
+        </blockquote>
+        <div class="data-list">
+            <table id="log-table" lay-filter="log-table"></table>
         </div>
     </div>
     <script id="log-level" type="text/html">

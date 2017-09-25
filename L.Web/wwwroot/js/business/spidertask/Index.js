@@ -42,7 +42,7 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
             {
                 field: 'urls',
                 title: '爬取地址',
-                width: 382
+                width: 400
             },
             {
                 field: 'isRecurrent',
@@ -67,7 +67,8 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
             }
         ]],
         page: true,
-        height: 315
+        height: 315,
+        width:1638
     });
 
     //为工具栏绑定事件

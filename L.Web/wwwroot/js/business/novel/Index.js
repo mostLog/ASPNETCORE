@@ -5,6 +5,7 @@
 layui.use(['table', 'layer', 'form', 'novelservice'], function () {
     var layer = layui.layer,
         form = layui.form,
+        $=layui.$,
         service = layui.novelservice,
         table = layui.table;
 

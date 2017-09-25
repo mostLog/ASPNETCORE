@@ -82,7 +82,6 @@ namespace L.SpiderCore.Crawler
                 request.KeepAlive = true;
                 //定义请求方式为GET
                 request.Method = "GET";
-
                 #endregion 请求参数
 
                 var completeArgs = new OnCompleteEventArgs()

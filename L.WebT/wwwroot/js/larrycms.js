@@ -2,10 +2,6 @@ var navtab;
 layui.config({
     base: '../js/layuilib/' //layui自定义layui组件目录
 }).extend({
-    larry: 'larry',
-    navtab: 'navtab',
-    elemnt: 'element',
-    common: 'common'
 });
 layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function () {
     var $ = layui.$,
@@ -24,10 +20,6 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
     });
 
     $(document).ready(function () {
-        // 浏览器兼容检查
-        if (device.ie && device.ie < 9) {
-            layer.alert('最低支持ie9，您当前使用的是古老的 IE' + device.ie + '！');
-        }
         // 001界面初始化
         AdminInit();
         //绑定导航数据
@@ -48,6 +40,11 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                 "title": "系统管理",
                 "icon": "fa-list",
                 "pid": "0"
+            },
+            {
+                "title": "系统管理",
+                "icon": "fa-list",
+                "pid": "1"
             }
         ]
         larry.set({
@@ -99,6 +96,12 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                             },
                             {
                                 "title": "图片管理", "icon": "icon-imgmanage", "href": "/Images/ViewImages"
+                            },
+                            {
+                                "title": "开源项目管理", "icon": "", "href": "/OpenSourceProject/"
+                            },
+                            {
+                                "title": "常用软件管理", "icon": "", "href": ""
                             }
                         ]
                     },
@@ -115,6 +118,9 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                                 "title": "采集任务", "icon": "icon-task", "href": "/SpiderTask/"
                             },
                             {
+                                "title": "代理ip", "icon": "icon-proxy", "href":"/Proxy/"
+                            },
+                            {
                                 "title": "数据类型维护", "icon": "icon-category", "href": "html/myloginfo.html"
                             }]
                     }, {
@@ -127,7 +133,7 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                                 "title": "Crawler日志", "icon": "icon-operlog", "href": "/Logger/"
                             },
                             {
-                                "title": "数据库管理", "icon": "icon-novel", "href": "/Db/"
+                                "title": "数据库管理", "icon": "icon-novel", "href": "/DbManager/"
                             }
                         ]
                     }];

@@ -1,9 +1,11 @@
 ﻿using L.Application.Dto;
 using L.Domain.Entities;
 using L.EntityFramework;
+using L.LCore.Http;
 using L.LCore.Infrastructure.Extension;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace L.Application.Services
@@ -16,6 +18,8 @@ namespace L.Application.Services
         {
             _proxyRepository = proxyRepository;
         }
+
+        #region 增删改查
 
         /// <summary>
         /// 获取分页数据
@@ -104,6 +108,24 @@ namespace L.Application.Services
         {
             var task = await _proxyRepository.GetEntityByIdAsync(input.Id.Value);
             return task.MapTo<ProxyEditDto>();
+        }
+
+        #endregion 增删改查
+
+        public async void PingProxyIsAvailable()
+        {
+            
+            var list=await _proxyRepository.Table
+                .Where(c=>c.LastVerifyDateTime==null)
+                .Take(10)
+                .ToListAsync();
+            //并行验证代理是否可用
+            Parallel.ForEach(list,proxy=> {
+                ProxyHelper.PingProxy(proxy.IP,proxy.Port);
+            });
+            //获取总记录数
+            int count =await _proxyRepository.Table.CountAsync();
+
         }
     }
 }

@@ -15,15 +15,12 @@ namespace L.Web.Controllers
             return View();
         }
 
-        public IActionResult About()
+        /// <summary>
+        /// 主页
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Main()
         {
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 

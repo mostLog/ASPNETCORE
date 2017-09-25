@@ -1,6 +1,4 @@
 ﻿using L.Application.Dto;
-using System;
-using System.Collections.Generic;
 
 namespace L.Application.Services
 {
@@ -11,7 +9,7 @@ namespace L.Application.Services
         /// </summary>
         /// <param name="dt"></param>
         /// <returns></returns>
-        void AddDataBackup(DateTime? dt);
+        void AddDataBackup(DbBackInput input);
 
         /// <summary>
         /// 获取表数据
