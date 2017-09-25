@@ -26,8 +26,6 @@
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
-    <None Include="Views\_ViewImports.cshtml" />
-    <None Include="Views\_ViewStart.cshtml" />
     <None Include="wwwroot\lib\layui\font\iconfont.svg" />
     <None Include="wwwroot\lib\layui\lay\modules\carousel.js" />
     <None Include="wwwroot\lib\layui\lay\modules\code.js" />

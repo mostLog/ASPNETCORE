@@ -11,9 +11,10 @@ using System;
 namespace L.EntityFramework.Migrations
 {
     [DbContext(typeof(LDbContext))]
-    partial class LDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170920093847_20179201735")]
+    partial class _20179201735
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

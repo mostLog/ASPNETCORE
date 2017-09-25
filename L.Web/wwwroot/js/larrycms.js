@@ -40,6 +40,11 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                 "title": "系统管理",
                 "icon": "fa-list",
                 "pid": "0"
+            },
+            {
+                "title": "系统管理",
+                "icon": "fa-list",
+                "pid": "1"
             }
         ]
         larry.set({
@@ -111,6 +116,9 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                             },
                             {
                                 "title": "采集任务", "icon": "icon-task", "href": "/SpiderTask/"
+                            },
+                            {
+                                "title": "代理ip", "icon": "icon-proxy", "href":"/Proxy/"
                             },
                             {
                                 "title": "数据类型维护", "icon": "icon-category", "href": "html/myloginfo.html"

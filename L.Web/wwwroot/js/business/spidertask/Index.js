@@ -4,6 +4,7 @@
 });
 layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
     var layer = layui.layer,
+        $=layui.$,
         form = layui.form,
         service = layui.spidertaskservice,
         table = layui.table,
