@@ -1,18 +1,14 @@
-﻿layui.config({
-    base: '../js/business/spidertask/' //layui自定义layui组件目录
-}).extend({
-});
-layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
+﻿(function () {
     var layer = layui.layer,
-        $=layui.$,
+        $ = layui.$,
         form = layui.form,
-        service = layui.spidertaskservice,
-        table = layui.table,
-        socket;
+        service = core.services.spidertaskservice,
+        table = layui.table;
 
     var taskTable = table.render({
         elem: '#task-table',
         url: '/SpiderTask/GetPagedList/',
+        cellMinWidth: 100,
         cols: [[
             {
                 checkbox: true,
@@ -30,8 +26,7 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
             },
             {
                 field: 'description',
-                title: '任务描述',
-                width: 300
+                title: '任务描述'
             },
             {
                 field: 'crawlerType',
@@ -49,6 +44,7 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
                 title: '定时任务',
                 width: 140,
                 align: 'center',
+                unresize: true,
                 templet: '#is-recurrent'
             },
             {
@@ -57,25 +53,16 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
                 width: 200,
                 align: 'center',
                 toolbar: '#task-bar'
-            },
-            {
-                fixed: 'right',
-                title: '测试',
-                width: 100,
-                align: 'center',
-                toolbar: '#task-isrun'
             }
         ]],
         page: true,
-        height: 315,
-        width:1638
+        height: 315
     });
 
     //为工具栏绑定事件
     table.on('tool(task-table)', function (obj) {
         var currRowData = obj.data;
         var layEvent = obj.event;
-        console.log(currRowData);
         if (layEvent === 'edit') {
             //编辑
             layer.open({
@@ -97,84 +84,97 @@ layui.use(['table', 'layer', 'form', 'spidertaskservice'], function () {
                     }
                 });
             });
-        } else if (layEvent === 'run') {
-            var ck = $(this).prev("input[lay-event='run']").get(0).checked;
-            //如果开启
-            if (ck) {
-                var uris = [];
-                if (currRowData.urls != null) {
-                    uris = currRowData.urls.split("\n");
-                }
-                //向服务器发送消息
-                sendMsg(socket, {
-                    spiderId: currRowData.spiderId,
-                    uris: uris
-                });
-            }
-        } else if (layEvent === 'isRecurrent') {
-            var ck = $(this).prev("input[lay-event='isRecurrent']").get(0).checked;
-            if (ck) {
-                var uris = [];
-                if (currRowData.urls != null) {
-                    uris = currRowData.urls.split("\n");
-                }
-                //开启自动爬取
-                service.startOrStopRecurrentTask({
-                    isRecurrent: ck,
-                    spiderId: currRowData.spiderId,
-                    recurrentCron: currRowData.recurrentCron,
-                    uris: uris
-                }).done(function () {
-                    layer.msg("操作成功！");
-                }).fail(function () {
-                    layer.msg("操作失败！");
-                });
-            } else {
-                //关闭自动爬取
-                service.startOrStopRecurrentTask({
-                    isRecurrent: ck,
-                    spiderId: currRowData.spiderId
-                }).done(function () {
-                    layer.msg("操作成功！");
-                }).fail(function () {
-                    layer.msg("操作失败！");
+        }
+        //} else if (layEvent === 'run') {
+        //    var ck = $(this).prev("input[lay-event='run']").get(0).checked;
+        //    //如果开启
+        //    if (ck) {
+        //        var uris = [];
+        //        if (currRowData.urls != null) {
+        //            uris = currRowData.urls.split("\n");
+        //        }
+        //        //向服务器发送消息
+        //        sendMsg(socket, {
+        //            spiderId: currRowData.spiderId,
+        //            uris: uris
+        //        });
+        //    }
+        //} //else if (layEvent === 'isRecurrent') {
+        //    var ck = $(this).prev("input[lay-event='isRecurrent']").get(0).checked;
+        //    if (ck) {
+        //        //开启自动爬取
+        //        service.startOrStopRecurrentTask({
+        //            IsRecurrent: ck,
+        //            PathogenId: currRowData.spiderId
+        //        }).done(function () {
+        //            layer.msg("操作成功！");
+        //        }).fail(function () {
+        //            layer.msg("操作失败！");
+        //        });
+        //    } else {
+        //        //关闭自动爬取
+        //        service.startOrStopRecurrentTask({
+        //            isRecurrent: false,
+        //            PathogenId: ""
+        //        }).done(function () {
+        //            layer.msg("操作成功！");
+        //        }).fail(function () {
+        //            layer.msg("操作失败！");
+        //        });
+        //    }
+        //}
+    });
+
+    //监听测试开启按钮
+    form.on('switch(isRecurrent)', function (obj) {
+        layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
+    });
+
+
+    //使用vue重构添加
+    new Vue({
+        el: '#app',
+        data: function () {
+            return { visible: false }
+        },
+        methods: {
+            openAddDialog: function () {
+                layer.open({
+                    title: "添加任务",
+                    type: 2,
+                    content: '/SpiderTask/AddOrEditSpiderTask',
+                    area: ['100%', '100%']
                 });
             }
         }
     });
-    //绑定添加按钮事件
-    $("#btn-add").click(function () {
-        layer.open({
-            title: "添加任务",
-            type: 2,
-            content: '/SpiderTask/AddOrEditSpiderTask',
-            area: ['100%', '100%']
-        });
-    });
+
     /**
      * 建立连接
      * @param url 地址
      */
-    function doConnect() {
-        var uri = "ws://" + window.location.host + "/Notice";
-        socket = new WebSocket(uri);
-        socket.onopen = function (e) {
-            console.log("连接已开启");
-        };
-        socket.onclose = function (e) {
-            console.log("连接已关闭");
-        };
-        socket.onmessage = function (e) {
-            //接收消息
-            $("#TaskInfo").prepend(e.data + "\r\n");
-        };
-        socket.onerror = function (e) {
-            console.log(e);
-        };
-        return socket;
-    }
-    doConnect();
-    function sendMsg(s, param) {
-        s.send(JSON.stringify(param));
-    }
-});
+    //function doConnect() {
+    //    var uri = "ws://" + window.location.host + "/Notice";
+    //    socket = new WebSocket(uri);
+    //    socket.onopen = function (e) {
+    //        console.log("连接已开启");
+    //    };
+    //    socket.onclose = function (e) {
+    //        console.log("连接已关闭");
+    //    };
+    //    socket.onmessage = function (e) {
+    //        //接收消息
+    //        $("#TaskInfo").prepend(e.data + "\r\n");
+    //    };
+    //    socket.onerror = function (e) {
+    //        console.log(e);
+    //    };
+    //    return socket;
+    //}
+    //doConnect();
+    //function sendMsg(s, param) {
+    //    s.send(JSON.stringify(param));
+    //}
+
+})();
+

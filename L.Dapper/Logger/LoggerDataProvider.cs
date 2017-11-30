@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace L.Dapper.AspNetCore.Logger
 {
@@ -34,7 +35,23 @@ namespace L.Dapper.AspNetCore.Logger
             }
             return result;
         }
+        /// <summary>
+        /// 写入日志信息
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="level"></param>
+        /// <param name="e"></param>
+        public async Task<int> WriteLogAsync(Log log)
+        {
+            int result = 0;
+            string sql = "insert into T_Log(DateTime,Msg,ClassName,ActionName,Duration,LogLevel) Values(@DateTime,@Msg,@ClassName,@ActionName,@Duration,@LogLevel)";
+            using (var db = _factory.GetDbInstance())
+            {
+                result = await db.ExcuteSqlAsync(sql, log);
 
+            }
+            return result;
+        }
         /// <summary>
         /// 获取日志信息
         /// </summary>

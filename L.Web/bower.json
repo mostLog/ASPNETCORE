@@ -8,6 +8,7 @@
     "jquery-validation-unobtrusive": "3.2.6",
     "animate.css": "animate-css#v3.1.0",
     "font-awesome": "Font-Awesome#v4.7.0",
-    "video-js": "v6.2.8"
+    "video-js": "v6.2.8",
+    "jquery-qrcode": "v1.0"
   }
 }

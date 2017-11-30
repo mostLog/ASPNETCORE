@@ -1,13 +1,9 @@
-﻿layui.config({
-    base: '../../js/business/spidertask/' //layui自定义layui组件目录
-}).extend({
-});
-layui.use(['form', 'layer', 'laydate', 'spidertaskservice'], function () {
+﻿(function () {
     var $ = layui.$,
         form = layui.form,
         layer = layui.layer,
         laydate = layui.laydate,
-        service = layui.spidertaskservice;
+        service = core.services.spidertaskservice;
 
     //开启 关闭 事件监听
     //form.on('switch(switchIsRecurrent)', function (data) {
@@ -21,6 +17,7 @@ layui.use(['form', 'layer', 'laydate', 'spidertaskservice'], function () {
 
     //监听提交
     form.on('submit(btnSubmit)', function (data) {
+        console.log(service);
         var d = data.field;
         if (d.IsRecurrent == "1") {
             d.IsRecurrent = true;
@@ -37,4 +34,5 @@ layui.use(['form', 'layer', 'laydate', 'spidertaskservice'], function () {
         });
         return false;
     });
-});
+})();
+

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace L.Application.Services
 {
-    [UnitOfWork(isTransactional: true)]
+    [UnitOfWork()]
     public interface INovelService : IAppService
     {
         [NoUnitOfWork]

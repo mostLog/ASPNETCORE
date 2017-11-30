@@ -98,10 +98,7 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                                 "title": "图片管理", "icon": "icon-imgmanage", "href": "/Images/ViewImages"
                             },
                             {
-                                "title": "开源项目管理", "icon": "", "href": "/OpenSourceProject/"
-                            },
-                            {
-                                "title": "常用软件管理", "icon": "", "href": ""
+                                "title": "网址管理", "icon": "", "href": "/UrlManager/"
                             }
                         ]
                     },

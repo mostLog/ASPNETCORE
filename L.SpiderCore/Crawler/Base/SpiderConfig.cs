@@ -18,9 +18,5 @@ namespace L.SpiderCore.Crawler
         /// </summary>
         public Action<string> CallBack { get; set; }
 
-        /// <summary>
-        /// 数据处理回掉
-        /// </summary>
-        public Action<ICrawlerResult> DataHandleCallBack { get; set; }
     }
 }

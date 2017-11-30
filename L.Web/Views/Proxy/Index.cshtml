@@ -26,7 +26,7 @@
                         <i class="iconfont icon-ip" ></i>
                     </div>
                     <div class="panel_word">
-                        <span>5</span>
+                        <span id="ava-ip">5</span>
                         <cite>可用ip</cite>
                     </div>
                 </a>
@@ -37,7 +37,7 @@
                         <i class="iconfont icon-ip1" ></i>
                     </div>
                     <div class="panel_word">
-                        <span>3</span>
+                        <span id="val-ip">3</span>
                         <cite>正在验证ip</cite>
                     </div>
                 </a>
@@ -58,6 +58,13 @@
             <table id="proxy-table" lay-filter="proxy-table"></table>
         </div>
     </div>
+    <script id="proxy-type" type="text/html">
+        {{# if(d.type==0){ }}
+        <span>HTTP</span>
+        {{# }else{ }}
+        <span>HTTPS</span>
+        {{# } }}
+    </script>
     <script type="text/html" id="proxy-bar">
         <a class="layui-btn layui-btn-small" lay-event="edit">编辑</a>
         <a class="layui-btn layui-btn-danger layui-btn-small" lay-event="del">删除</a>

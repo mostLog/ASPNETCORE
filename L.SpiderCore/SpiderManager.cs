@@ -1,4 +1,5 @@
 ﻿using L.LCore.Infrastructure.Reflection;
+using L.Pathogen;
 using L.SpiderCore.Crawler;
 using System;
 using System.Collections.Generic;
@@ -64,12 +65,42 @@ namespace L.SpiderCore
             spiderCrawler.InitConfig(config);
             spiderCrawler.Run();
         }
-
+        /// <summary>
+        /// 运行病原体
+        /// </summary>
+        public void RunPathogen(PathogenSelectorConfig config)
+        {
+            IList<InfectionTarget> targets = null;
+            //初始化目标
+            if (config.Targets!=null&&config.Targets.Count>0)
+            {
+                targets = config.Targets.Select(m=> {
+                    return new InfectionTarget() {
+                        Url=m
+                    };
+                }).ToList();
+            }
+            IPathogen pathogen = PathogenFacotry.GetPathogenInstance(config.Key, targets);
+            //启动
+            pathogen.Infected();
+        }
         /// <summary>
         /// 创建爬虫表
         /// </summary>
         private void CreateSpiderTaskTable()
         {
+
         }
+    }
+    public class PathogenSelectorConfig
+    {
+        /// <summary>
+        /// 标识
+        /// </summary>
+        public string Key { get; set; }
+        /// <summary>
+        /// 感染目标
+        /// </summary>
+        public IList<string> Targets { get; set; }
     }
 }

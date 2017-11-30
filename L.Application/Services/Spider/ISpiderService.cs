@@ -19,7 +19,7 @@ namespace L.Application.Services
         /// 创建或者更新爬虫
         /// </summary>
         /// <returns></returns>
-        void AddOrUpdateSpiderTask(TaskAddOrEditInput input);
+        Task AddOrUpdateSpiderTask(TaskAddOrEditInput input);
 
         /// <summary>
         /// 更具id获取实体
@@ -42,6 +42,6 @@ namespace L.Application.Services
         /// <param name="spiderId"></param>
         /// <param name="runOrStop"></param>
         /// <returns></returns>
-        void RunOrStopRecurrentTask(string spiderId, bool runOrStop);
+        Task RunOrStopRecurrentTask(string spiderId, bool runOrStop);
     }
 }

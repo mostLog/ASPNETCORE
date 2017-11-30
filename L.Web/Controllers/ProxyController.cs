@@ -80,5 +80,13 @@ namespace L.Web.Controllers
         {
             return Json(await _proxyService.GetProxyPagedList(input));
         }
+        /// <summary>
+        /// 验证代理是否可用
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> PingProxy()
+        {
+            return Json(await _proxyService.PingProxyIsAvailable());
+        }
     }
 }

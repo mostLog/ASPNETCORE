@@ -1,7 +1,5 @@
 ﻿using L.Application.Dto;
 using L.Application.Services;
-using L.HangFire.AspNetCore.Services;
-using L.SpiderCore;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -15,24 +13,11 @@ namespace L.Web.Controllers
         /// </summary>
         private readonly ISpiderService _spiderService;
 
-        /// <summary>
-        /// hangfire服务
-        /// </summary>
-        private readonly IHangFireService _hangFireService;
-
-        /// <summary>
-        /// 爬虫管理
-        /// </summary>
-        private readonly SpiderManager _spiderManager;
-
         public SpiderTaskController(
-            ISpiderService spiderService,
-            IHangFireService hangFireService,
-            SpiderManager spiderManager)
+            ISpiderService spiderService
+            )
         {
             _spiderService = spiderService;
-            _hangFireService = hangFireService;
-            _spiderManager = spiderManager;
         }
 
         public IActionResult Index()
@@ -111,40 +96,6 @@ namespace L.Web.Controllers
                 result = -1;
             }
             return Json(result);
-        }
-
-        /// <summary>
-        /// 启动循环任务
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        public void StartOrStopRecurrentTask(TaskRunOrStopInput input)
-        {
-            if (input == null)
-            {
-                throw new ArgumentException(nameof(input));
-            }
-            if (string.IsNullOrEmpty(input.SpiderId))
-            {
-                throw new ArgumentException(nameof(input.SpiderId));
-            }
-            //开启循环
-            if (input.IsRecurrent)
-            {
-                if (string.IsNullOrEmpty(input.RecurrentCron))
-                {
-                    throw new ArgumentException(nameof(input.RecurrentCron));
-                }
-                //启动爬虫信息
-                _spiderService.RunOrStopRecurrentTask(input.SpiderId, true);
-                _hangFireService.AddRecurrentSchedule<SpiderManager>(input.SpiderId, s => s.RunTask(input.SpiderId, new SpiderCore.Crawler.SpiderConfig() { Uris = input.Uris }), input.RecurrentCron);
-            }
-            else
-            {
-                //关闭爬虫信息
-                _spiderService.RunOrStopRecurrentTask(input.SpiderId, false);
-                _hangFireService.DeleteRecurrentSchedule(input.SpiderId);
-            }
         }
     }
 }

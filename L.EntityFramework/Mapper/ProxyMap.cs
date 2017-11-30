@@ -14,6 +14,8 @@ namespace L.EntityFramework.Mapper
             b.Property(c => c.IP).HasMaxLength(20);
             b.Property(c => c.Location).HasMaxLength(50);
             b.Property(c => c.Type).HasMaxLength(8);
+            //设置代理默认可用
+            b.Property(c => c.IsAvailable).HasDefaultValue(true);
         }
     }
 }

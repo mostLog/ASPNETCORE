@@ -188,5 +188,14 @@ namespace L.EntityFramework
             T model = GetEntityById(id);
             return DeleteAsync(model);
         }
+
+        public async Task<int> SaveChangeAsync()
+        {
+             return await _context.SaveChangesAsync();
+        }
+        public int SaveChange()
+        {
+            return _context.SaveChanges();
+        }
     }
 }

@@ -20,4 +20,9 @@
     <ProjectReference Include="..\L.LCore\L.LCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Crawler\新文件夹\" />
+    <Folder Include="DataProvider\" />
+  </ItemGroup>
+
 </Project>

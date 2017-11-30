@@ -71,5 +71,15 @@ namespace L.EntityFramework
         /// <param name="id"></param>
         /// <returns></returns>
         Task<T> DeleteAsync(int id);
+        /// <summary>
+        /// 异步保存
+        /// </summary>
+        /// <returns></returns>
+        Task<int> SaveChangeAsync();
+        /// <summary>
+        /// 同步保存
+        /// </summary>
+        /// <returns></returns>
+        int SaveChange();
     }
 }

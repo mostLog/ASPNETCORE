@@ -42,9 +42,9 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                 "pid": "0"
             },
             {
-                "title": "系统管理",
+                "title": "工具管理",
                 "icon": "fa-list",
-                "pid": "1"
+                "pid": "35"
             }
         ]
         larry.set({
@@ -98,10 +98,7 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                                 "title": "图片管理", "icon": "icon-imgmanage", "href": "/Images/ViewImages"
                             },
                             {
-                                "title": "开源项目管理", "icon": "", "href": "/OpenSourceProject/"
-                            },
-                            {
-                                "title": "常用软件管理", "icon": "", "href": ""
+                                "title": "网址管理", "icon": "", "href": "/UrlManager/"
                             }
                         ]
                     },
@@ -112,6 +109,9 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                         "spread": "true",
                         "children": [
                             {
+                                "title": "Chrome推送信息审核", "icon": "icon-rule", "href": "/Chrome/"
+                            },
+                            {
                                 "title": "采集规则定义", "icon": "icon-rule", "href": "/CrawlerRule/"
                             },
                             {
@@ -121,7 +121,7 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                                 "title": "代理ip", "icon": "icon-proxy", "href":"/Proxy/"
                             },
                             {
-                                "title": "数据类型维护", "icon": "icon-category", "href": "html/myloginfo.html"
+                                "title": "数据类型维护", "icon": "icon-category", "href": "/DataType/"
                             }]
                     }, {
                         "pid": "103",
@@ -137,7 +137,18 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                             }
                         ]
                     }];
-
+                var pid_35 = [
+                    {
+                        "pid": "100",
+                        "title": "二维码生成",
+                        "icon": "icon-home",
+                        "href": "/Tools/QRCodeIndex"
+                    }, {
+                        "pid": "101",
+                        "title": "Cron在线生成",
+                        "icon": "icon-home",
+                        "href": "/Tools/CronIndex"
+                    }];
                 var result;
                 if (id == 0)
                     result = pid_0;

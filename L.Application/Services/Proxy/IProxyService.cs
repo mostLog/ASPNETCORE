@@ -31,5 +31,11 @@ namespace L.Application.Services
         /// <returns></returns>
         [NoUnitOfWork]
         Task<ProxyEditDto> GetProxyById(BaseDto input);
+
+        /// <summary>
+        /// 代理验证 
+        /// </summary>
+        /// <returns></returns>
+        Task<ProxyCountOutput> PingProxyIsAvailable();
     }
 }

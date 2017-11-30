@@ -1,0 +1,118 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cron表达式生成器</title>
+    <!--引入element ui样式-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link href="~/lib/animate.css/animate.min.css" rel="stylesheet" />
+    <style>
+        .sel {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }
+            .sel li {
+                margin: 10px 0px;
+            }
+    </style>
+</head>
+<body>
+    <div id="app" class="wrapper wrapper-content animated fadeInUp">
+        <el-button type="primary">立即生成</el-button>
+        <el-tabs type="border-card">
+            <el-tab-pane label="分钟">
+                <el-row>
+                    <template>
+                          每 <el-input-number style="width:100px" v-model="minute.minuteNum" :min="1" :max="59" label="多少分钟" controls-position="right"></el-input-number> 分钟
+                    </template> 
+                </el-row>
+            </el-tab-pane>
+            <el-tab-pane label="小时">
+                <ul class="sel">
+                    <li>
+                        每 <el-input-number style="width:100px" v-model="hour.hourNum" :min="1" :max="59" label="多少分钟" controls-position="right"></el-input-number> 小时
+                    </li>
+                    <li>
+                        <el-time-picker v-model="hour.hourTime" :picker-options="{selectableRange: '18:30:00 - 20:30:00'}" placeholder="任意时间点"></el-time-picker>
+                    </li>
+                </ul>
+            </el-tab-pane>
+            <el-tab-pane label="日">
+                <ul class="sel">
+                    <li>
+                        每 <el-input-number style="width:100px" v-model="day.dayNum" :min="1" :max="59" label="多少天" controls-position="right"></el-input-number> 天
+                    </li>
+                    <li>
+                        <el-time-picker v-model="day.dayTime" :picker-options="{selectableRange: '18:30:00 - 20:30:00'}" placeholder="任意时间点"></el-time-picker>
+                    </li>
+                </ul>
+            </el-tab-pane>
+            <el-tab-pane label="周">
+                <ul class="sel">
+                    <li>
+                        <template>
+                            <el-radio-group v-model="week.weekRadio">
+                                <el-radio :label="0">周一</el-radio>
+                                <el-radio :label="1">周二</el-radio>
+                                <el-radio :label="2">周三</el-radio>
+                                <el-radio :label="3">周四</el-radio>
+                                <el-radio :label="4">周五</el-radio>
+                                <el-radio :label="5">周六</el-radio>
+                                <el-radio :label="6">周日</el-radio>
+                            </el-radio-group>
+                        </template>
+                    </li>
+                    <li>
+                        <el-time-picker v-model="week.weekTime" :picker-options="{selectableRange: '18:30:00 - 20:30:00'}" placeholder="任意时间点"></el-time-picker>
+                    </li>
+                </ul>
+            </el-tab-pane>
+            <el-tab-pane label="月">
+
+            </el-tab-pane>
+            <el-tab-pane label="年">
+
+            </el-tab-pane>
+        </el-tabs>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <!-- 先引入 Vue -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script type="text/javascript">
+        var Main = {
+            data() {
+                return {
+                    minute: {
+                        minuteNum: 1
+                    },
+                    hour: {
+                        hourNum: 1,
+                        hourTime: new Date(2016, 9, 10, 18, 40)
+                    },
+                    day: {
+                        dayNum: 1,
+                        dayTime: new Date(2016, 9, 10, 18, 40)
+                    },
+                    week: {
+                        weekRadio: 1,
+                        weekTime: new Date(2016, 9, 10, 18, 40)
+                    }
+
+                };
+            },
+            methods: {
+                
+            }
+        };
+        var Ctor = Vue.extend(Main);
+        new Ctor().$mount('#app');
+    </script>
+</body>
+</html>

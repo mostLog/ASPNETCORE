@@ -14,10 +14,6 @@ layui.use(['table', 'layer', 'laydate', 'form', 'dbmanagerservice'], function ()
         url: '/DbManager/GetTableData',
         cols: [[
             {
-                checkbox: true,
-                fixed: true
-            },
-            {
                 field: 'name',
                 title: '表名',
                 width: 200
@@ -35,7 +31,7 @@ layui.use(['table', 'layer', 'laydate', 'form', 'dbmanagerservice'], function ()
                 templet:'#db-reserved'
             }
         ]],
-        width:653
+        width:604
     });
 
     laydate.render({

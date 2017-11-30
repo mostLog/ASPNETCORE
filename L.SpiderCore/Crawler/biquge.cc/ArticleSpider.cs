@@ -20,6 +20,7 @@ namespace L.SpiderCore.Crawler
 
         public ArticleSpider()
         {
+
         }
 
         public override void HtmlParser(OnCompleteEventArgs e)

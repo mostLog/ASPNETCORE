@@ -52,12 +52,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\L.Application\L.Application.csproj" />
-    <ProjectReference Include="..\L.HangFire.AspNetCore\L.HangFire.AspNetCore.csproj" />
-    <ProjectReference Include="..\L.SpiderCore\L.SpiderCore.csproj" />
+    <ProjectReference Include="..\L.LCore\L.LCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\images\Sources\" />
+    <Folder Include="Images\" />
+    <Folder Include="wwwroot\js\common\" />
   </ItemGroup>
 
 </Project>

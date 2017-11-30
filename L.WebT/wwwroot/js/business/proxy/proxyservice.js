@@ -17,13 +17,13 @@
                 data: model
             });
         },
-        deleteProxy: function (param) {
+        pingProxy: function () {
             return $.ajax({
-                type: 'POST',
-                url: '/Proxy/DeleteProxy',
-                data: param
+                type: 'GET',
+                url: '/Proxy/PingProxy'
             });
-        }
+        },
+
     };
     exports(module_name, Service);
 });

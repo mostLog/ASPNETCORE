@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace L.Dapper.AspNetCore
 {
@@ -67,6 +68,18 @@ namespace L.Dapper.AspNetCore
         public static int ExcuteSql<T>(this IDbConnection db, string sql, T p)
         {
             return db.Execute(sql, p);
+        }
+        /// <summary>
+        /// 执行sql语句
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="db"></param>
+        /// <param name="sql"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public static async Task<int> ExcuteSqlAsync<T>(this IDbConnection db, string sql, T p)
+        {
+            return await db.ExecuteAsync(sql, p);
         }
     }
 }

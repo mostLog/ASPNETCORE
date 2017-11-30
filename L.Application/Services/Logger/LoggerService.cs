@@ -30,7 +30,8 @@ namespace L.Application.Services
         /// <returns></returns>
         public void WriteLog(Log log)
         {
-            _loggerDataProvider.WriteLog(log);
+            //加入队列
+            //_hangFireService.AddEnqueue<ILoggerDataProvider>(c=>c.WriteLog(log));
         }
 
         /// <summary>

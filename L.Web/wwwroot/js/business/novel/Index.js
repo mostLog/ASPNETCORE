@@ -51,7 +51,6 @@ layui.use(['table', 'layer', 'form', 'novelservice'], function () {
                 toolbar: '#novel-bar'
             }
         ]],
-        width: 1206,
         page: true,
         height: 315
     });
@@ -109,7 +108,6 @@ layui.use(['table', 'layer', 'form', 'novelservice'], function () {
                 toolbar: '#article-bar'
             }
         ]],
-        width: 1106,
         page: false,
         height: 'full-100'
     });

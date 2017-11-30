@@ -111,6 +111,56 @@ namespace L.EntityFramework.Migrations
                     b.ToTable("T_CrawlerRuleDetail");
                 });
 
+            modelBuilder.Entity("L.Domain.Entities.DataType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreateDateTime");
+
+                    b.Property<string>("CreatePerson");
+
+                    b.Property<int?>("DataTypeClassificationId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTime?>("OperaterDateTime");
+
+                    b.Property<string>("OperaterPerson");
+
+                    b.Property<string>("Remark");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DataTypeClassificationId");
+
+                    b.ToTable("T_DataType");
+                });
+
+            modelBuilder.Entity("L.Domain.Entities.DataTypeClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClassId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("ParentId");
+
+                    b.Property<string>("Remark");
+
+                    b.Property<int?>("Seq");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("T_DataTypeClassification");
+                });
+
             modelBuilder.Entity("L.Domain.Entities.ImageInfo", b =>
                 {
                     b.Property<int>("Id")
@@ -294,6 +344,10 @@ namespace L.EntityFramework.Migrations
                     b.Property<string>("IP")
                         .HasMaxLength(20);
 
+                    b.Property<bool>("IsAvailable")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(true);
+
                     b.Property<DateTime?>("LastVerifyDateTime");
 
                     b.Property<string>("Location")
@@ -309,6 +363,27 @@ namespace L.EntityFramework.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("T_Proxy");
+                });
+
+            modelBuilder.Entity("L.Domain.Entities.PushText", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("IsWriteDb");
+
+                    b.Property<DateTime?>("PushDateTime");
+
+                    b.Property<string>("Remark");
+
+                    b.Property<string>("Text");
+
+                    b.Property<string>("TextType")
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("T_PushText");
                 });
 
             modelBuilder.Entity("L.Domain.Entities.SpiderTask", b =>
@@ -370,6 +445,20 @@ namespace L.EntityFramework.Migrations
                     b.HasOne("L.Domain.Entities.CrawlerRule", "CrawlerRule")
                         .WithMany()
                         .HasForeignKey("CrawlerRuleId");
+                });
+
+            modelBuilder.Entity("L.Domain.Entities.DataType", b =>
+                {
+                    b.HasOne("L.Domain.Entities.DataTypeClassification", "DataTypeClassification")
+                        .WithMany("DataTypes")
+                        .HasForeignKey("DataTypeClassificationId");
+                });
+
+            modelBuilder.Entity("L.Domain.Entities.DataTypeClassification", b =>
+                {
+                    b.HasOne("L.Domain.Entities.DataTypeClassification", "ParentDataTypeClass")
+                        .WithMany("DataTypeClasses")
+                        .HasForeignKey("ParentId");
                 });
 
             modelBuilder.Entity("L.Domain.Entities.ImageInfo", b =>

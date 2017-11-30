@@ -34,6 +34,10 @@ namespace L.Domain.Entities
         /// 最后验证时间
         /// </summary>
         public DateTime? LastVerifyDateTime { get; set; }
+        /// <summary>
+        /// 是否可用
+        /// </summary>
+        public bool IsAvailable { get; set; }
 
     }
 }

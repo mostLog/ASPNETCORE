@@ -14,14 +14,5 @@ namespace L.Application.Dto
         /// </summary>
         public string SpiderId { get; set; }
 
-        /// <summary>
-        /// 定时任务cron表达式
-        /// </summary>
-        public string RecurrentCron { get; set; }
-
-        /// <summary>
-        /// 爬取地址
-        /// </summary>
-        public IList<string> Uris { get; set; }
     }
 }

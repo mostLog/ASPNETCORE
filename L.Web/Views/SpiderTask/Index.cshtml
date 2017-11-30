@@ -14,19 +14,22 @@
     <link href="~/css/common/layuie.css" rel="stylesheet" />
     <link href="~/lib/animate.css/animate.min.css" rel="stylesheet" />
     <link href="~/css/common/font/iconfont.css" rel="stylesheet" />
+    <!--引入element ui样式-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <base target="_blank">
 </head>
 <body style="padding:15px;">
     <div class="wrapper wrapper-content animated fadeInUp">
-        <blockquote class="layui-elem-quote">
+        <blockquote id="app" class="layui-elem-quote">
             <div class="layui-inline">
                 <div class="layui-input-inline">
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                    @*<input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">*@
+                    <el-input placeholder="请输入内容" prefix-icon="el-icon-search" ></el-input>
                 </div>
-                <button type="submit" class="layui-btn">搜索</button>
+                <el-button type="primary">搜索</el-button>
             </div>
             <div class="layui-inline">
-                <button id="btn-add" class="layui-btn">新建任务</button>
+                <el-button v-on:click="openAddDialog" type="success">新建任务</el-button>
             </div>
         </blockquote>
         <div class="data-list">
@@ -45,18 +48,11 @@
 
     </div>
     <script type="text/html" id="task-bar">
-        <a class="layui-btn layui-btn-small" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-danger layui-btn-small" lay-event="del">删除</a>
-    </script>
-    <script type="text/html" id="task-isrun">
-        <input type="checkbox" lay-skin="switch" lay-text="开启|关闭" lay-event="run">
+        <a class="layui-btn layui-btn-sm" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除</a>
     </script>
     <script type="text/html" id="is-recurrent">
-        {{# if(d.isRecurrent=="1"){ }}
-        <input type="checkbox" lay-skin="switch" lay-text="开启|关闭" lay-event="isRecurrent" checked>
-        {{# }else{ }}
-        <input type="checkbox" lay-skin="switch" lay-text="开启|关闭" lay-event="isRecurrent">
-        {{# } }}
+        <input type="checkbox" lay-skin="switch" lay-text="开启|关闭" lay-filter="isRecurrent" {{d.isRecurrent=="1"?'checked':''}}>
     </script>
     <script type="text/html" id="task-crawlerType">
         {{# if(d.crawlerType=="1"){ }}
@@ -65,7 +61,14 @@
         <div>基于网址</div>
         {{# } }}
     </script>
-    <script src="~/lib/layui/layui.js"></script>
+    <!-- 先引入 Vue -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!--layui组件库-->-->
+    <script src="~/lib/layui/layui.all.js"></script>
+    <script src="~/js/common/Core.js"></script>
+    <script src="~/js/business/spidertask/spidertaskservice.js"></script>
     <script src="~/js/business/spidertask/Index.js"></script>
 </body>
 </html>

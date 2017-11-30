@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
 namespace L.Application.Services
 {
@@ -112,20 +113,37 @@ namespace L.Application.Services
 
         #endregion 增删改查
 
-        public async void PingProxyIsAvailable()
+        /// <summary>
+        /// 代理验证
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ProxyCountOutput> PingProxyIsAvailable()
         {
-            
-            var list=await _proxyRepository.Table
-                .Where(c=>c.LastVerifyDateTime==null)
-                .Take(10)
-                .ToListAsync();
-            //并行验证代理是否可用
-            Parallel.ForEach(list,proxy=> {
-                ProxyHelper.PingProxy(proxy.IP,proxy.Port);
-            });
+            var query = _proxyRepository.Table.Where(c => c.LastVerifyDateTime == null||c.IsAvailable==true);
+            var list = await query.ToListAsync();
+           
+            //正在验证数量
+            int inValidation =await query.CountAsync();
             //获取总记录数
             int count =await _proxyRepository.Table.CountAsync();
 
+            //并行验证代理是否可用
+            Parallel.ForEach(list, proxy => {
+                //判断是否可用
+                if (!ProxyHelper.PingProxy(proxy.IP, proxy.Port))
+                {
+                    proxy.IsAvailable = false;
+                }
+                //更新验证时间
+                proxy.LastVerifyDateTime = DateTime.Now;
+                _proxyRepository.UpdateAsync(proxy);
+            });
+            await _proxyRepository.SaveChangeAsync();
+            return new ProxyCountOutput
+            {
+                InValidation=inValidation,
+                TotalCount=count
+            };
         }
     }
 }

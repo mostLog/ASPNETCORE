@@ -22,13 +22,11 @@ namespace L.Application.Services
 
         public SpiderService(
             IBaseRepository<SpiderTask> spiderRepository,
-            INoticeService noticeService,
-            ILogger<SpiderService> logger
+            INoticeService noticeService
             )
         {
             _spiderRepository = spiderRepository;
             _novelService = noticeService;
-            _logger = logger;
         }
 
         /// <summary>
@@ -38,7 +36,6 @@ namespace L.Application.Services
         /// <returns></returns>
         public async Task<PagedListResult<TaskListOutput>> GetSpiderTaskPagedList(TaskSearchInput input)
         {
-            _logger.LogError(1000, "fff");
             var tmplist = _spiderRepository.Table
                 .AsNoTracking()
                 .WhereIf(!input.Name.IsNullOrEmpty(), p => p.Name.Contains(input.Name))
@@ -71,16 +68,16 @@ namespace L.Application.Services
         /// 添加或者更新
         /// </summary>
         /// <returns></returns>
-        public void AddOrUpdateSpiderTask(TaskAddOrEditInput input)
+        public async Task AddOrUpdateSpiderTask(TaskAddOrEditInput input)
         {
             //是否存在有效值
             if (input.SpiderTask.Id.HasValue)
             {
-                UpdateSpiderTask(input);
+                await UpdateSpiderTask(input);
             }
             else
             {
-                CreateSpiderTask(input);
+                await CreateSpiderTask(input);
             }
         }
 
@@ -88,7 +85,7 @@ namespace L.Application.Services
         /// 创建爬虫任务
         /// </summary>
         /// <returns></returns>
-        private async void CreateSpiderTask(TaskAddOrEditInput input)
+        private async Task CreateSpiderTask(TaskAddOrEditInput input)
         {
             SpiderTask task = input.SpiderTask.MapTo<SpiderTask>();
             await _spiderRepository.InsertAsync(task);
@@ -98,7 +95,7 @@ namespace L.Application.Services
         /// 更新爬虫任务
         /// </summary>
         /// <returns></returns>
-        private async void UpdateSpiderTask(TaskAddOrEditInput input)
+        private async Task UpdateSpiderTask(TaskAddOrEditInput input)
         {
             var spiderTask = await _spiderRepository.GetEntityByIdAsync(input.SpiderTask.Id.Value);
             if (spiderTask != null)
@@ -141,14 +138,14 @@ namespace L.Application.Services
         /// </summary>
         /// <param name="spiderId"></param>
         /// <param name="runOrStop"></param>
-        public void RunOrStopRecurrentTask(string spiderId, bool runOrStop)
+        public async Task RunOrStopRecurrentTask(string spiderId, bool runOrStop)
         {
             var spiderTask = _spiderRepository.Table.FirstOrDefault(m => m.SpiderId == spiderId);
             if (spiderTask != null)
             {
                 spiderTask.IsRecurrent = runOrStop;
             }
-            _spiderRepository.UpdateAsync(spiderTask);
+            await _spiderRepository.UpdateAsync(spiderTask);
         }
     }
 }

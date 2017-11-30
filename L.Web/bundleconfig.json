@@ -1,9 +1,6 @@
-﻿// Configure bundling and minification for the project.
-// More info at https://go.microsoft.com/fwlink/?LinkId=808241
 [
   {
     "outputFileName": "wwwroot/css/site.min.css",
-    // An array of relative input file paths. Globbing patterns supported
     "inputFiles": [
       "wwwroot/css/site.css"
     ]
@@ -13,12 +10,28 @@
     "inputFiles": [
       "wwwroot/js/site.js"
     ],
-    // Optionally specify minification options
     "minify": {
       "enabled": true,
       "renameLocals": true
-    },
-    // Optionally generate .map file
-    "sourceMap": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/business/chrome/chromeservice.min.js",
+    "inputFiles": [
+      "wwwroot/js/business/chrome/chromeservice.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/business/chrome/bundle.js",
+    "inputFiles": [
+      "wwwroot/js/business/chrome/chromeservice.js",
+      "wwwroot/js/business/chrome/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/business/spidertask/Index.min.js",
+    "inputFiles": [
+      "wwwroot/js/business/spidertask/Index.js"
+    ]
   }
 ]

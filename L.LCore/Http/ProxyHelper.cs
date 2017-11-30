@@ -17,7 +17,7 @@ namespace L.LCore.Http
         {
             try
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.baidu.com"); // 61.183.192.5
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.baidu.com");
                 request.UserAgent = RequestConfig.UserAgent;
                 //设置代理
                 request.Proxy = CreteProxy(ip, port);
@@ -32,7 +32,7 @@ namespace L.LCore.Http
                     return false;
                 }
             }
-            catch (System.Exception)
+            catch
             {
                 return false;
             }

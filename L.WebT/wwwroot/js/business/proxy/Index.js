@@ -30,7 +30,8 @@ layui.use(['table', 'layer', 'form', 'proxyservice'], function () {
             {
                 field: 'type',
                 title: '类型',
-                width: 200
+                width: 200,
+                templet:'#proxy-type'
             },
             {
                 field: 'location',
@@ -45,7 +46,8 @@ layui.use(['table', 'layer', 'form', 'proxyservice'], function () {
             {
                 title: '最后验证时间',
                 field:'lastVerifyDateTime',
-                width: 200
+                width: 200,
+                templet:'#dt'
             },
             {
                 fixed: 'right',
@@ -95,4 +97,18 @@ layui.use(['table', 'layer', 'form', 'proxyservice'], function () {
             area: ['50%', '80%']
         });
     });
+    //120秒获取更新一次
+    setInterval(getPxoxyCount, 120000);
+    getPxoxyCount();
+    function getPxoxyCount() {
+        service.pingProxy({
+
+        }).done(function (data) {
+            console.log(data);
+            if (data) {
+                $("#ava-ip").text(data.totalCount);
+                $("#val-ip").text(data.inValidation);
+            }
+        });
+    }
 });

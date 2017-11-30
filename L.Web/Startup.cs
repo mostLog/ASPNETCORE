@@ -1,10 +1,12 @@
 ﻿using L.LCore.Infrastructure.Extension;
-using L.Web.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using System;
+using System.IO;
 
 namespace L.Web
 {
@@ -35,14 +37,21 @@ namespace L.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            //日志记录
+            app.UseLogger();
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Images")),
+                RequestPath = new PathString("/QRImages")
+            });
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            app.Map("/notice", NotcieSocketHandler.Map);
             app.ConfigureRequestMiddleware();
         }
     }

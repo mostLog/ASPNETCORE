@@ -42,22 +42,29 @@ namespace L.LCore
         {
             var typeFinder = new AssemblyTypeFinder();
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
-            //var config = GetServiceProvider().GetRequiredService<ILConfig>();
-
-            //配置服务
-            var startUps = typeFinder.FindTypesByInterface<IStartUp>();
-
-            var instances = startUps.Select(r => (IStartUp)Activator.CreateInstance(r))
-                .OrderBy(r => r.Order);
-
-            foreach (var register in instances)
+            try
             {
-                register.ConfigureServices(services);
-            }
+                services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            RegisterDependencies(services, typeFinder);
+                //var config = GetServiceProvider().GetRequiredService<ILConfig>();
+
+                //配置服务
+                var startUps = typeFinder.FindTypesByInterface<IStartUp>();
+
+                var instances = startUps.Select(r => (IStartUp)Activator.CreateInstance(r))
+                    .OrderBy(r => r.Order);
+
+                foreach (var register in instances)
+                {
+                    register.ConfigureServices(services);
+                }
+
+                RegisterDependencies(services, typeFinder);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
 
             return ServiceProvider;
         }

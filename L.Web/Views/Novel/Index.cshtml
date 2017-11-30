@@ -32,18 +32,14 @@
         </div>
     </div>
     <script type="text/html" id="novel-bar">
-        <a class="layui-btn layui-btn-mini" lay-event="viewChapters">获取小说章节列表</a>
+        <a class="layui-btn layui-btn-sm" lay-event="viewChapters">获取小说章节列表</a>
     </script>
     <script type="text/html" id="article-bar">
-        <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-mini" lay-event="view">查看</a>
+        <a class="layui-btn layui-btn-primary layui-btn-sm" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-sm" lay-event="view">查看</a>
     </script>
     <script type="text/html" id="novel-isemail">
-        {{# if(d.isOpenEmail=="1"){ }}
-        <input type="checkbox" lay-skin="switch" lay-text="开启|关闭" lay-event="email" checked>
-        {{# }else{ }}
-        <input type="checkbox" lay-skin="switch" lay-text="开启|关闭" lay-event="email">
-        {{# } }}
+        <input type="checkbox" lay-skin="switch" lay-text="开启|关闭" lay-event="email" {{d.isOpenEmail=="1"?'checked':''}}>
     </script>
     <script src="~/lib/layui/layui.js"></script>
     <script src="~/js/business/novel/Index.js"></script>

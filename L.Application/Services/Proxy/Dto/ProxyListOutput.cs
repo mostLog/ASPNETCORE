@@ -33,6 +33,6 @@ namespace L.Application.Dto
         /// <summary>
         /// 最后验证时间
         /// </summary>
-        public DateTime? LastVerifyDateTime { get; set; }
+        public string LastVerifyDateTime { get; set; }
     }
 }

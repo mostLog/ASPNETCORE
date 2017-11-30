@@ -1,0 +1,228 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>QRCodeIndex</title>
+    <!--引入element ui样式-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link href="~/lib/animate.css/animate.min.css" rel="stylesheet" />
+    <style>
+        .avatar-uploader .el-upload {
+            border: 1px dashed #d9d9d9;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .avatar-uploader .el-upload:hover {
+                border-color: #409EFF;
+            }
+
+        .avatar-uploader-icon {
+            font-size: 28px;
+            color: #8c939d;
+            width: 178px;
+            height: 178px;
+            line-height: 178px;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 178px;
+            height: 178px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="wrapper wrapper-content animated fadeInUp">
+        <template>
+            <el-tabs v-model="activeName" v-on:click="handleClick">
+                <el-tab-pane label="生成二维码" name="first">
+                    <img id="imgUrl" width="200" height="200" />
+                    <el-row style="margin-bottom: 6px;">
+                        <el-input size="medium" v-model="textOrUrl" placeholder="请输入文字或Url地址" style="width:300px;"></el-input>
+                        <el-button type="success" v-on:click="generateQRCodeByService()">生成</el-button>
+                        <el-button type="info" v-on:click="downloadQRCodeByService()">下载</el-button>
+                    </el-row>
+                    <el-tabs type="border-card">
+                        <el-tab-pane label="基础设置">
+                            <h2 style="">容错率</h2>
+                            <template>
+                                <el-radio-group v-model="faultToleranceRate">
+                                    <el-radio label="0" border>7%</el-radio>
+                                    <el-radio label="1" border>15%</el-radio>
+                                    <el-radio label="2" border>25%</el-radio>
+                                    <el-radio label="3" border>30%</el-radio>
+                                </el-radio-group>
+                            </template>
+                            <template>
+                                <div class="block" style="width:300px;">
+                                    <h2>形状</h2>
+                                    <el-slider v-model="shapeValue" :show-tooltip="false"></el-slider>
+                                </div>
+                            </template>
+                        </el-tab-pane>
+                        <el-tab-pane label="颜色设置">
+                            <el-row>
+                                <div style="display:inline-block;margin-right:20px;">
+                                    <div>前景色({{foregroundColor}})</div>
+                                    <el-color-picker v-model="foregroundColor"></el-color-picker>
+                                </div>
+                                <div style="display:inline-block;">
+                                    <div>背景色({{backgroundColor}})</div>
+                                    <el-color-picker v-model="backgroundColor"></el-color-picker>
+                                </div>
+                            </el-row>
+                            <el-row>
+                                <div style="display:inline-block;margin-right:20px;">
+                                    <div>定位点(外框)</div>
+                                    <el-color-picker v-model="color2"></el-color-picker>
+                                </div>
+                                <div style="display:inline-block;">
+                                    <div>定位点(内点)</div>
+                                    <el-color-picker v-model="color2"></el-color-picker>
+                                </div>
+                            </el-row>
+                            <el-row>
+                                <div style="display:inline;margin-right:20px;">
+                                    <h2>渐变色</h2>
+                                    <el-color-picker v-model="color2"></el-color-picker>
+                                </div>
+                                <template>
+                                    <div style="display:inline;">
+                                        <h2>渐变方式</h2>
+                                        <el-select v-model="value" placeholder="渐变方式">
+                                            <el-option v-for="item in options"
+                                                       :key="item.value"
+                                                       :label="item.label"
+                                                       :value="item.value">
+                                            </el-option>
+                                        </el-select>
+                                    </div>
+                                </template>
+                            </el-row>
+
+                        </el-tab-pane>
+                        <el-tab-pane label="嵌入Logo">
+                            <el-upload class="avatar-uploader"
+                                       action="https://jsonplaceholder.typicode.com/posts/"
+                                       :show-file-list="false"
+                                       :on-success="handleAvatarSuccess"
+                                       :before-upload="beforeAvatarUpload">
+                                <img v-if="iconUrl" :src="iconUrl" class="avatar">
+                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                            </el-upload>
+                        </el-tab-pane>
+                    </el-tabs>
+
+                </el-tab-pane>
+                <el-tab-pane label="jquery.qrcode方式" name="second">
+                    <el-input size="medium" v-model="jqUrl" placeholder="请输入文字或Url地址" style="width:300px;"></el-input>
+                    <el-button type="success" v-on:click="generateQRCodeByJquery()">生成</el-button>
+                    <el-button type="info" v-on:click="downloadQRCodeByJquery()">下载</el-button>
+                    <div id="code"></div>
+                </el-tab-pane>
+            </el-tabs>
+        </template>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-qrcode/jquery.qrcode.min.js"></script>
+    <!-- 先引入 Vue -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script type="text/javascript">
+        var Main = {
+            data() {
+                return {
+                    activeName: 'first',
+                    settingActiveName: '1',
+                    //默认容错率为25%
+                    faultToleranceRate: '2',
+                    //默认前景色为黑色
+                    foregroundColor: '#000000',
+                    //默认背景色为白色
+                    backgroundColor: '#ffffff',
+                    //输入文字或者url
+                    textOrUrl: '',
+                    jqUrl:'',
+                    iconUrl:'',
+                    shapeValue: 36
+                };
+            },
+            methods: {
+                handleClick(tab, event) {
+                    console.log(tab, event);
+                },
+                //生成二维码
+                generateQRCodeByJquery() {
+                    $('#code').html('');
+                    $('#code').qrcode(this.jqUrl);
+                },
+                //下载二维码
+                downloadQRCodeByJquery() {
+
+
+                },
+                //服务器生成二维码
+                generateQRCodeByService() {
+                    $.ajax({
+                        url: '/Tools/GetQRImage',
+                        data: {
+                            faultToleranceRate: this.faultToleranceRate,
+                            foregroundColor: this.foregroundColor,
+                            backgroundColor: this.backgroundColor,
+                            textOrUrl: this.textOrUrl
+                        },
+                        type: 'POST',
+                        success: function (data) {
+                            $("#imgUrl").attr("src",data);
+                        },
+                        error: function (data) {
+                            vue.show = true;
+                            vue.content = '系统内部错误';
+                        }
+                    });
+
+                },
+                //服务器生成二维码
+                downloadQRCodeByService() {
+                    download($("#imgUrl").attr("src"));
+                },
+                //请求成功
+                handleAvatarSuccess(res, file) {
+                    this.imageUrl = URL.createObjectURL(file.raw);
+                },
+                //上传信息校验
+                beforeAvatarUpload(file) {
+                    var isJPG = file.type === 'image/jpeg';
+                    var isLt2M = file.size / 1024 / 1024 < 2;
+
+                    if (!isJPG) {
+                        this.$message.error('上传头像图片只能是 JPG 格式!');
+                    }
+                    if (!isLt2M) {
+                        this.$message.error('上传头像图片大小不能超过 2MB!');
+                    }
+                    return isJPG && isLt2M;
+                }
+            }
+        };
+        var Ctor = Vue.extend(Main);
+        new Ctor().$mount('#app');
+
+        //下载图片
+        function download(src) {
+            var $a = $("<a></a>").attr("href", src).attr("download", "qr.jpg");
+            $a[0].click();
+        }
+    </script>
+
+</body>
+</html>

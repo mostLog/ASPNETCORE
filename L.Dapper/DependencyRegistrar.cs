@@ -15,7 +15,7 @@ namespace L.Dapper.AspNetCore
             //初始化数据库配置
             builder.Register(c => new Dapper(new DapperConfig()
             {
-                ConnectionString = "data source=.;initial catalog=CoreTest;uid=sa;pwd=sa;",
+                ConnectionString = "Max Pool Size=512;;data source=.;initial catalog=CoreTest;uid=sa;pwd=sa;",
                 DbType = DbType.MSSQLServer
             })).SingleInstance();
 

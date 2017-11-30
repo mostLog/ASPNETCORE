@@ -167,6 +167,7 @@ namespace L.Application.Services
         /// <param name="article"></param>
         public void UpdateArticel(Article article)
         {
+
             _articleRepository.Update(article);
         }
     }
