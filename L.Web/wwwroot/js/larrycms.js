@@ -98,7 +98,7 @@ layui.use(['element', 'layer', 'larry', 'navtab', 'form', 'common'], function ()
                                 "title": "图片管理", "icon": "icon-imgmanage", "href": "/Images/ViewImages"
                             },
                             {
-                                "title": "网址管理", "icon": "", "href": "/UrlManager/"
+                                "title": "网址管理", "icon": "icon-urls", "href": "/UrlManager/"
                             }
                         ]
                     },

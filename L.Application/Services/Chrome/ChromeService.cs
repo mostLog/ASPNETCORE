@@ -12,7 +12,6 @@ namespace L.Application.Services
 {
     public class ChromeService:IChromeService
     {
-
         private readonly IBaseRepository<PushText> _pushTextRepository;
         public ChromeService(IBaseRepository<PushText> pushTextRepository)
         {
@@ -27,21 +26,32 @@ namespace L.Application.Services
         public async Task<PagedListResult<PushTextListOutput>> GetPushTextPagedList(PushTextSearchInput input)
         {
             var tmplist = _pushTextRepository.Table
+                .Where(c=>c.IsWriteDb==input.IsWriteDb) //只查询未审核的数据
+                .WhereIf(!string.IsNullOrEmpty(input.Remark),c=>c.Remark.Contains(input.Remark))
+                .WhereIf(input.DataTypeId != null, c=>c.TextTypeId==input.DataTypeId.Value)
                 .AsNoTracking();
 
             try
             {
                 var list = await tmplist
+                        .Select(c=> new PushTextListOutput() {
+                            Id=c.Id,
+                            Text=c.Text,
+                            PushDateTime=c.PushDateTime.Value.ToString("yyyy-MM-dd HH:mm"),
+                            TextType=c.TextType,
+                            Remark=c.Remark,
+                            IsWriteDb=c.IsWriteDb
+                        })
                        .PageBy(input.PageIndex, input.PageSize)
                        .ToListAsync();
-                AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<PushText, PushTextListOutput>());
+                
 
                 //总数
                 int count = list.Count();
 
                 return new PagedListResult<PushTextListOutput>()
                 {
-                    Data = AutoMapper.Mapper.Map<IList<PushTextListOutput>>(list),
+                    Data = list,
                     Count = count,
                     Code = 0
                 };
@@ -93,6 +103,21 @@ namespace L.Application.Services
 
                 await _pushTextRepository.UpdateAsync(spiderTask);
             }
+        }
+
+        /// <summary>
+        /// 审核
+        /// </summary>
+        /// <returns></returns>
+        public async Task CheckOk(CheckInput input)
+        {
+            if (!input.PushTextId.HasValue) return;
+            if (!input.DataTypeId.HasValue) return;
+            var pushText=_pushTextRepository.GetEntityById(input.PushTextId.Value);
+            pushText.TextType = input.Name;
+            pushText.TextTypeId = input.DataTypeId;
+            pushText.IsWriteDb = true;
+            await _pushTextRepository.UpdateAsync(pushText);
         }
     }
 }

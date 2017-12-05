@@ -10,7 +10,9 @@ namespace L.Application.Services
     [UnitOfWork()]
     public interface IChromeService
     {
+        [NoUnitOfWork]
         Task<PagedListResult<PushTextListOutput>> GetPushTextPagedList(PushTextSearchInput input);
         Task AddOrUpdatePushText(PushTextAddOrEditInput input);
+        Task CheckOk(CheckInput input);
     }
 }

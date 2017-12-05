@@ -1,12 +1,15 @@
-﻿using L.Domain.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace L.Domain.Entities
+namespace L.Application.Dto
 {
-    public class DataType: AuditEntity
+    public class DataTypeOutput
     {
+        /// <summary>
+        /// 主键
+        /// </summary>
+        public int Id { get; set; }
         /// <summary>
         /// 类型名称
         /// </summary>
@@ -19,10 +22,10 @@ namespace L.Domain.Entities
         /// 备注说明
         /// </summary>
         public string Remark { get; set; }
-        /// <summary>
-        /// 分类信息
-        /// </summary>
-        public virtual DataTypeClassification DataTypeClassification { get; set; }
-    }
 
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public string CreateDateTime { get; set; }
+    }
 }

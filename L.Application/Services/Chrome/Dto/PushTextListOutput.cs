@@ -6,6 +6,7 @@ namespace L.Application.Dto
 {
     public class PushTextListOutput
     {
+        public int Id { get; set; }
         /// <summary>
         /// 信息类型
         /// </summary>
@@ -19,7 +20,7 @@ namespace L.Application.Dto
         /// <summary>
         /// 推送时间
         /// </summary>
-        public DateTime? PushDateTime { get; set; }
+        public string PushDateTime { get; set; }
 
         /// <summary>
         /// 是否已经入库

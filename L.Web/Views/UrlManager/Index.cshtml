@@ -11,38 +11,52 @@
     <title>Index</title>
     <!--引入element ui样式-->
     <link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.0.5/theme-chalk/index.css">
-    <base target="_blank">
+    <style>
+        .query-form {
+            padding-left:15px;
+            padding-top: 25px;
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body style="padding:15px;">
     <div id="app">
         <el-row>
             <el-col :span="24">
                 <template>
+                    <!--搜索条件-->
+                    <el-form :inline="true" :model="tableSearchParams" class="query-form">
+                        <el-form-item>
+                            <el-autocomplete prefix-icon="el-icon-search"
+                                             v-model="tableSearchParams.dataTypeName"
+                                             :fetch-suggestions="querySearchAsync"
+                                             placeholder="请输入数据类别"
+                                             v-on:select="handleSelect">
+                                <template slot-scope="props">
+                                    <span>{{ props.item.name }}({{ props.item.className }})</span>
+                                </template>
+                            </el-autocomplete>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-input v-model="tableSearchParams.remark" prefix-icon="el-icon-search" placeholder="请输入备注信息"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" v-on:click="getPagedPushTexts">查询</el-button>
+                        </el-form-item>
+                    </el-form>
                     <el-table :data="tableData"
                               stripe
-                              v-loading="tableLoading"
                               style="width: 100%">
                         <el-table-column type="selection"
                                          align="center"
                                          header-align="center"
                                          width="55">
                         </el-table-column>
-                        <el-table-column fixed="left"
-                                         label="操作"
-                                         align="center"
-                                         header-align="center"
-                                         width="240">
-                            <template slot-scope="scope">
-                                <el-button type="primary" size="small" v-on:click="openCheckDialog(scope.row)">审核</el-button>
-                                <el-button size="small">编辑</el-button>
-                                <el-button type="danger" size="small">删除</el-button>
-                            </template>
-                        </el-table-column>
                         <el-table-column prop="textType"
                                          align="center"
                                          header-align="center"
                                          label="信息类别"
-                                         width="180">
+                                         width="200">
                         </el-table-column>
                         <el-table-column prop="pushDateTime"
                                          align="center"
@@ -50,10 +64,14 @@
                                          header-align="center"
                                          width="180">
                         </el-table-column>
-                        <el-table-column prop="text"
-                                         align="center"
+                        <el-table-column align="center"
                                          header-align="center"
-                                         label="推送内容">
+                                         label="Url地址">
+                            <template slot-scope="scope">
+                                <el-button type="text" size="small" v-on:click="openHref(scope.row)">
+                                    {{scope.row.text}}
+                                </el-button>
+                            </template>
                         </el-table-column>
                         <el-table-column prop="remark"
                                          align="center"
@@ -74,20 +92,6 @@
                         </el-pagination>
                     </div>
                 </template>
-                <el-dialog title="信息审核" :visible.sync="checkDialogVisible">
-                    <el-autocomplete v-model="checkForm.name"
-                                     :fetch-suggestions="querySearchAsync"
-                                     placeholder="请输入数据类别"
-                                     v-on:select="handleSelect" style="width:100%;">
-                        <template slot-scope="props">
-                            <span>{{ props.item.name }}({{ props.item.className }})</span>
-                        </template>
-                    </el-autocomplete>
-                    <div slot="footer" class="dialog-footer">
-                        <el-button v-on:click="checkDialogVisible=false">取 消</el-button>
-                        <el-button type="primary" v-on:click="checkOk()">确 定</el-button>
-                    </div>
-                </el-dialog>
             </el-col>
         </el-row>
     </div>
@@ -103,19 +107,15 @@
                 return {
                     tableData: [],
                     totalCount: 0,
-                    tableLoading:false,
-                    currentCheckRow: {},
-                    tableSearchParams:{
+                    //表格搜索条件
+                    tableSearchParams: {
                         pageIndex: 1,
-                        pageSize: 20
-                    },
-                    checkDialogVisible: false,
-                    checkForm: {
-                        name: '',
+                        pageSize: 10,
                         dataTypeId: '',
-                        pushTextId:''
+                        dataTypeName:'',
+                        remark:''
                     },
-                    formLabelWidth: "120px"
+                    currentCheckRow: {}
                 };
             },
             //实例创建完成后立即调用
@@ -124,8 +124,10 @@
             },
             methods: {
                 getPagedPushTexts(params) {
-                    this.tableLoading = true;
                     this.$http.post('/Chrome/GetPagedPushTexts', {
+                        isWriteDb: true,
+                        remark: this.tableSearchParams.remark,
+                        dataTypeId:this.tableSearchParams.dataTypeId,
                         pageIndex: this.tableSearchParams.pageIndex,
                         pageSize: this.tableSearchParams.pageSize
                     }, { emulateJSON: true }).then(
@@ -134,49 +136,30 @@
                             this.tableData = successResponse.body.data;
                             //数量赋值
                             this.totalCount = successResponse.body.count;
-                            this.tableLoading = false;
                         },
                         failResponse => {
 
                         });
                 },
                 handleSizeChange(size) {
-                    this.pageSize = size;
+                    this.tableSearchParams.pageSize = size;
                     this.getPagedPushTexts();
                 },
                 handleCurrentChange(page) {
-                    this.pageIndex = page;
+                    this.tableSearchParams.pageIndex = page;
+                    //获取当前点击节点
                     this.getPagedPushTexts();
                 },
-                openCheckDialog(row) {
-                    this.checkDialogVisible = true;
-                    this.currentCheckRow = row;
-                },
-                //审核成功！
-                checkOk() {
-                    this.checkDialogVisible = false;
-                    this.$http.post('/Chrome/CheckOk', this.checkForm, { emulateJSON: true }).then(
-                        successResponse => {
-                            if (successResponse.body==0) {
-                                this.$message({
-                                    message: '审核通过！',
-                                    type: 'success'
-                                });
-                                this.getPagedPushTexts();
-                            }
-                        },
-                        failResponse => {
-
-                        });
-                },
                 handleSelect(item) {
-                    this.checkForm.name = item.name+"("+item.className+")";
-                    this.checkForm.dataTypeId = item.dataTypeId;
-                    this.checkForm.pushTextId = this.currentCheckRow.id;
+                    this.tableSearchParams.dataTypeName = item.name;
+                    this.tableSearchParams.dataTypeId = item.dataTypeId;
                 },
                 //
                 querySearchAsync(queryString, callback) {
+                    //如果输入条件为空
                     if (!queryString) {
+                        this.tableSearchParams.dataTypeName = '';
+                        this.tableSearchParams.dataTypeId = '';
                         return;
                     }
                     this.$http.get('/DataType/QueryDataTypeAsync', {
@@ -185,13 +168,16 @@
                         }
                     }).then(
                         successResponse => {
-                            setTimeout(() => { 
+                            setTimeout(() => {
                                 callback(successResponse.body);
-                            },2000);
+                            }, 500);
                         },
                         failResponse => {
 
                         });
+                },
+                openHref(row) { 
+                    window.open(row.text);
                 }
             }
         };

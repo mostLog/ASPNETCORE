@@ -1,11 +1,10 @@
-﻿using L.Domain.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace L.Domain.Entities
+namespace L.Application.Dto
 {
-    public class DataType: AuditEntity
+    public class DataTypeInput
     {
         /// <summary>
         /// 类型名称
@@ -20,9 +19,8 @@ namespace L.Domain.Entities
         /// </summary>
         public string Remark { get; set; }
         /// <summary>
-        /// 分类信息
+        /// 分类id
         /// </summary>
-        public virtual DataTypeClassification DataTypeClassification { get; set; }
+        public int? ClassId { get; set; }
     }
-
 }

@@ -14,6 +14,10 @@ namespace L.Domain.Entities
         /// 信息类型
         /// </summary>
         public string TextType { get; set; }
+        /// <summary>
+        /// 信息类型id
+        /// </summary>
+        public int? TextTypeId { get; set; }
 
         /// <summary>
         /// 信息

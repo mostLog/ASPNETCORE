@@ -6,7 +6,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-   
+
     <!--引入element ui样式-->
     <link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.0.5/theme-chalk/index.css">
     <base target="_blank">
@@ -14,13 +14,37 @@
         .layui-table-view {
             margin: 0px;
         }
+
+        .table-page {
+            position: relative;
+            width: 100%;
+            padding: 7px 7px 0;
+            border-width: 1px 0 0;
+            height: 41px;
+            font-size: 12px;
+            border: 1px solid #e6ebf5;
+            border-top: none;
+        }
+
+        .el-pagination__jump {
+            margin-left: 0px;
+        }
+
+        .el-pagination__total {
+            margin-left: 10px;
+        }
+        .query-form {
+            padding-left: 15px;
+            padding-top: 25px;
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body style="padding:15px;">
     <div id="app">
         <el-row>
             <el-col :span="6">
-                <div >
+                <div>
                     <div>
                         <el-button type="primary" v-on:click="addNode" icon="el-icon-circle-plus-outline">添加</el-button>
                         <el-button type="danger" v-on:click="removeNode" icon="el-icon-delete">删除</el-button>
@@ -45,47 +69,93 @@
                 </div>
             </el-col>
             <el-col :span="18">
-                <div >
+                <div>
                     <div>
-                        <el-button type="primary" icon="el-icon-circle-plus-outline">添加</el-button>
-                        <el-button type="danger" icon="el-icon-delete">删除</el-button>
+                        <el-button type="primary" icon="el-icon-circle-plus-outline" v-on:click="addDialogVisible=true">添加</el-button>
+                        <el-dialog title="添加数据类型" :visible.sync="addDialogVisible">
+                            <el-form :model="dataTypeForm">
+                                <el-form-item label="类型名称" :label-width="formLabelWidth">
+                                    <el-input v-model="dataTypeForm.name" auto-complete="off"></el-input>
+                                </el-form-item>
+                                <el-form-item label="类型值" :label-width="formLabelWidth">
+                                    <el-input v-model="dataTypeForm.value" auto-complete="off"></el-input>
+                                </el-form-item>
+                                <el-form-item label="备注" :label-width="formLabelWidth">
+                                    <el-input type="textarea"
+                                              :rows="2"
+                                              placeholder="请输入备注信息"
+                                              v-model="dataTypeForm.remark">
+                                    </el-input>
+                                </el-form-item>
+                            </el-form>
+                            <div slot="footer" class="dialog-footer">
+                                <el-button v-on:click="addDialogVisible = false">取 消</el-button>
+                                <el-button type="primary" v-on:click="addDataType()">确 定</el-button>
+                            </div>
+                        </el-dialog>
+                        <el-button type="danger" icon="el-icon-delete" v-on:click="delDataType">删除</el-button>
                     </div>
                     <div style="margin: 10px 0px;width:99%;">
-                        <el-input placeholder="请输入类别名称" style="width:200px;"></el-input>
+                        <el-form :inline="true" :model="tableSearchParams" class="query-form">
+                            <el-form-item>
+                                <el-input v-model="tableSearchParams.dataTypeName" prefix-icon="el-icon-search" placeholder="请输入类别名称"></el-input>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button type="primary" v-on:click="getPagedDataTypes">查询</el-button>
+                            </el-form-item>
+                        </el-form>
                     </div>
                     <template>
                         <el-table :data="tableData"
-                                  border
+                                  stripe
+                                  v-loading="tableLoading"
+                                  v-on:selection-change="tableSelChange"
                                   style="width: 100%">
                             <el-table-column type="selection"
+                                             align="center"
                                              header-align="center"
                                              width="55">
                             </el-table-column>
                             <el-table-column prop="name"
+                                             align="center"
                                              header-align="center"
                                              label="类别名称"
                                              width="180">
                             </el-table-column>
                             <el-table-column prop="value"
+                                             align="center"
                                              label="值"
                                              header-align="center"
                                              width="180">
                             </el-table-column>
                             <el-table-column prop="remark"
+                                             align="center"
                                              header-align="center"
                                              label="备注">
                             </el-table-column>
                             <el-table-column prop="createDateTime"
+                                             align="center"
                                              header-align="center"
                                              width="180"
                                              label="创建时间">
                             </el-table-column>
                         </el-table>
+                        <div class="table-page" v-show="this.totalCount>=this.pageSize">
+                            <el-pagination background
+                                           v-on:size-change="handleSizeChange"
+                                           v-on:current-change="handleCurrentChange"
+                                           :current-page="tableSearchParams.pageIndex"
+                                           :page-sizes="[10, 20, 30, 40]"
+                                           :page-size="tableSearchParams.pageSize"
+                                           layout="prev, pager, next, jumper,total, sizes"
+                                           :total="totalCount">
+                            </el-pagination>
+                        </div>
                     </template>
                 </div>
             </el-col>
         </el-row>
-      
+
     </div>
     <!-- 先引入 Vue -->
     <script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
@@ -93,7 +163,6 @@
     <!-- 引入组件库 -->
     <script src="https://cdn.bootcss.com/element-ui/2.0.5/index.js"></script>
     <script type="text/javascript">
-        let id = 1000;
         var Main = {
             //监听器
             watch: {
@@ -104,9 +173,26 @@
             data() {
                 return {
                     treeData: [],
+                    treeClickNode: {},//tree当前点击节点
                     tableData: [],
+                    totalCount: 0,
+                    tableSelRows: [],//table选中行
+                    tableSearchParams: {
+                        pageIndex: 1,
+                        pageSize: 10,
+                        dataTypeName:''
+                    },
+                    tableLoading:false,
+                    addDialogVisible: false,
+                    dataTypeForm: {
+                        name: '',
+                        value: '',
+                        remark: '',
+                        classId: ''
+                    },
                     filterText: '',
                     fullscreenLoading: false,
+                    formLabelWidth: "120px",
                     defaultProps: {
                         children: 'dataTypeClasses',
                         label: 'name'
@@ -134,7 +220,7 @@
                 },
                 //赖加载子节点
                 lazyLoadNode(node, resolve) {
-                    if (node.level ===0) return resolve([]);
+                    if (node.level === 0) return resolve([]);
                     setTimeout(() => {
                         this.$http.get('/DataType/GetChildrenClasses', {
                             params: {
@@ -166,7 +252,7 @@
                             successResponse => {
                                 if (successResponse.body == 0) {
                                     this.$message({
-                                        message: '添加成功',
+                                        message: '添加成功!',
                                         type: 'success'
                                     });
                                 }
@@ -187,9 +273,9 @@
                     var pId = selectedNode ? selectedNode.id : "";
                     this.$http.post('/DataType/DelDataTypeClass', {
                         id: pId
-                    }, { emulateJSON:true}).then(
+                    }, { emulateJSON: true }).then(
                         successResponse => {
-                            if (successResponse.body==0) {
+                            if (successResponse.body == 0) {
                                 this.$message({
                                     message: '删除成功',
                                     type: 'success'
@@ -202,16 +288,111 @@
                 },
                 //点击节点触发事件
                 handleNodeClick(data) {
+                    //设置当前点击节点
+                    this.treeClickNode = data;
+                    //获取表格数据
+                    this.getPagedDataTypes();
+                },
+                //获取数据类别
+                getPagedDataTypes() {
+                    //显示loading
+                    this.tableLoading = true;
+                    this.$http.post('/DataType/GetPagedDataTypes', {
+                        classId: this.treeClickNode.id,
+                        pageIndex: this.tableSearchParams.pageIndex,
+                        pageSize: this.tableSearchParams.pageSize,
+                        dataTypeName: this.tableSearchParams.dataTypeName
+                    }, { emulateJSON: true }).then(
+                        successResponse => {
+                            //数据赋值
+                            this.tableData = successResponse.body.data;
+                            //数量赋值
+                            this.totalCount = successResponse.body.count;
+                            //关闭loading
+                            this.tableLoading = false;
+                        },
+                        failResponse => {
 
+                        });
+                    
                 },
                 //添加数据类型
                 addDataType() {
+                    var selectedNode = this.$refs.tree.getCurrentNode();
+                    if (!selectedNode) {
+                        this.$message({
+                            message: '请选择类别',
+                            type: 'warning'
 
+                        });
+                        return;
+                    } else {
+                        this.dataTypeForm.classId = selectedNode.id;
+                    }
+                    //关闭对话框
+                    this.addDialogVisible = false;
+                    this.$http.post('/DataType/AddDataType', this.dataTypeForm, { emulateJSON: true }).then(
+                        successResponse => {
+                            if (successResponse.body == 0) {
+                                this.$message({
+                                    message: '添加成功!',
+                                    type: 'success'
+                                });
+                                //重新获取数据
+                                this.getPagedDataTypes();
+                            }
+                        },
+                        failResponse => {
+
+                        });
 
                 },
-                delDataType() { 
+                //删除数据类型
+                delDataType() {
+                    if (this.tableSelRows.length==0) {
+                        this.$message({
+                            message: '请选择至少一条数据！',
+                            type: 'warning'
+                        });
+                        return;
+                    }
+                    if (this.tableSelRows.length > 1) {
+                        this.$message({
+                            message: '目前只支持删除一条数据！',
+                            type: 'warning'
+                        });
+                        return;
+                    }
+                    this.$http.get('/DataType/DelDataType', {
+                        params: {
+                            id: this.tableSelRows[0].id
+                        }
+                    }).then(
+                        successResponse => {
+                            if (successResponse.body == 0) {
+                                this.$message({
+                                    message: '删除成功!',
+                                    type: 'success'
+                                });
+                                //刷新表格数据
+                                this.getPagedDataTypes();
+                            }
+                        },
+                        failResponse => {
 
-
+                        });
+                },
+                handleSizeChange(size) {
+                    this.pageSize = size;
+                    this.getPagedDataTypes();
+                },
+                handleCurrentChange(page) {
+                    this.pageIndex = page;
+                    this.getPagedDataTypes();
+                },
+                //table选择行时
+                tableSelChange(sel) { 
+                    this.tableSelRows = sel;
                 }
             }
         };

@@ -30,9 +30,27 @@ namespace L.Web.Controllers
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<IActionResult> GetPagedList(PushTextSearchInput input)
+        public async Task<IActionResult> GetPagedPushTexts(PushTextSearchInput input)
         {
             return Json(await _chromeService.GetPushTextPagedList(input));
+        }
+        /// <summary>
+        /// 审核通过
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> CheckOk(CheckInput input)
+        {
+            int result = 0;
+            try
+            {
+                await _chromeService.CheckOk(input);
+            }
+            catch (Exception)
+            {
+
+                result = -1;
+            }
+            return Json(result);
         }
     }
 }

@@ -17,5 +17,13 @@ namespace L.Application.Services
         Task<IList<DataTypeClassOutput>> GetChildrenAllClasses(int? parentId);
         Task CreateDataTypeClass(DataTypeClassInput input);
         Task DelDataTypeClass(int? id);
+
+        [NoUnitOfWork]
+        Task<PagedListResult<DataTypeOutput>> GetDataTypesByClass(DataTypeSearchInput input);
+        Task CreateDataType(DataTypeInput input);
+        Task DelDataType(int? id);
+        [NoUnitOfWork]
+
+        Task<IList<QueryDataTypeOutput>> QueryDataTypeByName(string name);
     }
 }
